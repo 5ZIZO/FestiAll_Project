@@ -1,7 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import * as S from "./Details.styled"
+import supabaseTestJhu from '../../supabase/supabaseClient';
 
 const Details = () => {
+    const festId = "c75c7d4b-a402-49ba-a80f-4b181b843953";
+
+    const fetchData = async () => {
+        const { data: festival_info, error } = await supabaseTestJhu
+            .from('festival_info')
+            .select('*').eq("id", festId)
+        if (error) {
+            console.log("error => ", error);
+        } else {
+            console.log("data => ", festival_info);
+        }
+    };
+
     return (
         <>
             <S.Section>
