@@ -1,12 +1,14 @@
-import React from 'react'
-import DetailPage from './pages/DetailPage'
+import "./App.css";
+import GlobalStyles from "./global/GlobalStyles";
+import MainRouter from "./routers/MainRouter";
 
-const App = () => {
+function App() {
   return (
     <>
-      <DetailPage />
+      <GlobalStyles />
+      <MainRouter />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
