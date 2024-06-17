@@ -14,9 +14,9 @@ border: 3px solid black;
 `
 
 function App() {
-  const { data: places, isLoading, isError, error } = usePlaces();
+  const { data: places, isPending, isError, error } = usePlaces();
 
-  if (isLoading) return <div>로딩 중입니다...</div>;
+  if (isPending) return <div>로딩 중입니다...</div>;
   if (isError) return <div>에러가 발생했습니다: {error.message}</div>;
 
   return (
