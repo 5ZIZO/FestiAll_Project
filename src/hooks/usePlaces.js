@@ -1,22 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
 import axiosInstance from '../components/api/axiosInstance';
-import useStore from '../store/useStore';
 
 const fetchPlaces = async () => {
-  const { data } = await axiosInstance.get('/rest/v1/places');
-  return data;
+    const response = await axiosInstance.get('/rest/v1/places', {
+        headers: {
+            'Content-Type': 'application/json',
+            'apikey': import.meta.env.VITE_SUPABASE_KEY,
+        },
+    });
+    return response.data;
 };
 
 const usePlaces = () => {
-  const setPlaces = useStore((state) => state.setPlaces);
 
-  return useQuery({
-    queryKey: ['places'],
-    queryFn: fetchPlaces,
-    onSuccess: (data) => {
-      setPlaces(data);
-    },
-  });
+    return useQuery({
+        queryKey: ['places'],
+        queryFn: fetchPlaces,
+    });
 };
 
 export default usePlaces;
