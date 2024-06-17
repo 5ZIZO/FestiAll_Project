@@ -1,5 +1,5 @@
-import { useQuery } from 'react-query';
-import axiosInstance from '../api/axiosInstance';
+import { useQuery } from '@tanstack/react-query';
+import axiosInstance from '../components/api/axiosInstance';
 import useStore from '../store/useStore';
 
 const fetchPlaces = async () => {
@@ -10,7 +10,9 @@ const fetchPlaces = async () => {
 const usePlaces = () => {
   const setPlaces = useStore((state) => state.setPlaces);
 
-  return useQuery('places', fetchPlaces, {
+  return useQuery({
+    queryKey: ['places'],
+    queryFn: fetchPlaces,
     onSuccess: (data) => {
       setPlaces(data);
     },

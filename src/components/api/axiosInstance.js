@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_SUPABASE_URL,
+  baseURL: import.meta.env.VITE_SUPABASE_URL,
   headers: {
-    apikey: process.env.REACT_APP_SUPABASE_KEY,
+    apikey: import.meta.env.VITE_SUPABASE_KEY,
   },
 });
 

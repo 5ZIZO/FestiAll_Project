@@ -1,33 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import usePlaces from './hooks/usePlaces';
+import useStore from './store/useStore';
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const { isPending, error } = usePlaces();
+  const places = useStore((state) => state.places);
+  console.log(places);
+
+  if (isPending) return <div>로딩 중입니다...</div>;
+  if (error) return <div>에러가 발생했습니다: {error.message}</div>;
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div>API 호출 테스트</div>
+      <ul>
+        {places.map((place) => (
+          <li key={place.post_id}>
+            <p>행사명 : {place.name}</p>
+            <p>행사 일정 : {place.st_date} ~ {place.ed_date}</p>
+          </li>
+        ))}
+      </ul>
     </>
   )
 }
