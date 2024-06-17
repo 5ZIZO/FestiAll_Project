@@ -1,11 +1,16 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "../page/Home";
+import DetailPage from "../page/DetailPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
   },
+  {
+    path: "/detail/:festId",
+    element: <DetailPage />
+  }
   /*
 
     임시 입니다.
