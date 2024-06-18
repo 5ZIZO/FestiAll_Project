@@ -63,7 +63,7 @@ export const Image = styled.img`
 `;
 
 export const TextDiv = styled.div`
-
+    width: 100%;
 `;
 
 export const ButtonDiv = styled.div`
