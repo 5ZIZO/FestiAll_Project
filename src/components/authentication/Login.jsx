@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../api/supabaseClient';
 import { Container, Content, ImgWrapper, Forms, Form, Title, InputBox, Icon, Input, Button, ErrorMessage } from './SignUp';
-import useLogout from '../../hooks/useLogout';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -10,7 +9,6 @@ const Login = () => {
   const [error, setError] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const navigate = useNavigate();
-  const handleLogout = useLogout();
 
   const validateEmail = (email) => {
     return /\S+@\S+\.\S+/.test(email);
@@ -19,26 +17,26 @@ const Login = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     let errorMessage = '';
-  
+
     if (!validateEmail(email)) {
       errorMessage = '이메일 형식을 확인해주세요.';
     } else if (password.length < 7) {
       errorMessage = '비밀번호는 6자리 이상이어야 합니다.';
     }
-  
+
     if (errorMessage) {
       setError(errorMessage);
       return;
     }
-  
+
     setError('');
-  
+
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email: email,
         password: password,
       });
-  
+
       if (error) {
         const signUpError = `회원가입 중 에러가 발생했습니다.: ${error.message}`;
         setError(signUpError);
@@ -112,9 +110,6 @@ const Login = () => {
             )}
             <Button type="submit" disabled={isButtonDisabled}>
               로그인
-            </Button>
-            <Button type="button" onClick={handleLogout}>
-              로그아웃(테스트)
             </Button>
           </Form>
         </Forms>

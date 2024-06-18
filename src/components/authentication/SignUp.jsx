@@ -30,7 +30,7 @@ export const ImgWrapper = styled.div`
 
   img {
     width: 250px;
-    margin-top: 3rem;
+    // margin-top: 1rem;
   }
 `;
 
@@ -45,7 +45,7 @@ export const Forms = styled.div`
 
 export const Form = styled.form`
   position: absolute;
-  bottom: 5rem;
+  bottom: 9rem;
   width: 100%;
   background-color: #f2f2f2;
   padding: 2rem 1rem;
