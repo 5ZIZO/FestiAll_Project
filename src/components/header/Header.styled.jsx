@@ -2,24 +2,23 @@ import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
     width: 100%;
-    height: 70px;
+    height: 80px;
     background-color: #E2E5E9;
     display: flex;
     flex-direction: row;
     align-items: center;
+    padding: 0 40px;
 `;
 
 export const LeftSide = styled.ul`
     width: 50%;
-    width: 50%;
     display: flex;
-    flex-direction: row;
     align-items: center;
     gap: 20px;
 `;
 
 export const RightSide = styled.ul`
-    width: 45%;
+    width: 50%;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
@@ -30,7 +29,6 @@ export const Logo = styled.img`
     width: 150px;
     height: 45px;
     object-fit: fill;
-    margin-left: 15px;
     cursor: pointer;
 `;
 
