@@ -2,9 +2,9 @@ import Map from "../components/map/Map";
 
 function Home() {
   return (
-    <div>
+    <>
       <Map />
-    </div>
+    </>
   )
 }
 
