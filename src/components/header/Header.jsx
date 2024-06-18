@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import Button from '../Button/Button'
 import useLogout from '../../hooks/useLogout'
 import useAuthStore from '../../store/store'
-import checkSignIn from '../authentication/\bcheckSignIn'
+import checkSignIn from '../authentication/checkSignIn'
 
 const header = () => {
     const navigate = useNavigate();

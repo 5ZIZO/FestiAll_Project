@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import usePlaces from '../hooks/usePlaces';
 import useAuthStore from '../store/store';
-import checkSignIn from '../components/authentication/\bcheckSignIn';
+import checkSignIn from '../components/authentication/checkSignIn';
 
 
 function Home() {
