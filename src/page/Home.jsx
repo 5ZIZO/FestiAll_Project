@@ -1,19 +1,11 @@
-import { useEffect } from 'react';
-import useAuthStore from '../store/store';
+import usePlaces from '../hooks/usePlaces';
 
 
 function Home() {
 
-  // 유저 인증 상태 테스트용 함수
-  const accessToken = useAuthStore((state) => state.accessToken);
-  useEffect(() => {
-    if (accessToken) {
-      console.log('유저가 로그인 상태입니다.');
-    } else {
-      console.log('유저가 로그아웃 상태입니다.');
-    }
-  }, [accessToken]);
-
+  // 스토어 커스텀 훅 fetch 테스트용 함수
+  const { data: places, error, isLoading } = usePlaces();
+  console.log('데이터 테이블을 잘 불러왔습니다요 =>' , places);
 
   return (
     <div>Home</div>

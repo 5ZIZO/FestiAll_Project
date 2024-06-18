@@ -1,22 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import axiosInstance from '../components/api/axiosInstance';
-
-const fetchPlaces = async () => {
-    const response = await axiosInstance.get('/rest/v1/places', {
-        headers: {
-            'Content-Type': 'application/json',
-            'apikey': import.meta.env.VITE_SUPABASE_KEY,
-        },
-    });
-    return response.data;
-};
+import { getPlaces } from '../components/api/api';
 
 const usePlaces = () => {
-
-    return useQuery({
-        queryKey: ['places'],
-        queryFn: fetchPlaces,
-    });
+  return useQuery({
+    queryKey: ['posts'],
+    queryFn: getPlaces,
+  });
 };
 
 export default usePlaces;
