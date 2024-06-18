@@ -12,7 +12,7 @@ const Wrap = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: auto;
+    overflow-y: auto;
     padding: 20px 0;
 
     &::-webkit-scrollbar {
