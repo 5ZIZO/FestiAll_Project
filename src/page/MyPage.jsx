@@ -1,50 +1,71 @@
 import styled from "styled-components";
+import MapComponent from "../components/mypage/MapComponent";
 
 
 const StContainer = styled.div`
   width: 80%;
   height: 1000px;
-  background-color: gray;
   margin: 100px auto;
+  padding: 5%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 5%;
 `;
 const StLeftBox = styled.div`
-  display: grid;
+  display: flex;
+  flex-direction: column;
 `;
-const StTitle = styled.h2`
+const StTitleLeft = styled.h2`
+  font-size: 1.5rem;
+`;
+const StTitleRight = styled.h2`
+  font-size: 1.5rem;
 `;
 const StRightBox = styled.div`
-  display: grid;
-  width: 50%;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
-const StMap = styled.div`
-  width: 90%;
-  background-color: white;
-  margin: 0 auto;
 
+const StGraphTitle = styled.div`
+  width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  margin: 50px auto; 
+`;
+const StGraphBox = styled.div`
+  width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  align-items: center;
+`;
+const StGraphImg = styled.div`
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
 `;
 
 function App() {
   return (
     <StContainer>
       <StLeftBox>
-        <StTitle>내가 찜한 축제</StTitle>
-        <StMap>지도</StMap>
+        <StTitleLeft>내가 찜한 축제</StTitleLeft>
+          <MapComponent />
       </StLeftBox>
       <StRightBox>
-        <h3>선택지역</h3>
-        <div>
+        <StTitleRight>서울특별시(선택지역)</StTitleRight>
+        <StGraphTitle>
+          <p>축제포스터</p>
           <p>축제이름</p>
           <p>축제일정</p>
-          <hr />
-        </div>
-        <div>
-          <img src="" alt="" />
+        </StGraphTitle>
+        <hr style={{backgroundColor: "black"}}/>
+        <StGraphBox>
+          <StGraphImg>이미지</StGraphImg>
           <p>축제 타이틀</p>
           <p>2024-00-00~2024-00-00</p>
-        </div>
+        </StGraphBox>
       </StRightBox>
     </StContainer>
   );
