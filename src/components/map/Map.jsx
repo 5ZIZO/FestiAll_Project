@@ -36,7 +36,7 @@ const Map = () => {
     };
   }, []);
 
-  return <div id="map" style={{ width: "calc(100% - 400px)", height: "500px" }}></div>;
+  return <div id="map" style={{ width: "calc(100% - 400px)", height: "100vh" }}></div>;
 };
 
 export default Map;
