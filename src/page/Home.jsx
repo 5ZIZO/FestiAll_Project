@@ -13,7 +13,7 @@ function Home() {
 
     .map__ul__wrap {
       width: 400px;
-      height: 100vh;
+      height: calc(100vh - 80px);
       background-color: white;
       display: flex;
       flex-direction: column;
