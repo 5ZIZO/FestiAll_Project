@@ -3,6 +3,8 @@ import * as S from "./Details.styled"
 import { useParams } from 'react-router-dom';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import useGetPlace from '../../hooks/useGetPlace';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import supabase from '../api/supabaseClient';
 
 const Details = () => {
     const festId = useParams().festId;
@@ -10,6 +12,11 @@ const Details = () => {
     const [isEnded, setIsEnded] = useState(false);
     const [lat, setLat] = useState(0);
     const [lng, setLng] = useState(0);
+    const [isJiimed, setIsJiimed] = useState(false);
+
+    const handleToggleJjim = () => {
+        setIsJiimed(prev => !prev);
+    };
 
     const { data: place, isError, isPending } = useGetPlace(festId);
 
@@ -73,7 +80,9 @@ const Details = () => {
                     <S.TextDiv>
                         <S.ButtonDiv>
                             <S.H3>행사정보</S.H3>
-                            <S.JjimButton>찜 하기</S.JjimButton>
+                            <S.JjimButton
+                                $color={isJiimed ? "red" : "green"}
+                                onClick={handleToggleJjim}>{isJiimed ? "찜 취소" : "찜 하기"}</S.JjimButton>
                         </S.ButtonDiv>
                         <S.P>{place?.description}
                         </S.P>

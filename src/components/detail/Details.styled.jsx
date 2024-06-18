@@ -85,7 +85,7 @@ export const JjimButton = styled.button`
     border-radius: 8px;
     padding: 10px 20px;
     color: white;
-    background-color: tomato;
+    background-color: ${props => props.$color};
     cursor: pointer;
     &:hover{
         filter: brightness(0.9);
