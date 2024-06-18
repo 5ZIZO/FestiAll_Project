@@ -35,7 +35,9 @@ export const ImgWrapper = styled.div`
 `;
 
 export const Forms = styled.div`
-  position: relative;
+  position: absolute;
+  top: 24rem;
+  width: 100%;
   height: 368px;
   @media screen and (min-width: 576px) {
     width: 348px;
@@ -44,8 +46,8 @@ export const Forms = styled.div`
 `;
 
 export const Form = styled.form`
-  position: absolute;
-  bottom: 9rem;
+  position: absolute; 
+  top: 0;
   width: 100%;
   background-color: #f2f2f2;
   padding: 2rem 1rem;
