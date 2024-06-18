@@ -14,6 +14,8 @@ const Details = () => {
     const [lng, setLng] = useState(0);
     const [isJiimed, setIsJiimed] = useState(false);
 
+
+    // 아직 찜 기능 완성 X, 테스트 중..
     const handleToggleJjim = () => {
         setIsJiimed(prev => !prev);
     };
