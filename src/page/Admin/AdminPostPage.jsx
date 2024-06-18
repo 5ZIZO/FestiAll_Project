@@ -1,60 +1,121 @@
-import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { getAllPlaces, postPlace } from "../../components/api/places.api";
+import { useCreatePost } from "../../hooks/usePostQuerys";
 
 
 function AdminPostPage() {
-    const admin = true; //로그인 유저가 관리자 권한이 있으면 관리자페이지로 접근가능(supabase에서 권한 주기/기본값을 null)
-    const navigate = useNavigate()
-    useEffect(() => {
-        if (!admin) {
-            navigate('/');
-            alert("관리자 권한이 아닙니다!");
-        }
-    }, [admin])
+  // const admin = true; //로그인 유저가 관리자 권한이 있으면 관리자페이지로 접근가능(supabase에서 권한 주기/기본값을 null)
+  // const navigate = useNavigate()
+  // useEffect(() => {
+  //   if (!admin) {
+  //     navigate('/');
+  //     alert("관리자 권한이 아닙니다!");
+  //   }
+  // }, [admin])
 
-    return (
-        <StWriteWrapper>
-            <StForm>
-                {/* <StFestivalImg >이미지 들어가야함</StFestivalImg> */}
-                <StInputForm>
-                    <StTopForm>
-                        <StFestival
-                            type="text"
-                            placeholder="행사명"
-                        />
-                    </StTopForm>
-                <StDateForm>
-                    <StDateName>행사일정</StDateName>
-                    <StFestivalDate type="date"/>
-                    <StFestivalDate type="date"/>
-                </StDateForm>
-                    <StTopForm>
-                        <StFestival
-                            type="text"
-                            placeholder="행사주소"
-                        />
-                        <StFestival
-                            type="text"
-                            placeholder="이용금액"
-                        />
-                        <StFestival
-                            type="text"
-                            placeholder="행사종류"
-                        />
-                    </StTopForm>
-                    <StDescription
-                        type="text"
-                        placeholder="행사 상세 내용"
-                    />
-                </StInputForm>
-                <StButtonDiv>
-                    <StButton >등록</StButton>
-                    <StButton >취소</StButton>
-                </StButtonDiv>
-            </StForm>
-        </StWriteWrapper>
-    );
+  const {mutate: createPost} = useCreatePost();
+  
+  const initialPost = {
+    image: "",
+    post_name: "",
+    st_date: "",
+    ed_date: "",
+    st_time: "",
+    ed_time: "",
+    category: "",
+    pricing: "",
+    address: "",
+    description: "",
+  } 
+
+  const [postData, setPostData] = useState(initialPost);
+
+  const { data } = useQuery({ queryKey: ["places"], queryFn: getAllPlaces });
+  console.log("data 불러와지나요?", data);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log(postData);
+    await createPost(postData, {
+      onSuccess: () => {
+        console.log("행사 등록 완료")
+        setPostData(initialPost)
+      }
+    })
+  };
+
+  return (
+    <StWriteWrapper>
+      <StForm onSubmit={handleSubmit}>
+        <ImageUpload src={postData.image} />
+        <StInputForm>
+          <StTopForm>
+            <StFestival
+              type="text"
+              placeholder="행사명"
+              value={postData.post_name}
+              onChange={(e) => setPostData({...postData, post_name: e.target.value})}
+            />
+          </StTopForm>
+          <StDateForm>
+            <StDateName>행사 시작일</StDateName>
+            <StFestivalDate 
+              type="date" 
+              value={postData.st_date}
+              onChange={(e) => setPostData({...postData, st_date: e.target.value})}/>
+            <StFestivalDate 
+              type="time" 
+              value={postData.st_time}
+              onChange={(e) => setPostData({...postData, st_time: e.target.value})}/> 
+          </StDateForm>
+          <StDateForm>
+            <StDateName>행사 종료일</StDateName>
+            <StFestivalDate 
+              type="date" 
+              value={postData.ed_date}
+              onChange={(e) => setPostData({...postData, ed_date: e.target.value})}/>
+            <StFestivalDate 
+              type="time" 
+              value={postData.ed_time}
+              onChange={(e) => setPostData({...postData, ed_time: e.target.value})}/> 
+          </StDateForm>
+          <StTopForm>
+            <StFestival
+              type="text"
+              placeholder="행사주소"
+              value={postData.address}
+              onChange={(e) => setPostData({...postData, address: e.target.value})}
+            />
+            <StFestival
+              type="text"
+              placeholder="이용금액"
+              value={postData.pricing}
+              onChange={(e) => setPostData({...postData, pricing: e.target.value})}
+            />
+            <StFestival
+              type="text"
+              placeholder="행사종류"
+              value={postData.category}
+              onChange={(e) => setPostData({...postData, category: e.target.value})}
+            />
+          </StTopForm>
+          <StDescription
+            type="text"
+            placeholder="행사 상세 내용"
+            value={postData.description}
+            onChange={(e) => setPostData({...postData,description: e.target.value})}
+          />
+        </StInputForm>
+        <StButtonDiv>
+          <StButton >등록</StButton>
+          <StButton >취소</StButton>
+        </StButtonDiv>
+      </StForm>
+    </StWriteWrapper>
+  );
 }
 
 
@@ -72,10 +133,12 @@ const StForm = styled.form`
   width: 50%;
 `;
 
-// const StFestivalImg = styled.img`
-  
-// `;
-
+const ImageUpload = styled.img`
+  max-width: 80%;
+  max-height: 80%;
+  margin-bottom: 30px;
+  background-color: red;
+`;
 
 const StTopForm = styled.div`
   width: 100%;
@@ -99,7 +162,7 @@ const StDateForm = styled.div`
   justify-content: center;
 `;
 
-const StDateName =styled.div`
+const StDateName = styled.div`
   padding: 15px;
   margin: 20px 10px;
   font-size: 15px;

@@ -19,3 +19,4 @@ export const getAnEvent = async ({ queryKey }) => {
     console.error(error);
   }
 };
+
