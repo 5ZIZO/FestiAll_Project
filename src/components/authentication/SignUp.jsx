@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import supabase from '../api/supabaseClient';
 import styled from 'styled-components';
 
-const Container = styled.div`
+export const Container = styled.div`
   display: grid;
   grid-template-columns: 100%;
   height: 100vh;
@@ -21,11 +21,11 @@ const Container = styled.div`
   }
 `;
 
-const Content = styled.div`
+export const Content = styled.div`
   display: grid;
 `;
 
-const ImgWrapper = styled.div`
+export const ImgWrapper = styled.div`
   justify-self: center;
 
   img {
@@ -34,7 +34,7 @@ const ImgWrapper = styled.div`
   }
 `;
 
-const Forms = styled.div`
+export const Forms = styled.div`
   position: relative;
   height: 368px;
   @media screen and (min-width: 576px) {
@@ -43,7 +43,7 @@ const Forms = styled.div`
   }
 `;
 
-const Form = styled.form`
+export const Form = styled.form`
   position: absolute;
   bottom: 5rem;
   width: 100%;
@@ -64,12 +64,12 @@ const Form = styled.form`
   }
 `;
 
-const Title = styled.h1`
+export const Title = styled.h1`
   font-size: 1.5rem;
   margin-bottom: 2rem;
 `;
 
-const InputBox = styled.div`
+export const InputBox = styled.div`
   display: grid;
   grid-template-columns: max-content 1fr;
   column-gap: 0.5rem;
@@ -79,12 +79,12 @@ const InputBox = styled.div`
   border-radius: 0.5rem;
 `;
 
-const Icon = styled.i`
+export const Icon = styled.i`
   font-size: 1.5rem;
   color: #588157;
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
   border: none;
   outline: none;
   font-size: 0.938rem;
@@ -99,7 +99,7 @@ const Input = styled.input`
   }
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
   display: block;
   padding: 1rem;
   margin: 2rem 0;
@@ -123,12 +123,12 @@ const Button = styled.button`
   }
 `;
 
-const ErrorMessage = styled.div`
+export const ErrorMessage = styled.div`
   color: red;
-  margin-bottom: 10px;
+  margin: 10px;
 `;
 
-const SignUp = () => {
+export const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
