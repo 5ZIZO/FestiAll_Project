@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../api/supabaseClient';
-// import styled from 'styled-components';
 import { Container, Content, ImgWrapper, Forms, Form, Title, InputBox, Icon, Input, Button, ErrorMessage } from './SignUp';
+import useLogout from '../../hooks/useLogout';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -10,6 +10,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const navigate = useNavigate();
+  const handleLogout = useLogout();
 
   const validateEmail = (email) => {
     return /\S+@\S+\.\S+/.test(email);
@@ -111,6 +112,9 @@ const Login = () => {
             )}
             <Button type="submit" disabled={isButtonDisabled}>
               로그인
+            </Button>
+            <Button type="button" onClick={handleLogout}>
+              로그아웃(테스트)
             </Button>
           </Form>
         </Forms>
