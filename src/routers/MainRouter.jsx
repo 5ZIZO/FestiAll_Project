@@ -12,7 +12,7 @@ const router = createBrowserRouter([
   {
     path: "/detail/:festId",
     element: <DetailPage />
-  }
+  },
   {
     path: "/login",
     element: <Login />
