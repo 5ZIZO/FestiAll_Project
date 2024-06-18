@@ -1,11 +1,16 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "../page/Home";
+import AdminPostPage from "../page/Admin/AdminPostPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
   },
+  {
+    path: "/admin_post",
+    element: <AdminPostPage />,
+  }
   /*
 
     임시 입니다.
