@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import * as S from "./Details.styled"
-import supabaseTestJhu from '../../supabaseTestJhu/supabaseClient';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import usePlaces from '../../hooks/usePlaces';
-
+import useGetPlace from '../../hooks/useGetPlace';
 
 const Details = () => {
     const festId = useParams().festId;
@@ -14,34 +11,21 @@ const Details = () => {
     const [lat, setLat] = useState(0);
     const [lng, setLng] = useState(0);
 
-    const fetchFestDetailInfo = async ({ queryKey }) => {
-        const { data, error } = await supabaseTestJhu
-            .from('festival_info')
-            .select('*').eq("id", queryKey[1])
-        if (error) {
-            console.log("error => ", error);
-        } else {
-            return data[0];
-        }
-    };
-    const { data: festival_info, isPending, isError } = useQuery({
-        queryKey: ["festInfo", festId],
-        queryFn: fetchFestDetailInfo,
-    })
+    const { data: place, isError, isPending } = useGetPlace(festId);
 
     useEffect(() => {
-        if (festival_info) {
+        if (place) {
             const today = Date.now();
-            const dateStart = Date.parse(festival_info.date_start);
-            const dateEnd = Date.parse(festival_info.date_end);
+            const dateStart = Date.parse(place.st_date);
+            const dateEnd = Date.parse(place.ed_date);
 
             setIsStarted(today >= dateStart);
             setIsEnded(today > dateEnd);
         }
-        console.log(festival_info?.address);
-        if (festival_info?.address) {
+        console.log(place?.address);
+        if (place?.address) {
             const geocoder = new kakao.maps.services.Geocoder();
-            geocoder.addressSearch(festival_info?.address, (result, status) => {
+            geocoder.addressSearch(place?.address, (result, status) => {
                 if (status === kakao.maps.services.Status.OK) {
                     const newCoords = new kakao.maps.LatLng(result[0].y, result[0].x);
                     setLat(newCoords.Ma);
@@ -50,7 +34,7 @@ const Details = () => {
             });
         }
 
-    }, [festival_info]);
+    }, [place]);
 
     const FestMap = () => {
         return (
@@ -79,19 +63,19 @@ const Details = () => {
             <S.Section>
                 <S.TitleDiv>
                     <S.FestState>{isStarted ? (isEnded ? "종료" : "진행 중") : "진행 전"}</S.FestState>
-                    <S.FestTitle>{festival_info?.title}</S.FestTitle>
-                    <S.FestOutline>{festival_info?.category} | {festival_info?.date_start} ~ {festival_info?.date_end}</S.FestOutline>
+                    <S.FestTitle>{place?.name}</S.FestTitle>
+                    <S.FestOutline>{place?.category} | {place?.st_date} ~ {place?.ed_date}</S.FestOutline>
                 </S.TitleDiv>
                 <S.ContentsDiv>
                     <S.ImageDiv>
-                        <S.Image src={festival_info?.image_url} alt="행사 이미지" />
+                        <S.Image src={place?.image} alt="행사 이미지" />
                     </S.ImageDiv>
                     <S.TextDiv>
                         <S.ButtonDiv>
                             <S.H3>행사정보</S.H3>
                             <S.JjimButton>찜 하기</S.JjimButton>
                         </S.ButtonDiv>
-                        <S.P>{festival_info?.detail}
+                        <S.P>{place?.description}
                         </S.P>
                     </S.TextDiv>
                     <S.MapDiv>
@@ -99,10 +83,10 @@ const Details = () => {
                     </S.MapDiv>
                     <S.DetailInfo>
                         <ul>
-                            <li>시작일 : {festival_info?.date_start}</li>
-                            <li>종료일 : {festival_info?.date_end}</li>
-                            <li>주소 : {festival_info?.address}</li>
-                            <li>이용요금 : {festival_info?.cost}</li>
+                            <li>시작일 : {place?.st_date}</li>
+                            <li>종료일 : {place?.ed_date}</li>
+                            <li>주소 : {place?.address}</li>
+                            <li>이용요금 : {place?.pricing}</li>
                         </ul>
                     </S.DetailInfo>
                 </S.ContentsDiv>
