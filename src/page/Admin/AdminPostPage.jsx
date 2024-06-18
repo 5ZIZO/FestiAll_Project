@@ -1,112 +1,177 @@
-import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { getAllPlaces, postPlace } from "../../components/api/places.api";
-import { useCreatePost } from "../../hooks/usePostQuerys";
 
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import supabase from "../../components/api/supabaseClient";
+import { v4 as uuid } from "uuid";
 
 function AdminPostPage() {
-  // const admin = true; //로그인 유저가 관리자 권한이 있으면 관리자페이지로 접근가능(supabase에서 권한 주기/기본값을 null)
-  // const navigate = useNavigate()
-  // useEffect(() => {
-  //   if (!admin) {
-  //     navigate('/');
-  //     alert("관리자 권한이 아닙니다!");
-  //   }
-  // }, [admin])
+  const [userId, setUserId] = useState('');
+  const [image, setImage] = useState('');
+  const [festName, setFestName] = useState('');
+  const [stDate, setStDate] = useState('');
+  const [edDate, setEdDate] = useState('');
+  const [stTime, setStTime] = useState('');
+  const [edTime, setEdTime] = useState('');
+  const [category, setCategory] = useState('');
+  const [pricing, setPricing] = useState('');
+  const [address, setAddress] = useState('');
+  const [description, setDescription] = useState('');
 
-  const {mutate: createPost} = useCreatePost();
+  useEffect(() => {
+    const checkUser = async() => {
+      try {
+        const {
+          data:{user}, 
+          error
+        } = await supabase.auth.getUser();
+
+        setUserId(user.id);
+
+        if (error) {
+          throw error;
+        }
+
+        console.log("잘 불러왔어요!", user.id);
+      } catch (error) {
+        console.error("실패", error.message);
+      }
+    }
+    checkUser();
+  },[]);
+  console.log("userid 상태", userId);
+
+  const newImage = (e) => {
+    const file = e.target.files[0];
+    if(file) {
+      handleImgUpload();
+    }
+  };
+
+  const fileSelect = () => {
+    if (fileRef.current) {
+      fileRef.current.click();
+    }
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
+  };
+
+  const handleImgUpload = async (file) => {
+    if (!file) return;  //이미지파일 없으면 함수 끝
+
+    const uniqueImgName = `${uuid()}_${file.name}`;
   
-  const initialPost = {
-    image: "",
-    post_name: "",
-    st_date: "",
-    ed_date: "",
-    st_time: "",
-    ed_time: "",
-    category: "",
-    pricing: "",
-    address: "",
-    description: "",
+    try{
+      const {data, error} = await supabase.storage.from('images/places').upload(uniqueImgName, file);
+      if(error) throw error;
+
+      const {publicUrl} = supabase.storage.from('images/places').getPublicUrl(uniqueImgName).data;
+      if(data) {
+        setImage(data.publicUrl)
+      }
+    } catch (error) {
+      console.error("이미지 업로드 실패", error.message);
+    }
   } 
 
-  const [postData, setPostData] = useState(initialPost);
-
-  const { data } = useQuery({ queryKey: ["places"], queryFn: getAllPlaces });
-  console.log("data 불러와지나요?", data);
-
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    console.log(postData);
-    await createPost(postData, {
-      onSuccess: () => {
-        console.log("행사 등록 완료")
-        setPostData(initialPost)
-      }
-    })
-  };
+      e.preventDefault()
+      const { data } = await supabase
+    .from('places')
+    .insert([
+        { 
+            name: festName, 
+            image,
+            st_date: stDate,
+            ed_date: edDate,
+            st_time: stTime,
+            ed_time: edTime,
+            category,
+            pricing,
+            address,
+            description,
+            user_id: userId,
+        },
+    ])
+    alert("등록이 완료되었습니다!");
+    setUserId('');
+    setFestName('');
+    setStDate('');
+    setEdDate('');
+    setStTime('');
+    setEdTime('');
+    setCategory('');
+    setPricing('');
+    setAddress('');
+    setDescription('');
+  }
+
 
   return (
     <StWriteWrapper>
       <StForm onSubmit={handleSubmit}>
-        <ImageUpload src={postData.image} />
+
+        <ImageUpload onClick={fileSelect}>
+        <input type="file" onChange={newImage}></input>
+        </ImageUpload>
         <StInputForm>
           <StTopForm>
             <StFestival
               type="text"
               placeholder="행사명"
-              value={postData.post_name}
-              onChange={(e) => setPostData({...postData, post_name: e.target.value})}
+              value={festName}
+              onChange={(e) => setFestName(e.target.value)}
             />
           </StTopForm>
           <StDateForm>
             <StDateName>행사 시작일</StDateName>
             <StFestivalDate 
               type="date" 
-              value={postData.st_date}
-              onChange={(e) => setPostData({...postData, st_date: e.target.value})}/>
+              value={stDate}
+              onChange={(e) => setStDate(e.target.value)}/>
             <StFestivalDate 
               type="time" 
-              value={postData.st_time}
-              onChange={(e) => setPostData({...postData, st_time: e.target.value})}/> 
+              value={stTime}
+              onChange={(e) => setStTime(e.target.value)}/> 
           </StDateForm>
           <StDateForm>
             <StDateName>행사 종료일</StDateName>
             <StFestivalDate 
               type="date" 
-              value={postData.ed_date}
-              onChange={(e) => setPostData({...postData, ed_date: e.target.value})}/>
+              value={edDate}
+              onChange={(e) => setEdDate(e.target.value)}/> 
             <StFestivalDate 
               type="time" 
-              value={postData.ed_time}
-              onChange={(e) => setPostData({...postData, ed_time: e.target.value})}/> 
+              value={edTime}
+              onChange={(e) => setEdTime(e.target.value)}/> 
           </StDateForm>
           <StTopForm>
             <StFestival
               type="text"
               placeholder="행사주소"
-              value={postData.address}
-              onChange={(e) => setPostData({...postData, address: e.target.value})}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
             />
             <StFestival
               type="text"
               placeholder="이용금액"
-              value={postData.pricing}
-              onChange={(e) => setPostData({...postData, pricing: e.target.value})}
+              value={pricing}
+              onChange={(e) => setPricing(e.target.value)}
             />
             <StFestival
               type="text"
               placeholder="행사종류"
-              value={postData.category}
-              onChange={(e) => setPostData({...postData, category: e.target.value})}
+              value={category}
+              onChange={(e) => setCategory(e.target.value)} 
             />
           </StTopForm>
           <StDescription
             type="text"
             placeholder="행사 상세 내용"
-            value={postData.description}
-            onChange={(e) => setPostData({...postData,description: e.target.value})}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </StInputForm>
         <StButtonDiv>
@@ -133,11 +198,10 @@ const StForm = styled.form`
   width: 50%;
 `;
 
-const ImageUpload = styled.img`
+const ImageUpload = styled.div`
   max-width: 80%;
   max-height: 80%;
   margin-bottom: 30px;
-  background-color: red;
 `;
 
 const StTopForm = styled.div`
