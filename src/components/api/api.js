@@ -8,7 +8,7 @@ export const getPlaces = async () => {
   return data;
 };
 
-export const getPlace = async ({ queryKey }) => {
+export const getAnEvent = async ({ queryKey }) => {
   try {
     const { data: place } = await supabase
       .from("places")
