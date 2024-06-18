@@ -3,8 +3,7 @@ import * as S from "./Details.styled"
 import { useParams } from 'react-router-dom';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import useGetPlace from '../../hooks/useGetPlace';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import supabase from '../api/supabaseClient';
+import Button from '../Button/Button'
 
 const Details = () => {
     const festId = useParams().festId;
@@ -56,7 +55,9 @@ const Details = () => {
                 }}
             >
                 <MapMarker
-                    style={{ border: 'tranparent' }}
+                    style={{
+                        border: 'tranparent'
+                    }}
                     position={{ lat, lng }}
                 >행사장소
                 </MapMarker>
@@ -82,9 +83,8 @@ const Details = () => {
                     <S.TextDiv>
                         <S.ButtonDiv>
                             <S.H3>행사정보</S.H3>
-                            <S.JjimButton
-                                $color={isJiimed ? "red" : "green"}
-                                onClick={handleToggleJjim}>{isJiimed ? "찜 취소" : "찜 하기"}</S.JjimButton>
+                            <Button bgColor={isJiimed ? "red" : "green"}
+                                onClick={handleToggleJjim}>{isJiimed ? "찜 취소" : "찜 하기"}</Button>
                         </S.ButtonDiv>
                         <S.P>{place?.description}
                         </S.P>
