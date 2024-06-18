@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const StMap = styled.div`
   width: 100%;
-  height: 100%;
+  height: 800px;
   margin: 20px auto;
   border: 1px solid #D8D8D8;
 `;
@@ -16,7 +16,7 @@ const MapComponent = () => {
     } else {
       // Kakao Maps API를 동적으로 로드
       const script = document.createElement('script');
-      script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_APP_KEY`; // Replace with your actual API key
+      script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=6b64da532cf44e1f1fe35e806f2a4e83`; // Replace with your actual API key
       script.async = true;
       script.onload = () => {
         if (window.kakao && window.kakao.maps) {
@@ -38,6 +38,8 @@ const MapComponent = () => {
     };
     new kakao.maps.Map(container, options);
   };
+
+
 
   return <StMap id="map"></StMap>;
 };

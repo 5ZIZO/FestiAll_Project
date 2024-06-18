@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import MapComponent from "../components/mypage/MapComponent";
 
-
 const StContainer = styled.div`
   width: 80%;
-  height: 1000px;
+  height: 800px;
   margin: 100px auto;
   padding: 5%;
   display: grid;
@@ -29,20 +28,37 @@ const StRightBox = styled.div`
 const StGraphTitle = styled.div`
   width: 100%;
   display: flex;
-  text-align: center;
-  justify-content: space-between;
-  margin: 50px auto; 
+  justify-content: space-around;
+  margin: 40px auto;
+  border-bottom: 1px solid black;
+  padding-bottom: 10px;
+  justify-content: space-around;
+
+  p {
+    text-align: center;
+  }
+`;
+const StGraphSrollBox = styled.div`
+  width: 100%;
+  height: 700px;
+  /* border: 1px solid black; */
+  overflow-y: scroll;
 `;
 const StGraphBox = styled.div`
   width: 100%;
   display: flex;
-  text-align: center;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  white-space: nowrap;
+  margin: 10px auto;
+  p {
+    text-align: center;
+  }
 `;
-const StGraphImg = styled.div`
-  width: 100px;
-  height: 100px;
+const StGraphImg = styled.img`
+  background-image: url("http://via.placeholder.com/150x150 ");
+  width: 150px;
+  height: 150px;
   border: 1px solid black;
 `;
 
@@ -51,21 +67,48 @@ function App() {
     <StContainer>
       <StLeftBox>
         <StTitleLeft>내가 찜한 축제</StTitleLeft>
-          <MapComponent />
+        <MapComponent />
       </StLeftBox>
       <StRightBox>
         <StTitleRight>서울특별시(선택지역)</StTitleRight>
         <StGraphTitle>
-          <p>축제포스터</p>
-          <p>축제이름</p>
-          <p>축제일정</p>
+          <p style={{ width: "30%" }}>포스터</p>
+          <p style={{ width: "30%" }}>축제이름</p>
+          <p style={{ width: "40%" }}>축제일정</p>
         </StGraphTitle>
-        <hr style={{backgroundColor: "black"}}/>
-        <StGraphBox>
-          <StGraphImg>이미지</StGraphImg>
-          <p>축제 타이틀</p>
-          <p>2024-00-00~2024-00-00</p>
-        </StGraphBox>
+
+        <StGraphSrollBox>
+          <StGraphBox>
+            <StGraphImg style={{ width: "30%" }} />
+            <p style={{ width: "30%" }}>축제 타이틀</p>
+            <p style={{ width: "40%" }}>2024-00-00 ~ 2024-00-00</p>
+          </StGraphBox>
+          <StGraphBox>
+            <StGraphImg style={{ width: "30%" }} />
+            <p style={{ width: "30%" }}>축제 타이틀</p>
+            <p style={{ width: "40%" }}>2024-00-00 ~ 2024-00-00</p>
+          </StGraphBox>
+          <StGraphBox>
+            <StGraphImg style={{ width: "30%" }} />
+            <p style={{ width: "30%" }}>축제 타이틀</p>
+            <p style={{ width: "40%" }}>2024-00-00 ~ 2024-00-00</p>
+          </StGraphBox>
+          <StGraphBox>
+            <StGraphImg style={{ width: "30%" }} />
+            <p style={{ width: "30%" }}>축제 타이틀</p>
+            <p style={{ width: "40%" }}>2024-00-00 ~ 2024-00-00</p>
+          </StGraphBox>
+          <StGraphBox>
+            <StGraphImg style={{ width: "30%" }} />
+            <p style={{ width: "30%" }}>축제 타이틀</p>
+            <p style={{ width: "40%" }}>2024-00-00 ~ 2024-00-00</p>
+          </StGraphBox>
+          <StGraphBox>
+            <StGraphImg style={{ width: "30%" }} />
+            <p style={{ width: "30%" }}>축제 타이틀</p>
+            <p style={{ width: "40%" }}>2024-00-00 ~ 2024-00-00</p>
+          </StGraphBox>
+        </StGraphSrollBox>
       </StRightBox>
     </StContainer>
   );
