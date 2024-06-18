@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import MapComponent from "../components/mypage/MapComponent";
+// import axios from "axios";
+import MapData from "../map.json";
 
 const StContainer = styled.div`
   width: 80%;
   height: 800px;
-  margin: 100px auto;
+  margin: 50px auto;
   padding: 5%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -36,6 +38,8 @@ const StGraphTitle = styled.div`
 
   p {
     text-align: center;
+    
+    word-wrap: break-word;
   }
 `;
 const StGraphSrollBox = styled.div`
@@ -52,7 +56,10 @@ const StGraphBox = styled.div`
   white-space: nowrap;
   margin: 10px auto;
   p {
+    white-space: pre-wrap;
     text-align: center;
+    line-height: 26px;
+    max-width: 170px;
   }
 `;
 const StGraphImg = styled.img`
@@ -62,7 +69,25 @@ const StGraphImg = styled.img`
   border: 1px solid black;
 `;
 
-function App() {
+
+function MyPage() {
+  // const apiKey ='kjelz5qb9QC3+4nh0Ov2rqNUv+OgJH5zlfuBHg/gqaULC7llZC5Y4Y72aui0iIryXyxbmDE5VHE6GaOvPS1bag==';
+  // const url = 'http://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api';
+  // const params = {
+  //   serviceKey: apiKey,
+  //   type: 'json',
+  //   pageNo: 1,
+  //   numOfRows: 10,
+  // };
+  // axios.get(url, { params })
+  //   .then(response => {
+  //     console.log(response.data);
+  //   })
+  //   .catch(error => {
+  //     console.error('Error fetching data:', error);
+  //   });
+
+
   return (
     <StContainer>
       <StLeftBox>
@@ -72,46 +97,27 @@ function App() {
       <StRightBox>
         <StTitleRight>서울특별시(선택지역)</StTitleRight>
         <StGraphTitle>
-          <p style={{ width: "30%" }}>포스터</p>
-          <p style={{ width: "30%" }}>축제이름</p>
-          <p style={{ width: "40%" }}>축제일정</p>
+          <p style={{ width: "40%"}}>포스터</p>
+          <p style={{ width: "28%" }}>축제이름</p>
+          <p style={{ width: "32%" }}>축제일정</p>
         </StGraphTitle>
 
         <StGraphSrollBox>
-          <StGraphBox>
+          {MapData.records.slice(5).map((data, index)=>(
+          <StGraphBox key={index}> 
             <StGraphImg style={{ width: "30%" }} />
-            <p style={{ width: "30%" }}>축제 타이틀</p>
-            <p style={{ width: "40%" }}>2024-00-00 ~ 2024-00-00</p>
+            <p style={{ width: "30%" }}>{data.축제명}</p>
+            <div>
+            <p style={{ width: "40%" }}>{data.축제시작일자}</p>
+            <p>~ {data.축제종료일자}</p>
+            </div>
           </StGraphBox>
-          <StGraphBox>
-            <StGraphImg style={{ width: "30%" }} />
-            <p style={{ width: "30%" }}>축제 타이틀</p>
-            <p style={{ width: "40%" }}>2024-00-00 ~ 2024-00-00</p>
-          </StGraphBox>
-          <StGraphBox>
-            <StGraphImg style={{ width: "30%" }} />
-            <p style={{ width: "30%" }}>축제 타이틀</p>
-            <p style={{ width: "40%" }}>2024-00-00 ~ 2024-00-00</p>
-          </StGraphBox>
-          <StGraphBox>
-            <StGraphImg style={{ width: "30%" }} />
-            <p style={{ width: "30%" }}>축제 타이틀</p>
-            <p style={{ width: "40%" }}>2024-00-00 ~ 2024-00-00</p>
-          </StGraphBox>
-          <StGraphBox>
-            <StGraphImg style={{ width: "30%" }} />
-            <p style={{ width: "30%" }}>축제 타이틀</p>
-            <p style={{ width: "40%" }}>2024-00-00 ~ 2024-00-00</p>
-          </StGraphBox>
-          <StGraphBox>
-            <StGraphImg style={{ width: "30%" }} />
-            <p style={{ width: "30%" }}>축제 타이틀</p>
-            <p style={{ width: "40%" }}>2024-00-00 ~ 2024-00-00</p>
-          </StGraphBox>
+            ))}
         </StGraphSrollBox>
       </StRightBox>
     </StContainer>
   );
 }
 
-export default App;
+export default MyPage
+;
