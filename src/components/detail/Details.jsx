@@ -49,17 +49,12 @@ const Details = () => {
             <Map
                 center={{ lat, lng }}
                 style={{
-                    width: "1280px",
-                    height: '500px',
+                    width: "300px",
+                    height: '300px',
                     borderRadius: '20px',
                 }}
             >
-                <MapMarker
-                    style={{
-                        border: 'tranparent'
-                    }}
-                    position={{ lat, lng }}
-                >행사장소
+                <MapMarker position={{ lat, lng }} >
                 </MapMarker>
             </Map>
         );
@@ -89,17 +84,19 @@ const Details = () => {
                         <S.P>{place?.description}
                         </S.P>
                     </S.TextDiv>
-                    <S.MapDiv>
+                    <S.DetailDiv>
+                        <S.DescriptionDiv>
+                            <S.H4>시작일</S.H4>
+                            <S.DetailBar>{place?.st_date}</S.DetailBar>
+                            <S.H4>종료일</S.H4>
+                            <S.DetailBar>{place?.ed_date}</S.DetailBar>
+                            <S.H4>주소</S.H4>
+                            <S.DetailBar>{place?.address}</S.DetailBar>
+                            <S.H4>이용요금</S.H4>
+                            <S.DetailBar>{place?.pricing}</S.DetailBar>
+                        </S.DescriptionDiv>
                         <FestMap></FestMap>
-                    </S.MapDiv>
-                    <S.DetailInfo>
-                        <ul>
-                            <li>시작일 : {place?.st_date}</li>
-                            <li>종료일 : {place?.ed_date}</li>
-                            <li>주소 : {place?.address}</li>
-                            <li>이용요금 : {place?.pricing}</li>
-                        </ul>
-                    </S.DetailInfo>
+                    </S.DetailDiv>
                 </S.ContentsDiv>
             </S.Section>
         </>

@@ -50,7 +50,7 @@ export const ContentsDiv = styled.div`
 
 export const P = styled.p`
     width: 100%;
-    
+    padding: 10px;
 `;
 
 export const ImageDiv = styled.div`
@@ -92,10 +92,38 @@ export const JjimButton = styled.button`
     }
 `;
 
+export const DetailDiv = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: self-start;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 30px;
+`;
+
 export const MapDiv = styled.div`
 
 `;
 
-export const DetailInfo = styled.div`
+export const DescriptionDiv = styled.div`
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+`;
+
+export const DetailBar = styled.div`
     width: 100%;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 1%;
+`;
+
+export const H4 = styled.h4`
+    font-size: 1em;
+    margin: 0;
+    font-weight: bold;
 `;
