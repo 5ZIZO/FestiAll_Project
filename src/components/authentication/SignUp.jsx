@@ -141,7 +141,7 @@ export const SignUp = () => {
   };
 
   const handleSignUp = async (event) => {
-    event.preventDefault(); // 폼 제출 시 페이지 리로드 방지
+    event.preventDefault();
     let errorMessage = '';
 
     if (!validateEmail(email)) {
@@ -193,12 +193,12 @@ export const SignUp = () => {
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-    setError('');  // 에러 메시지 초기화
+    setError('');
   };
 
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
-    setError('');  // 에러 메시지 초기화
+    setError('');
   };
 
   useEffect(() => {
