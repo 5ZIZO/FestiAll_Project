@@ -17,6 +17,7 @@ export const TitleDiv = styled.div`
 `;
 
 export const FestState = styled.div`
+    margin-top: 10px;
     width: 50%;
     height: 40px;
     background-color: #495057;
@@ -29,7 +30,9 @@ export const FestState = styled.div`
 `;
 
 export const FestTitle = styled.h1`
-
+    font-size: 2em;
+    margin: 0.67em 0;
+    font-weight: bold;
 `;
 
 export const FestOutline = styled.div`
@@ -71,6 +74,12 @@ export const ButtonDiv = styled.div`
     border-bottom: 1px solid black;
 `;
 
+export const H3 = styled.h3`
+    font-size: 1.17em;
+    margin: 1em 0;
+    font-weight: bold;
+`;
+
 export const JjimButton = styled.button`
     border: none;
     border-radius: 8px;
@@ -88,5 +97,5 @@ export const MapDiv = styled.div`
 `;
 
 export const DetailInfo = styled.div`
-
+    width: 100%;
 `;
