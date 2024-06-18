@@ -1,8 +1,11 @@
+import Map from "../components/map/Map";
 
 function Home() {
   return (
-    <div>Home</div>
+    <div>
+      <Map />
+    </div>
   )
 }
-   
+
 export default Home;
