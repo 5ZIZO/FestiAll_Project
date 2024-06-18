@@ -9,6 +9,11 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d4338524b2a6b4d4f30b172736982fc4"></script>
+    <script type="module">
+      const kakaoMapKey = import.meta.env.VITE_KAKAO_MAP_KEY;
+      const script = document.createElement('script');
+      script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoMapKey}`;
+      document.head.appendChild(script);
+    </script>
   </body>
 </html>
