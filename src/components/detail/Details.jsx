@@ -3,8 +3,11 @@ import * as S from "./Details.styled"
 import { useParams } from 'react-router-dom';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import useGetPlace from '../../hooks/useGetPlace';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import supabase from '../api/supabaseClient';
+import Button from '../Button/Button'
+import { getCurrentUser, handleAddJjim, handleDeleteJjim } from '../api/api';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import useGetAllJjim from '../../hooks/useGetAllJjim';
+import useGetJjim from '../../hooks/useGetJjim';
 
 const Details = () => {
     const festId = useParams().festId;
@@ -13,14 +16,32 @@ const Details = () => {
     const [lat, setLat] = useState(0);
     const [lng, setLng] = useState(0);
     const [isJiimed, setIsJiimed] = useState(false);
-
+    const [currentUser, setCurrentUser] = useState(null);
+    const defaultImageUrl = "https://kmfvncclriiektxphias.supabase.co/storage/v1/object/public/images/default/default.jpg?t=2024-06-18T02%3A18%3A29.813Z";
 
     // 아직 찜 기능 완성 X, 테스트 중..
-    const handleToggleJjim = () => {
-        setIsJiimed(prev => !prev);
-    };
+
+    const queryClient = useQueryClient();
+    const { mutate: jjimAddMutate } = useMutation({
+        mutationFn: () => handleAddJjim(festId, currentUser?.id),
+        onSuccess: () => {
+            queryClient.invalidateQueries(["jjim"]);
+        }
+    });
+
+    const { mutate: jjimDeleteMutate } = useMutation({
+        mutationFn: () => handleDeleteJjim(festId, currentUser?.id),
+        onSuccess: () => {
+            queryClient.invalidateQueries(["jjim"]);
+        }
+    });
 
     const { data: place, isError, isPending } = useGetPlace(festId);
+    const { data: allJjim } = useGetAllJjim();
+    const { data: myJjim } = useGetJjim(festId, currentUser?.id);
+
+    console.log("allJjim => ", allJjim);
+    console.log("myJjim => ", myJjim);
 
     useEffect(() => {
         if (place) {
@@ -31,7 +52,6 @@ const Details = () => {
             setIsStarted(today >= dateStart);
             setIsEnded(today > dateEnd);
         }
-        console.log(place?.address);
         if (place?.address) {
             const geocoder = new kakao.maps.services.Geocoder();
             geocoder.addressSearch(place?.address, (result, status) => {
@@ -42,64 +62,117 @@ const Details = () => {
                 }
             });
         }
-
+        const checkUser = async () => {
+            const gotUser = await getCurrentUser();
+            setCurrentUser(gotUser);
+            console.log(currentUser);
+        }
+        checkUser();
+        console.log(currentUser?.id);
+        if (myJjim?.length > 0) setIsJiimed(true);
+        else setIsJiimed(false);
     }, [place]);
+
+    useEffect(() => {
+        if (myJjim?.length > 0) setIsJiimed(true);
+        else setIsJiimed(false);
+    }, [myJjim]);
+
+    console.log(place);
 
     const FestMap = () => {
         return (
             <Map
                 center={{ lat, lng }}
                 style={{
-                    width: "1280px",
-                    height: '500px',
+                    width: "500px",
+                    height: '300px',
                     borderRadius: '20px',
                 }}
             >
-                <MapMarker
-                    style={{ border: 'tranparent' }}
-                    position={{ lat, lng }}
-                >행사장소
+                <MapMarker position={{ lat, lng }} >
                 </MapMarker>
             </Map>
         );
     };
 
-    if (isPending) return <div>로딩 중 ...</div>
+    if (isPending) {
+        return (
+            <>
+                <S.Section>
+                    <S.TitleDiv>
+                        <S.FestState></S.FestState>
+                        <S.FestTitle></S.FestTitle>
+                        <S.FestOutline> | 0000.00.00 ~ 0000.00.00</S.FestOutline>
+                    </S.TitleDiv>
+                    <S.ContentsDiv>
+                        <S.ImageDiv>
+                            <S.Image src={defaultImageUrl} alt="행사 이미지" />
+                        </S.ImageDiv>
+                        <S.TextDiv>
+                            <S.ButtonDiv>
+                                <S.H3>행사정보</S.H3>
+                                <Button></Button>
+                            </S.ButtonDiv><br />
+                            <S.H4>
+                            </S.H4>
+                        </S.TextDiv>
+                        <S.DetailDiv>
+                            <S.DescriptionDiv>
+                                <S.LabelUl>
+                                    <S.ContentLi><S.Label> </S.Label><S.Span></S.Span> </S.ContentLi>
+                                    <S.ContentLi><S.Label> </S.Label><S.Span></S.Span> </S.ContentLi>
+                                    <S.ContentLi><S.Label> </S.Label><S.Span></S.Span> </S.ContentLi>
+                                    <S.ContentLi><S.Label> </S.Label><S.Span></S.Span></S.ContentLi>
+                                    <S.ContentLi><S.Label> </S.Label> <S.Span></S.Span></S.ContentLi>
+                                    <S.ContentLi><S.Label> </S.Label> <S.Span></S.Span></S.ContentLi>
+                                </S.LabelUl>
+                            </S.DescriptionDiv>
+                            <FestMap></FestMap>
+                        </S.DetailDiv>
+                    </S.ContentsDiv>
+                </S.Section>
+            </>
+        );
+    }
     if (isError) return <div>데이터를 불러오는 데 실패했습니다</div>
 
     return (
         <>
             <S.Section>
                 <S.TitleDiv>
-                    <S.FestState>{isStarted ? (isEnded ? "종료" : "진행 중") : "진행 전"}</S.FestState>
+                    <S.FestState $bgColor={isStarted ? (isEnded ? "#495057" : "#a7c957") : "#495057"}>{isStarted ? (isEnded ? "종료" : "진행 중") : "진행 전"}</S.FestState>
                     <S.FestTitle>{place?.name}</S.FestTitle>
-                    <S.FestOutline>{place?.category} | {place?.st_date} ~ {place?.ed_date}</S.FestOutline>
+                    <S.FestOutline>{place?.region} | {place?.st_date} ~ {place?.ed_date}</S.FestOutline>
                 </S.TitleDiv>
                 <S.ContentsDiv>
                     <S.ImageDiv>
-                        <S.Image src={place?.image} alt="행사 이미지" />
+                        <S.Image src={place?.image || defaultImageUrl} alt="행사 이미지" />
                     </S.ImageDiv>
                     <S.TextDiv>
                         <S.ButtonDiv>
                             <S.H3>행사정보</S.H3>
-                            <S.JjimButton
-                                $color={isJiimed ? "red" : "green"}
-                                onClick={handleToggleJjim}>{isJiimed ? "찜 취소" : "찜 하기"}</S.JjimButton>
-                        </S.ButtonDiv>
-                        <S.P>{place?.description}
-                        </S.P>
+                            {currentUser ? (
+                                isJiimed ? <Button bgColor="red" onClick={jjimDeleteMutate}>찜 취소</Button> :
+                                    <Button bgColor="green" onClick={jjimAddMutate}>찜 하기</Button>
+                            ) : ""}
+                        </S.ButtonDiv><br />
+                        <S.H4>{place?.description}
+                        </S.H4>
                     </S.TextDiv>
-                    <S.MapDiv>
+                    <S.DetailDiv>
+                        <S.DescriptionDiv>
+                            <S.LabelUl>
+                                <S.ContentLi><S.Label>카테고리 </S.Label><S.Span>{place?.category}</S.Span> </S.ContentLi>
+                                <S.ContentLi><S.Label>시작일 </S.Label><S.Span>{place?.st_date}</S.Span> </S.ContentLi>
+                                <S.ContentLi><S.Label>종료일 </S.Label><S.Span>{place?.ed_date}</S.Span> </S.ContentLi>
+                                <S.ContentLi><S.Label>주소 </S.Label><S.Span>{place?.address}</S.Span></S.ContentLi>
+                                <S.ContentLi><S.Label>이용요금</S.Label> <S.Span>{place?.pricing}</S.Span></S.ContentLi>
+                                <S.ContentLi><S.Label>이용가능 시간</S.Label> <S.Span>{place?.st_time.substr(0, 5)}~{place?.ed_time.substr(0, 5)}</S.Span></S.ContentLi>
+                            </S.LabelUl>
+                        </S.DescriptionDiv>
                         <FestMap></FestMap>
-                    </S.MapDiv>
-                    <S.DetailInfo>
-                        <ul>
-                            <li>시작일 : {place?.st_date}</li>
-                            <li>종료일 : {place?.ed_date}</li>
-                            <li>주소 : {place?.address}</li>
-                            <li>이용요금 : {place?.pricing}</li>
-                        </ul>
-                    </S.DetailInfo>
+                    </S.DetailDiv>
                 </S.ContentsDiv>
             </S.Section>
         </>
