@@ -33,8 +33,8 @@ const List = styled.li`
     line-height: 24px;
   }
 
-  & .btn--add {
-    width: 295px;
+  & .default__btn {
+    width: 49%;
     height: 40px;
     border-radius: 8px;
     background-color: #495057;
@@ -46,10 +46,26 @@ const List = styled.li`
     cursor: pointer;
     font-size: 16px;
     font-weight: 400;
+  }
+
+  & .default__btn--delete {
+  }
+
+  & .default__btn--mapmove {
+
+  }
+
+  & .card__btns__box{
+    display: flex;
+    justify-content: space-between;
     margin-top: 24px;
   }
 
-  img{
+  & .card__item{
+    width: 100%;
+  }
+
+  img {
     width: 300px;
     height: 295px;
     object-fit: cover;
@@ -57,6 +73,7 @@ const List = styled.li`
 `;
 
 function MapListCard({ places }) {
+  console.log(places);
   return (
     <List>
       <img src={places.image} />
@@ -65,9 +82,15 @@ function MapListCard({ places }) {
         <p className="title">{places.name}</p>
         <p className="desc">{places.description}</p>
 
-        <button className="btn--add" type="button">
-          Add to cart
-        </button>
+        <div className="card__btns__box">
+          <button className="default__btn default__btn--mapmove" type="button">
+            지역이동
+          </button>
+
+          <button className="default__btn default__btn--delete" type="button">
+            상세보기
+          </button>
+        </div>
       </div>
     </List>
   );

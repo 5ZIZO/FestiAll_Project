@@ -5,6 +5,7 @@ import MapListCard from "../components/map/MapListCard";
 import usePlaces from "../hooks/usePlaces";
 import useAuthStore from "../store/store";
 import checkSignIn from "../components/authentication/checkSignIn";
+import useFileterStore from "../store/useFileterStore";
 
 const Wrap = styled.div`
   display: flex;
@@ -48,14 +49,19 @@ const Wrap = styled.div`
     }
   }
 `;
-
 function Home() {
   // 사용자 인증상태 전역 공유 아래처럼 사용하세요
   const isSignedIn = useAuthStore((state) => state.isSignedIn);
+  const filteredData = useFileterStore((state) => state.filteredData);
   useEffect(() => {
+    console.log(123);
     checkSignIn();
   }, []);
-  console.log("로그인 상태:", isSignedIn);
+  console.log('로그인 상태:', isSignedIn);
+
+  useEffect(() => {
+    console.log('Filtered Data:', filteredData);
+  }, [filteredData]);
 
   // 스토어 커스텀 훅 fetch 테스트용 함수
   const { data: places, error, isLoading } = usePlaces();
@@ -77,8 +83,8 @@ function Home() {
         ))}
       </ul>
 
-      <Map />
-    </Wrap>
+        <Map />
+      </Wrap>
   );
 }
 
