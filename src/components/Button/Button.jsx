@@ -7,7 +7,7 @@ const StyledButton = styled.button`
     background-color: ${props => props.$bgColor || "white"};
     color: ${props => props.$bgColor ? "white" : "black"};
     border: 2px solid ${props => props.$bgColor || "black"};
-    padding: 10px 20px;
+    padding: 10px 5px;
     border-radius: 8px;
     font-weight: bold;
     cursor: pointer;

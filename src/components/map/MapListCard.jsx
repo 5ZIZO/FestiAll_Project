@@ -59,17 +59,18 @@ const List = styled.li`
 function MapListCard({ places }) {
   return (
     <List>
-      <img src={places.image} />
+      <img src={places?.image} />
       <div className="card__item">
-        <p className="date">{`${places.st_date} ~ ${places.ed_date}`}</p>
-        <p className="title">{places.name}</p>
-        <p className="desc">{places.description}</p>
+        <p className="date">{`${places?.st_date} ~ ${places?.ed_date}`}</p>
+        <p className="title">{places?.name}</p>
+        <p className="desc">{places?.description}</p>
 
         <button className="btn--add" type="button">
           Add to cart
         </button>
       </div>
     </List>
+    
   );
 }
 
