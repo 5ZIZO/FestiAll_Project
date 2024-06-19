@@ -40,6 +40,7 @@ export const FestOutline = styled.div`
 `;
 
 export const ContentsDiv = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -110,18 +111,33 @@ export const MapDiv = styled.div`
 
 export const DescriptionDiv = styled.div`
     width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
 `;
 
-export const DetailBar = styled.div`
+export const LabelUl = styled.ul`
+`;
+
+export const ContentLi = styled.li`
+    display: grid;
+    grid-template-columns: 5px 128px 1fr;
+    grid-gap: 25px;
+    margin-bottom: 10px;
     width: 100%;
-    font-weight: bold;
-    border: 1px solid black;
-    border-radius: 8px;
-    padding: 1%;
+    &::before{
+    content: '';
+    width: 5px;
+    height: 5px;
+    background-color: black;
+    border-radius: 100%;
+    margin: 5px 10px;
+    }
+`;
+
+export const Label = styled.label`
+
+`;
+
+export const Span = styled.span`
+    color: #727171;
 `;
 
 export const H4 = styled.h4`
