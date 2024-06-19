@@ -148,7 +148,7 @@ export const SignUp = () => {
 
     if (!validateEmail(email)) {
       errorMessage = '이메일 형식을 확인해주세요';
-    } else if (password.length < 6) {
+    } else if (password.length <= 6) {
       errorMessage = '비밀번호는 6자리 이상으로 설정해주세요';
     } else if (password !== confirmPassword) {
       errorMessage = '비밀번호 재입력이 일치하지 않습니다';
@@ -178,7 +178,7 @@ export const SignUp = () => {
       }
     } catch (error) {
       const signUpError = `회원가입 중 에러가 발생했습니다.: ${error.message}`;
-      // 에러메시지 스위치문
+      // Todo: 에러메시지 스위치문
       setError(signUpError);
       console.error(signUpError);
     }
