@@ -73,8 +73,7 @@ function Home() {
       <CatagoryBar />
       <Wrap>
         <ul className="map__ul__wrap">
-          <MapListCard />
-          <MapListCard />
+          <MapListCard places={places} />
         </ul>
 
         <Map />

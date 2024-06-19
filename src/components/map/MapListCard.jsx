@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const List = styled.li`
   width: 343px;
@@ -52,16 +52,15 @@ const List = styled.li`
   }
 
   & .default__btn--mapmove {
-
   }
 
-  & .card__btns__box{
+  & .card__btns__box {
     display: flex;
     justify-content: space-between;
     margin-top: 24px;
   }
 
-  & .card__item{
+  & .card__item {
     width: 100%;
   }
 
@@ -75,25 +74,29 @@ const List = styled.li`
 function MapListCard({ places }) {
   console.log(places);
   return (
-    <List>
-      <img src={places?.image} />
-      <div className="card__item">
-        <p className="date">{`${places?.st_date} ~ ${places?.ed_date}`}</p>
-        <p className="title">{places?.name}</p>
-        <p className="desc">{places?.description}</p>
+    <>
+      {places && (
+        <List>
+          <img src={places.image} alt={places.name} />
+          <div className="card__item">
+            <p className="date">{`${places.st_date} ~ ${places.ed_date}`}</p>
+            <p className="title">{places.name}</p>
+            <p className="desc">{places.description}</p>
 
-        <div className="card__btns__box">
-          <button className="default__btn default__btn--mapmove" type="button">
-            지역이동
-          </button>
+            <div className="card__btns__box">
+              <button className="default__btn default__btn--mapmove" type="button">
+                지역이동
+              </button>
 
-          <button className="default__btn default__btn--delete" type="button">
-            상세보기
-          </button>
-        </div>
-      </div>
-    </List>
-    
+              <button className="default__btn default__btn--delete" type="button">
+                상세보기
+              </button>
+            </div>
+          </div>
+        </List>
+      )}
+    </>
+
   );
 }
 
