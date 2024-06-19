@@ -59,11 +59,9 @@ const Map = () => {
         position,
         image: new window.kakao.maps.MarkerImage(
           "https://ifh.cc/g/T3HOhD.png",
-          new window.kakao.maps.Size(30, 30),
+          new window.kakao.maps.Size(32, 32),
           {
-            spriteSize: new window.kakao.maps.Size(30, 30),
-            spriteOrigin: new window.kakao.maps.Point(0, index * 46 + 10),
-            offset: new window.kakao.maps.Point(15, 30),
+            offset: new window.kakao.maps.Point(16, 32),
           }
         ),
       });
@@ -170,9 +168,12 @@ const MenuWrap = styled.div`
   margin-top: 20px;
   padding: 10px;
   position: absolute;
-  left: 10px;
-  top: 10px;
+  left: 400px;
+  top: 80px;
   width: 250px;
+  z-index: 10;
+  height: 600px;
+  overflow: auto;
 `;
 
 const Option = styled.div`
