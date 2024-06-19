@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import MapComponent from "../components/mypage/MapComponent";
-// import axios from "axios";
 import MapData from "../map.json";
 
 const StContainer = styled.div`
@@ -71,22 +70,6 @@ const StGraphImg = styled.img`
 
 
 function MyPage() {
-  // const apiKey ='kjelz5qb9QC3+4nh0Ov2rqNUv+OgJH5zlfuBHg/gqaULC7llZC5Y4Y72aui0iIryXyxbmDE5VHE6GaOvPS1bag==';
-  // const url = 'http://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api';
-  // const params = {
-  //   serviceKey: apiKey,
-  //   type: 'json',
-  //   pageNo: 1,
-  //   numOfRows: 10,
-  // };
-  // axios.get(url, { params })
-  //   .then(response => {
-  //     console.log(response.data);
-  //   })
-  //   .catch(error => {
-  //     console.error('Error fetching data:', error);
-  //   });
-
 
   return (
     <StContainer>
