@@ -49,7 +49,7 @@ const Header = () => {
           <></>
         ) : isSignedIn === false ? (
           <>
-            <S.Nav to="/signup">회원가입</S.Nav>
+            <S.Nav to="/introduction">회원가입</S.Nav>
             <S.Nav to="/login">로그인</S.Nav>
           </>
         ) : (
