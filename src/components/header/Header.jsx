@@ -45,7 +45,8 @@ const Header = () => {
         )}
       </S.LeftSide>
       <S.RightSide>
-        {isSignedIn ? (
+        {isSignedIn === null && (<></>)}
+        {isSignedIn === false ? (
           <Button bgColor={'red'} onClick={handleLogoutAndCheckSignIn}>
             로그아웃
           </Button>

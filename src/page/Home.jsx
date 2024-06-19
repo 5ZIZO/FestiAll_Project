@@ -56,6 +56,7 @@ function Home() {
   const isSignedIn = useAuthStore((state) => state.isSignedIn);
   const filteredData = useFileterStore((state) => state.filteredData);
   useEffect(() => {
+    console.log(123);
     checkSignIn();
   }, []);
   console.log('로그인 상태:', isSignedIn);
