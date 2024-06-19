@@ -54,12 +54,14 @@ export const P = styled.p`
 `;
 
 export const ImageDiv = styled.div`
+    width: 100%;
     display: flex;
     justify-content: center;
 `;
 
 export const Image = styled.img`
-    width: 50%;
+    width: 100%;
+    border-radius: 10px;
 `;
 
 export const TextDiv = styled.div`
