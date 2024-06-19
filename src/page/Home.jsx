@@ -53,6 +53,7 @@ function Home() {
   // 사용자 인증상태 전역 공유 아래처럼 사용하세요
   const isSignedIn = useAuthStore((state) => state.isSignedIn);
   useEffect(() => {
+    console.log(123);
     checkSignIn();
   }, []);
   console.log("로그인 상태:", isSignedIn);

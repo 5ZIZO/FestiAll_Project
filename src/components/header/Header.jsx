@@ -30,13 +30,14 @@ const header = () => {
                 <S.SearchButton src={searchIcon} />
             </S.LeftSide>
             <S.RightSide>
-                {isSignedIn ? (
-                    <Button bgColor={"red"} onClick={handleLogoutAndCheckSignIn}>로그아웃</Button>
-                ) : (
+                {isSignedIn === null && (<></>)}
+                {isSignedIn === false ? (
                     <>
                         <Button onClick={() => navigate("/introduction")}>회원가입</Button>
                         <Button bgColor={"#495057"} onClick={() => navigate("/login")}>로그인</Button>
                     </>
+                ) : (
+                    <Button bgColor={"red"} onClick={handleLogoutAndCheckSignIn}>로그아웃</Button>
                 )}
             </S.RightSide>
         </S.HeaderContainer>
