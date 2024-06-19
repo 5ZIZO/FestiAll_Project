@@ -1,47 +1,72 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
-    width: 100%;
-    height: 80px;
-    background-color: #eeeeee;
-    border-bottom: 1px solid #b2b9c0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0 40px;
+  width: 100%;
+  height: 80px;
+  background-color: #fff;
+  border-bottom: 1px solid rgb(237, 237, 237);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 40px;
 `;
 
 export const LeftSide = styled.ul`
-    width: 50%;
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 `;
 
 export const RightSide = styled.ul`
-    width: 50%;
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    gap: 30px;
+  width: 50%;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 30px;
 `;
 
 export const Logo = styled.img`
-    width: 150px;
-    height: 45px;
-    object-fit: fill;
-    cursor: pointer;
+  width: 150px;
+  height: 45px;
+  object-fit: fill;
+  cursor: pointer;
 `;
 
 export const SearchInput = styled.input`
-    width: 355px;
-    height: 40px;
-    border: 2px solid #B2B9C0;
-    border-radius: 8px;
+  width: 500px;
+  padding: 7px 37px 7px 15px;
+  color: rgb(34, 34, 34);
+  font-size: 14px;
+  line-height: 24px;
+  border: 1px solid rgb(237, 237, 237);
+  border-radius: 42px;
+  background-color: rgb(255, 255, 255);
 `;
 
 export const SearchButton = styled.img`
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+`;
+
+export const Nav = styled(Link)`
+  flex: 0 0 auto;
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0px 16px;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 700;
+  color: rgb(34, 34, 34);
+  border: 1px solid rgb(223, 223, 223);
+  border-radius: 2px;
+  background-color: transparent;
+  &:hover {
+    background-color: rgb(252, 252, 252);
+  }
 `;

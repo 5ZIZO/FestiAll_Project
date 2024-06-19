@@ -1,10 +1,11 @@
+import { useEffect } from "react";
 import styled from "styled-components";
+import checkSignIn from "../components/authentication/checkSignIn";
+import CatagoryBar from "../components/main/CatagoryBar";
 import Map from "../components/map/Map";
 import MapListCard from "../components/map/MapListCard";
-import { useEffect } from "react";
 import usePlaces from "../hooks/usePlaces";
 import useAuthStore from "../store/store";
-import checkSignIn from "../components/authentication/checkSignIn";
 
 function Home() {
   const Wrap = styled.div`
@@ -13,7 +14,7 @@ function Home() {
 
     .map__ul__wrap {
       width: 400px;
-      height: calc(100vh - 80px);
+      height: calc(100vh - 130px);
       background-color: white;
       display: flex;
       flex-direction: column;
@@ -62,14 +63,17 @@ function Home() {
   console.log("데이터 테이블을 잘 불러왔습니다요 =>", places);
 
   return (
-    <Wrap>
-      <ul className="map__ul__wrap">
-        <MapListCard />
-        <MapListCard />
-      </ul>
+    <>
+      <CatagoryBar />
+      <Wrap>
+        <ul className="map__ul__wrap">
+          <MapListCard />
+          <MapListCard />
+        </ul>
 
-      <Map />
-    </Wrap>
+        <Map />
+      </Wrap>
+    </>
   );
 }
 
