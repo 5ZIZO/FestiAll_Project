@@ -20,7 +20,7 @@ export const FestState = styled.div`
     margin-top: 10px;
     width: 50%;
     height: 40px;
-    background-color: #495057;
+    background-color: ${props => props.$bgColor};
     color: white;
     border: 2px solid black;
     border-radius: 20px;
