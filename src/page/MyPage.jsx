@@ -98,8 +98,8 @@ function MyPage() {
         <StTitleRight>서울특별시(선택지역)</StTitleRight>
         <StGraphTitle>
           <p style={{ width: "40%"}}>포스터</p>
-          <p style={{ width: "28%" }}>축제이름</p>
-          <p style={{ width: "32%" }}>축제일정</p>
+          <p style={{ width: "35%" }}>축제이름</p>
+          <p style={{ width: "25%" }}>축제일정</p>
         </StGraphTitle>
 
         <StGraphSrollBox>
@@ -108,7 +108,7 @@ function MyPage() {
             <StGraphImg style={{ width: "30%" }} />
             <p style={{ width: "30%" }}>{data.축제명}</p>
             <div>
-            <p style={{ width: "40%" }}>{data.축제시작일자}</p>
+            <p>{data.축제시작일자}</p>
             <p>~ {data.축제종료일자}</p>
             </div>
           </StGraphBox>
