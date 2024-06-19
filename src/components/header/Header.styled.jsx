@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const HeaderContainer = styled.header`
   width: 100%;
@@ -35,14 +35,33 @@ export const Logo = styled.img`
 `;
 
 export const SearchInput = styled.input`
+  width: 90%;
+  height: 100%;
+  color: rgb(34, 34, 34);
+  font-size: 14px;
+  border: 0;
+  outline: none;
+`;
+
+export const SearchForm = styled.form`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 15px;
+
   width: 500px;
-  padding: 7px 37px 7px 15px;
   color: rgb(34, 34, 34);
   font-size: 14px;
   line-height: 24px;
   border: 1px solid rgb(237, 237, 237);
   border-radius: 42px;
   background-color: rgb(255, 255, 255);
+
+  button {
+    all: unset;
+    font-size: 25px;
+    cursor: pointer;
+  }
 `;
 
 export const SearchButton = styled.img`
