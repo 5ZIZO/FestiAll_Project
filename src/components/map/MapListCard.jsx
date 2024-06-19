@@ -5,7 +5,7 @@ const List = styled.li`
   height: 499px;
   border: 1px solid #b2b9c0;
   border-radius: 16px;
-  padding: 24px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -48,19 +48,22 @@ const List = styled.li`
     font-weight: 400;
     margin-top: 24px;
   }
+
+  img{
+    width: 300px;
+    height: 295px;
+    object-fit: cover;
+  }
 `;
 
-function MapListCard() {
+function MapListCard({ places }) {
   return (
     <List>
-      <img src="http://via.placeholder.com/295x243" />
+      <img src={places.image} />
       <div className="card__item">
-        <p className="date">6/17 ~ 6/19</p>
-        <p className="title">Product name</p>
-        <p className="desc">
-          This is a product description. It is best to keep it short, between 1
-          or 3 lines.
-        </p>
+        <p className="date">{`${places.st_date} ~ ${places.ed_date}`}</p>
+        <p className="title">{places.name}</p>
+        <p className="desc">{places.description}</p>
 
         <button className="btn--add" type="button">
           Add to cart
