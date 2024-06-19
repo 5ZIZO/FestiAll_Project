@@ -419,6 +419,16 @@ function AdminPostPage() {
           </StAddressForm>
 
           <StTopForm>
+            <StDateName>행사 시작일</StDateName>
+            <StFestival //이름 수정해야함
+              type="text"
+              placeholder="상세주소"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </StTopForm>
+
+          <StTopForm>
             <StFestival //이름 수정해야함
               type="text"
               placeholder="이용금액"
