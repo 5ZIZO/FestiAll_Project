@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { IoMdSearch } from 'react-icons/io';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useLogout from '../../hooks/useLogout';
@@ -45,16 +45,17 @@ const Header = () => {
         )}
       </S.LeftSide>
       <S.RightSide>
-        {isSignedIn === null && (<></>)}
-        {isSignedIn === false ? (
-          <Button bgColor={'red'} onClick={handleLogoutAndCheckSignIn}>
-            로그아웃
-          </Button>
-        ) : (
+        {isSignedIn === null ? (
+          <></>
+        ) : isSignedIn === false ? (
           <>
             <S.Nav to="/signup">회원가입</S.Nav>
             <S.Nav to="/login">로그인</S.Nav>
           </>
+        ) : (
+          <Button bgColor={'red'} onClick={handleLogoutAndCheckSignIn}>
+            로그아웃
+          </Button>
         )}
       </S.RightSide>
     </S.HeaderContainer>
