@@ -5,6 +5,7 @@ import SignUp from "../components/authentication/SignUp";
 import Login from "../components/authentication/Login";
 import DetailPage from "../page/DetailPage";
 import DefaultLayout from "../layouts/DefaultLayout";
+import Introduction from "../components/authentication/Introduction";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <SignUp /> },
       { path: "/detail/:festId", element: <DetailPage /> },
+      { path: "/introduction", element: <Introduction /> }
       { path: "/mypage", element: <MyPage /> }
     ]
   }
