@@ -34,7 +34,7 @@ const header = () => {
                     <Button bgColor={"red"} onClick={handleLogoutAndCheckSignIn}>로그아웃</Button>
                 ) : (
                     <>
-                        <Button onClick={() => navigate("/signup")}>회원가입</Button>
+                        <Button onClick={() => navigate("/introduction")}>회원가입</Button>
                         <Button bgColor={"#495057"} onClick={() => navigate("/login")}>로그인</Button>
                     </>
                 )}
