@@ -8,6 +8,7 @@ const Map = () => {
   const [placesList, setPlacesList] = useState([]);
   const [pagination, setPagination] = useState(null);
   const [markers, setMarkers] = useState([]);
+  const [infoWindow, setInfoWindow] = useState(null); // Add state for InfoWindow
 
   useEffect(() => {
     const kakaoMapKey = import.meta.env.VITE_KAKAO_MAP_KEY;
@@ -23,6 +24,7 @@ const Map = () => {
         };
         const map = new window.kakao.maps.Map(mapContainer.current, options);
         setMap(map);
+        setInfoWindow(new window.kakao.maps.InfoWindow({ zIndex: 1 })); // Initialize InfoWindow
       });
     };
 
@@ -43,6 +45,7 @@ const Map = () => {
         setPlacesList(data);
         setPagination(pagination);
         displayPlaces(data);
+        closeInfoWindow(); // Close InfoWindow on search
       } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
         alert("검색 결과가 존재하지 않습니다.");
       } else if (status === window.kakao.maps.services.Status.ERROR) {
@@ -61,7 +64,7 @@ const Map = () => {
           "https://ifh.cc/g/T3HOhD.png",
           new window.kakao.maps.Size(32, 32),
           {
-            offset: new window.kakao.maps.Point(16, 32),
+            offset: new window.kakao.maps.Point(16, 32), // Center the marker image correctly
           }
         ),
       });
@@ -73,7 +76,7 @@ const Map = () => {
         displayInfowindow(marker, place.place_name);
       });
       window.kakao.maps.event.addListener(marker, "mouseout", () => {
-        infowindow.close();
+        closeInfoWindow();
       });
 
       return marker;
@@ -88,11 +91,14 @@ const Map = () => {
   };
 
   const displayInfowindow = (marker, title) => {
-    const infowindow = new window.kakao.maps.InfoWindow({
-      zIndex: 1,
-    });
-    infowindow.setContent(`<div style="padding:5px;z-index:1;">${title}</div>`);
-    infowindow.open(map, marker);
+    infoWindow.setContent(`<div style="padding:5px;z-index:1;">${title}</div>`);
+    infoWindow.open(map, marker);
+  };
+
+  const closeInfoWindow = () => {
+    if (infoWindow) {
+      infoWindow.close();
+    }
   };
 
   const handlePageClick = (page) => {
