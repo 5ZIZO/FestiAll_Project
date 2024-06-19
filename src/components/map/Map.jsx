@@ -109,52 +109,6 @@ const Map = () => {
 
   return (
     <Container>
-      <MenuWrap>
-        <Option>
-          <Input
-            type="text"
-            id="keyword"
-            size="15"
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
-            placeholder="검색어를 입력하세요"
-          />
-          <Button onClick={searchPlaces}>검색하기</Button>
-        </Option>
-        <hr />
-        <PlacesList>
-          {placesList.map((place, index) => (
-            <ListItem key={index} className="item">
-              <span className={`markerbg marker_${index + 1}`}></span>
-              <div className="info">
-                <h5>{place.place_name}</h5>
-                {place.road_address_name ? (
-                  <>
-                    <span>{place.road_address_name}</span>
-                    <span className="jibun gray">{place.address_name}</span>
-                  </>
-                ) : (
-                  <span>{place.address_name}</span>
-                )}
-                <span className="tel">{place.phone}</span>
-              </div>
-            </ListItem>
-          ))}
-        </PlacesList>
-        <Pagination>
-          {pagination &&
-            Array.from({ length: pagination.last }, (_, i) => (
-              <PageLink
-                key={i}
-                href="#"
-                className={i + 1 === pagination.current ? "on" : ""}
-                onClick={() => handlePageClick(i + 1)}
-              >
-                {i + 1}
-              </PageLink>
-            ))}
-        </Pagination>
-      </MenuWrap>
       <MapContainer id="map" ref={mapContainer}></MapContainer>
     </Container>
   );
