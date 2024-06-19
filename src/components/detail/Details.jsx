@@ -73,6 +73,11 @@ const Details = () => {
         else setIsJiimed(false);
     }, [place]);
 
+    useEffect(() => {
+        if (myJjim?.length > 0) setIsJiimed(true);
+        else setIsJiimed(false);
+    }, [myJjim]);
+
     console.log(place);
 
     const FestMap = () => {
