@@ -3,7 +3,10 @@ import styled, { css, keyframes } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 const effects = [
-  '어디론가 떠나고 싶나요?', '소중한 사람들과 추억을 남기고 싶나요?', '그렇다면 지금 당장', 'FestiAll로 숨 참고 Love Dive'
+  '어디론가 떠나고 싶나요?', 
+  '소중한 사람들과 추억을 남기고 싶나요?', 
+  '그렇다면 지금 당장', 
+  'Festiall로 숨 참고 Love Dive'
 ];
 
 const gradients = [
