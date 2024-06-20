@@ -8,6 +8,7 @@ import Map from '../components/map/Map';
 import MapListCard from '../components/map/MapListCard';
 import usePlaces from '../hooks/usePlaces';
 import useAuthStore from '../store/store';
+import LoadingSpinners from '../components/Loading/LoadingSpinners';
 
 const Wrap = styled.div`
   display: flex;
@@ -73,7 +74,7 @@ function Home() {
   console.log('데이터 테이블을 잘 불러왔습니다요 =>', places);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingSpinners />;
   }
 
   if (error) {

@@ -3,6 +3,7 @@ import MapComponent from '../components/mypage/MapComponent';
 import supabase from '../components/api/supabaseClient';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import LoadingSpinners from '../components/Loading/LoadingSpinners';
 
 function MyPage() {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ function MyPage() {
   });
 
   if (isPending) {
-    return null;
+    return <LoadingSpinners />;
   }
 
   return (

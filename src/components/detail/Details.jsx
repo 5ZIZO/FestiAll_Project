@@ -8,6 +8,7 @@ import { getCurrentUser, handleAddJjim, handleDeleteJjim } from '../api/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useGetAllJjim from '../../hooks/useGetAllJjim';
 import useGetJjim from '../../hooks/useGetJjim';
+import LoadingSpinners from '../Loading/LoadingSpinners';
 
 const Details = () => {
   const festId = useParams().festId;
@@ -78,6 +79,10 @@ const Details = () => {
     if (myJjim?.length > 0) setIsJiimed(true);
     else setIsJiimed(false);
   }, [myJjim]);
+
+  if (isPending) {
+    return <LoadingSpinners />;
+  }
 
   console.log(place);
 

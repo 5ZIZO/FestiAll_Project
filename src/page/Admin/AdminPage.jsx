@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import usePlaces from '../../hooks/usePlaces';
 import supabase from "../../components/api/supabaseClient";
+import LoadingSpinners from '../../components/Loading/LoadingSpinners';
 
 const Container = styled.div`
   display: flex;
@@ -93,7 +94,9 @@ const AdminPage = () => {
     }
   }, [data]);
 
-  if (isLoading) return <Container>로딩 중...</Container>;
+  if (isLoading) {
+    return <LoadingSpinners />;
+  }
   if (error) return <Container>데이터 불러오다 에러가 났습니다.</Container>;
 
   const handleSearchChange = (e) => {
