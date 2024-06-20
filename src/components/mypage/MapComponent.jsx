@@ -1,9 +1,8 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import MapData from '../../map.json';
 import supabase from '../api/supabaseClient';
-import { useQuery } from '@tanstack/react-query';
 
 const { kakao } = window;
 
@@ -31,7 +30,7 @@ export default function MapComponent({ mapData }) {
     var map = new kakao.maps.Map(mapContainer, {
       // 지도를 표시할 div
       center: new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표
-      level: 14 // 지도의 확대 레벨
+      level: 13 // 지도의 확대 레벨
     });
 
     const addressList = mapData.map((data) => data.address);
