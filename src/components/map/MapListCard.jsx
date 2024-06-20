@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const List = styled.li`
   width: 343px;
   height: 499px;
   border: 1px solid #b2b9c0;
   border-radius: 16px;
-  padding: 24px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -33,8 +33,8 @@ const List = styled.li`
     line-height: 24px;
   }
 
-  & .btn--add {
-    width: 295px;
+  & .default__btn {
+    width: 49%;
     height: 40px;
     border-radius: 8px;
     background-color: #495057;
@@ -46,27 +46,57 @@ const List = styled.li`
     cursor: pointer;
     font-size: 16px;
     font-weight: 400;
+  }
+
+  & .default__btn--delete {
+  }
+
+  & .default__btn--mapmove {
+  }
+
+  & .card__btns__box {
+    display: flex;
+    justify-content: space-between;
     margin-top: 24px;
+  }
+
+  & .card__item {
+    width: 100%;
+  }
+
+  img {
+    width: 300px;
+    height: 295px;
+    object-fit: cover;
   }
 `;
 
-function MapListCard() {
+function MapListCard({ places }) {
+  console.log(places);
   return (
-    <List>
-      <img src="http://via.placeholder.com/295x243" />
-      <div className="card__item">
-        <p className="date">6/17 ~ 6/19</p>
-        <p className="title">Product name</p>
-        <p className="desc">
-          This is a product description. It is best to keep it short, between 1
-          or 3 lines.
-        </p>
+    <>
+      {places && (
+        <List>
+          <img src={places.image} alt={places.name} />
+          <div className="card__item">
+            <p className="date">{`${places.st_date} ~ ${places.ed_date}`}</p>
+            <p className="title">{places.name}</p>
+            <p className="desc">{places.description}</p>
 
-        <button className="btn--add" type="button">
-          Add to cart
-        </button>
-      </div>
-    </List>
+            <div className="card__btns__box">
+              <button className="default__btn default__btn--mapmove" type="button">
+                지역이동
+              </button>
+
+              <button className="default__btn default__btn--delete" type="button">
+                상세보기
+              </button>
+            </div>
+          </div>
+        </List>
+      )}
+    </>
+
   );
 }
 

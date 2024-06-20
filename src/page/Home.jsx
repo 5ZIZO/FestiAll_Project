@@ -12,10 +12,10 @@ import useAuthStore from '../store/store';
 const Wrap = styled.div`
   display: flex;
   justify-content: space-between;
-
+  height: calc(100vh - 130px);
   .map__ul__wrap {
     width: 400px;
-    height: calc(100vh - 130px);
+    height: 100%;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -73,8 +73,7 @@ function Home() {
       <CatagoryBar />
       <Wrap>
         <ul className="map__ul__wrap">
-          <MapListCard />
-          <MapListCard />
+          <MapListCard places={places} />
         </ul>
 
         <Map />
