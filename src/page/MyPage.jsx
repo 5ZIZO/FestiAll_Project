@@ -70,7 +70,6 @@ const StLeftBox = styled.div`
 `;
 const StTitleLeft = styled.h2`
   font-size: 1.5rem;
-  font-weight: bold;
 `;
 const StRightBox = styled.div`
   display: flex;
