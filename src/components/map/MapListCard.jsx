@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const List = styled.li`
@@ -72,6 +73,7 @@ const List = styled.li`
 `;
 
 function MapListCard({ places }) {
+  const navigate = useNavigate();
   console.log(places);
   return (
     <>
@@ -88,7 +90,7 @@ function MapListCard({ places }) {
                 지역이동
               </button>
 
-              <button className="default__btn default__btn--delete" type="button">
+              <button className="default__btn default__btn--delete" type="button" onClick={() => navigate(`/detail/${places.post_id}`)}>
                 상세보기
               </button>
             </div>
