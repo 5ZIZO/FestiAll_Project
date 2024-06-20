@@ -97,7 +97,7 @@ const StGraphSrollBox = styled.div`
   width: 100%;
   height: 700px;
   /* border: 1px solid black; */
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 const StGraphBox = styled.div`
   width: 100%;
@@ -116,5 +116,4 @@ const StGraphBox = styled.div`
 const StGraphImg = styled.img`
   width: 150px;
   height: 150px;
-  border: 1px solid black;
 `;
