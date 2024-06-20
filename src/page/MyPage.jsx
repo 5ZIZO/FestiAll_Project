@@ -25,7 +25,6 @@ function MyPage() {
     return null;
   }
 
-  
   return (
     <StContainer>
       <StLeftBox>
@@ -40,9 +39,7 @@ function MyPage() {
         </StGraphTitle>
         <StGraphSrollBox>
           {mapData.map((data, index) => (
-            <StGraphBox 
-            key={index}
-            onClick={()=>navigate(`/detail/:${data.post_id}`)}>
+            <StGraphBox key={index} onClick={() => navigate(`/detail/:${data.post}`)}>
               <StGraphImg style={{ width: '30%' }} src={data.image} />
               <p style={{ width: '30%' }}>{data.name}</p>
               <div>
