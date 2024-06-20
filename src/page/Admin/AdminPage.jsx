@@ -10,14 +10,14 @@ const Container = styled.div`
   align-items: center;
   padding: 20px;
   background-color: #f5f5f5;
-  height: 100vh;
+  height: 100%;
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 800px;
   padding: 10px 20px;
   background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -27,7 +27,6 @@ const Logo = styled.div`
   font-size: 1.5em;
   font-weight: bold;
   color: #2d5f2e;
-  margin: 0 auto;
 `;
 
 const SearchBar = styled.input`

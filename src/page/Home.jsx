@@ -12,7 +12,7 @@ import useAuthStore from '../store/store';
 const Wrap = styled.div`
   display: flex;
   justify-content: space-between;
-  height: calc(100vh - 130px);
+  height: calc(100vh - 146px);
   .map__ul__wrap {
     width: 400px;
     height: 100%;
