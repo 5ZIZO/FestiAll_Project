@@ -90,7 +90,7 @@ function Home() {
             <MapListCard key={idx} places={data} />
           ))}
         </ul>
-        <Map />
+        <Map places={places} />
       </Wrap>
     </>
   );

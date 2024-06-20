@@ -1,8 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const List = styled.li`
   width: 343px;
-  height: 499px;
+  height: 100%;
   border: 1px solid #b2b9c0;
   border-radius: 16px;
   padding: 22px;
@@ -31,6 +32,15 @@ const List = styled.li`
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
+    height: 48px;
+
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: keep-all;
   }
 
   & .default__btn {
@@ -72,6 +82,7 @@ const List = styled.li`
 `;
 
 function MapListCard({ places }) {
+  const navigate = useNavigate();
   console.log(places);
   return (
     <>
@@ -88,7 +99,11 @@ function MapListCard({ places }) {
                 지역이동
               </button>
 
-              <button className="default__btn default__btn--delete" type="button">
+              <button
+                className="default__btn default__btn--delete"
+                type="button"
+                onClick={() => navigate(`/detail/${places.post_id}`)}
+              >
                 상세보기
               </button>
             </div>
@@ -96,7 +111,6 @@ function MapListCard({ places }) {
         </List>
       )}
     </>
-
   );
 }
 

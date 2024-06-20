@@ -17,6 +17,7 @@ const Header = () => {
   const isSignedIn = useAuthStore((state) => state.isSignedIn);
   const [userId, setUserId] = useState(null);
   const setSearchTerm = useFileterStore((state) => state.setSearchTerm); // Zustand action 가져오기
+  const [isLoadingUser, setIsLoadingUser] = useState(false);
 
   useEffect(() => {
     async function getUserData() {
@@ -24,14 +25,21 @@ const Header = () => {
         const userData = await getCurrentUser();
         console.log('userData:', userData.email);
         setUserId(userData.email);
+        console.log(userData);
       } catch (error) {
         console.error('Error fetching user data:', error);
+      } finally {
+        setIsLoadingUser(false);
       }
     }
 
-    getUserData();
+    if (isSignedIn) {
+      setIsLoadingUser(true);
+      getUserData();
+    }
+    console.log("isSignedIn:",isSignedIn)
     checkSignIn();
-  }, [checkSignIn]);
+  }, [isSignedIn]);
 
   const handleLogoutAndCheckSignIn = async () => {
     await handleLogout();
@@ -57,7 +65,7 @@ const Header = () => {
         )}
       </S.LeftSide>
       <S.RightSide>
-        {isSignedIn === null ? (
+        {isSignedIn === null || isLoadingUser ? (
           <></>
         ) : isSignedIn === false ? (
           <>  
