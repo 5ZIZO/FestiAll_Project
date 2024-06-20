@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import supabase from '../api/supabaseClient';
+import signInWithKakao from './signInWithKakao';
 
 export const Container = styled.div`
   display: grid;
@@ -224,12 +225,6 @@ export const SignUp = () => {
       setIsButtonDisabled(true);
     }
   }, [email, password, confirmPassword, error]);
-
-  async function signInWithKakao() {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'kakao',
-    })
-  }
 
   return (
     <Container>
