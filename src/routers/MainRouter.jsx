@@ -8,6 +8,7 @@ import AdminPostPage from "../page/Admin/AdminPostPage";
 import AdminPage from "../page/Admin/AdminPage";
 import Introduction from '../components/authentication/Introduction';
 import MyPage from '../page/MyPage';
+import { AdminRouters } from "./AdminRouters";
 
 const router = createBrowserRouter([
   {
@@ -20,15 +21,12 @@ const router = createBrowserRouter([
       { path: "/detail/:festId", element: <DetailPage /> },
       { path: '/introduction', element: <Introduction /> },
       { path: '/mypage', element: <MyPage /> },
-      { path: "/adminpage", element: <AdminPage />},
-      { path: "/adminpost", element: <AdminPostPage />},
-      { path: "/adminpost/:postId", element: <AdminPostPage/> },
-      // { element: <AdminRouters /> ,children: [ 
-      //   { path: "/adminpage", element: <AdminPage />},
-      //   { path: "/adminpost", element: <AdminPostPage />},
-      //   { path: "/adminpost/:postId", element: <AdminPostPage/> },
-      // ]},
-    ]
+      { element: <AdminRouters /> ,children: [ 
+        { path: "/adminpage", element: <AdminPage />},
+        { path: "/adminpost", element: <AdminPostPage />},
+        { path: "/adminpost/:postId", element: <AdminPostPage/> },
+      ]},
+    ] 
   }
 ]);
 
