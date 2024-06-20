@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import supabase from '../../components/api/supabaseClient';
 import checkSignIn from '../../components/authentication/checkSignIn';
 import usePlaces from '../../hooks/usePlaces';
+import LoadingSpinners from '../../components/Loading/LoadingSpinners';
 
 const StWriteWrapper = styled.div`
   display: flex;
@@ -403,7 +404,9 @@ function AdminPostPage() {
     }
   };
 
-  if (isLoading) return <div>로딩중</div>;
+  if (isLoading) {
+    return <LoadingSpinners />;
+  }
   if (error) return <div>에러났습니다</div>;
 
   return (
