@@ -1,26 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
-import supabase from '../../components/api/supabaseClient';
 import { useNavigate, useParams } from 'react-router-dom';
-import usePlaces from '../../hooks/usePlaces';
-import checkSignIn from '../../components/authentication/checkSignIn';
 import styled from 'styled-components';
+import supabase from '../../components/api/supabaseClient';
+import checkSignIn from '../../components/authentication/checkSignIn';
+import usePlaces from '../../hooks/usePlaces';
 
 const StWriteWrapper = styled.div`
   display: flex;
   justify-content: center;
   padding: 30px;
-  margin: 30px;
-  height: 75vh;
+  background-color: #f5f5f5;
 `;
 
 const StForm = styled.form`
-  width: 50%;
+  width: 700px;
+  
 `;
 
 const ImageUploadButton = styled.button`
   display: flex;
   justify-content: center;
-  width: 20%;
+  width: 100%;
   padding: 15px;
   margin: auto;
   margin-bottom: 10px;
@@ -34,9 +34,19 @@ const ImageUploadButton = styled.button`
 `;
 
 // ToDo : 이 부분이 원래 인풋임. 이상하게 반응 제대로 안 함. 바로 위 컴포넌트와 비교
-const ImageUpload = styled.input`
-  display: none;
-`;
+
+// const ImageUpload = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   width: 100%;
+//   padding: 15px;
+//   margin: auto;
+//   margin-bottom: 10px;
+//   font-size: 15px;
+//   border-radius: 20px;
+//   border: 1px solid gray;
+// `;
+
 
 const StTopForm = styled.div`
   width: 100%;
@@ -46,38 +56,41 @@ const StTopForm = styled.div`
 `;
 
 const StFestival = styled.input`
-  width: 70%;
+  width: 100%;
   padding: 15px;
   margin: auto;
   margin-bottom: 10px;
   font-size: 15px;
-  border-radius: 20px;
+  border-radius: 5px;
   border: 1px solid gray;
 `;
 
 const StDateForm = styled.div`
+
   display: flex;
+  align-items: center;
   justify-content: center;
 `;
 
 const StDateName = styled.div`
   padding: 15px;
-  margin: 20px 10px;
+  margin-right: 10px;
   font-size: 15px;
 `;
 
 const StFestivalDate = styled.input`
-  width: 28%;
-  padding: 15px;
-  margin: 10px;
+  width: 45%;
+  padding: 0px 15px;
+  height: 40px;
+  margin: 10px 2.5%;
   font-size: 15px;
-  border-radius: 20px;
+  border-radius: 5px;
   border: 1px solid gray;
 `;
 
 const StDescription = styled.textarea`
   padding: 20px;
-  border-radius: 20px;
+  border-radius: 5px;
   border: 1px solid gray;
   font-size: 14px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -91,9 +104,20 @@ const StInputForm = styled.div`
   display: flex;
   flex-direction: column;
   overflow: auto;
-  border: 1px solid gray;
+  border: 1px solid #ccc;
   border-radius: 10px;
   padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  /* background-color: #ddd; */
+  > h3 {
+    color: #2d5f2e;
+    font-size: 32px;
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 20px;
+  }
 `;
 
 const StAddressForm = styled.div`
@@ -103,50 +127,60 @@ const StAddressForm = styled.div`
 `;
 
 const StFestiAddress = styled.button`
-  border: 1px solid gray;
-  border-radius: 10px;
-  padding: 20px;
+  border: ${(props) => (props.selected ? 0 : '1px solid gray')};
+  border-radius: 20px;
+  height: 40px;
+  padding: ${(props) => (props.selected ? '0 21px' : '0 20px')};
   margin: 5px;
   cursor: pointer;
-  background: ${(props) => (props.selected ? '#ADADAD' : '#E0E0E0')};
+  color: ${(props) => (props.selected ? '#fff' : '#333')};
+  background: ${(props) => (props.selected ? '#333' : '#fff')};
   transition: background-color 0.3s ease;
   &:hover {
-    background: #adadad;
+    background: #333;
+    color: #fff;
+    border: 0;
+    padding: 0 21px;
     text-decoration: none;
   }
 `;
 
 const StFestiDetailAddress = styled.input`
-  width: 70%;
+  width: 100%;
   padding: 15px;
   margin: auto;
   margin-bottom: 10px;
   font-size: 15px;
-  border-radius: 20px;
+  border-radius: 5px;
   border: 1px solid gray;
 `;
 
 
 const StFestiPricing = styled.input`
-  width: 70%;
+  width: 100%;
   padding: 15px;
   margin: auto;
   margin-bottom: 10px;
   font-size: 15px;
-  border-radius: 20px;
+  border-radius: 5px;
   border: 1px solid gray;
 `;
 
 const StFestiCategory = styled.button`
-  border: 1px solid gray;
-  border-radius: 10px;
-  padding: 20px;
+  border: ${(props) => (props.selected ? 0 : '1px solid gray')};
+  border-radius: 20px;
+  height: 40px;
+  padding: ${(props) => (props.selected ? '0 21px' : '0 20px')};
   margin: 5px;
   cursor: pointer;
-  background: ${(props) => (props.selected ? '#ADADAD' : '#E0E0E0')};
+  color: ${(props) => (props.selected ? '#fff' : '#333')};
+  background: ${(props) => (props.selected ? '#333' : '#fff')};
   transition: background-color 0.3s ease;
   &:hover {
-    background: #adadad;
+    background: #333;
+    color: #fff;
+    border: 0;
+    padding: 0 21px;
     text-decoration: none;
   }
 `;
@@ -188,11 +222,11 @@ function AdminPostPage() {
   const [edDate, setEdDate] = useState('');
   const [stTime, setStTime] = useState('');
   const [edTime, setEdTime] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('음악');
   const [pricing, setPricing] = useState('');
   const [address, setAddress] = useState('');
   const [description, setDescription] = useState('');
-  const [region, setRegion] = useState('');
+  const [region, setRegion] = useState('서울');
 
   const { postId } = useParams();
   const isEdit = Boolean(postId); // 수정용 불리언 값
@@ -385,7 +419,10 @@ function AdminPostPage() {
     <StWriteWrapper>
       <StForm onSubmit={handleSubmit}>
         <StInputForm>
-          <ImageUploadButton onClick={fileSelect}>이미지 등록
+
+          <h3>행사 {isEdit ? '수정' : '등록'}</h3>
+          <ImageUpload onClick={fileSelect}>
+
             <input type="file" onChange={newImage} ref={fileRef} />
           </ImageUploadButton>
 
@@ -398,14 +435,14 @@ function AdminPostPage() {
             />
           </StTopForm>
 
-          <StDateForm>
             <StDateName>행사 시작일</StDateName>
+          <StDateForm>
             <StFestivalDate type="date" value={stDate} onChange={(e) => setStDate(e.target.value)} />
             <StFestivalDate type="time" value={stTime} onChange={(e) => setStTime(e.target.value)} />
           </StDateForm>
 
-          <StDateForm>
             <StDateName>행사 종료일</StDateName>
+          <StDateForm>
             <StFestivalDate type="date" value={edDate} onChange={(e) => setEdDate(e.target.value)} />
             <StFestivalDate type="time" value={edTime} onChange={(e) => setEdTime(e.target.value)} />
           </StDateForm>
