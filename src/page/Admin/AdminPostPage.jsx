@@ -10,11 +10,12 @@ const StWriteWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #f5f5f5;
-  height: calc(100vh - 80px);
+  height: 100%;
 `;
 
 const StForm = styled.form`
   width: 700px;
+  margin: 40px 0;
 `;
 
 const ImageUploadButton = styled.label`
