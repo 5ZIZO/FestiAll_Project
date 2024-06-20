@@ -61,7 +61,7 @@ export const ImageDiv = styled.div`
 `;
 
 export const Image = styled.img`
-    width: 100%;
+    width: 600px;
     border-radius: 10px;
 `;
 
