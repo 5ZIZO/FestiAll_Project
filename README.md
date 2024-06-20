@@ -8,37 +8,67 @@ FestiAll은 전국의 행사 정보를 유저들에게 알려주는 사이트 �
 
 ## 팀원 구성
 
-<div align="center" dir="auto">
-<table>
-<thead>
-<tr>
-<th align="center"><strong>김병준</strong></th>
-<th align="center"><strong>김동신</strong></th>
-<th align="center"><strong>이가현</strong></th>
-<th align="center"><strong>서샛별</strong></th>
-<th align="center"><strong>이준혁</strong></th>
-<th align="center"><strong>정현욱</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><a href="https://github.com/Captain-Kim"><img src="https://avatars.githubusercontent.com/u/160568904?v=4" height="150" width="150" style="max-width: 100%;"> <br> @Captain-Kim</a></td>
-
-<td align="center"><a href="https://github.com/KimDongSin"><img src="https://avatars.githubusercontent.com/u/81426391?v=4" height="150" width="150" style="max-width: 100%;"> <br> @KimDongSin</a></td>
-
-<td align="center"><a href="https://github.com/Ga-zzang"><img src="https://avatars.githubusercontent.com/u/165372628?v=4" height="150" width="150" style="max-width: 100%;"> <br> @Ga-zzang</a></td>
-
-<td align="center"><a href="https://github.com/ssbmel"><img src="https://avatars.githubusercontent.com/u/159214124?v=4" height="150" width="150" style="max-width: 100%;"> <br> @ssbmel</a></td>
-
-<td align="center"><a href="https://github.com/LeeJunhyeok369"><img src="https://avatars.githubusercontent.com/u/82815583?v=4" height="150" width="150" style="max-width: 100%;"> <br> @LeeJunhyeok369</a></td>
-
-<td align="center"><a href="https://github.com/ghastlymouse"><img src="https://avatars.githubusercontent.com/u/163982251?v=4" height="150" width="150" style="max-width: 100%;"> <br> @ghastlymouse</a></td>
-
-
-</tr>
-</tbody>
-</table>
+<div align="center">
+  <table style="width: 100%;">
+    <thead>
+      <tr>
+        <th><strong>김병준</strong></th>
+        <th><strong>김동신</strong></th>
+        <th><strong>이가현</strong></th>
+        <th><strong>서샛별</strong></th>
+        <th><strong>이준혁</strong></th>
+        <th><strong>정현욱</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td align="center">
+          <a href="https://github.com/Captain-Kim">
+            <img src="https://avatars.githubusercontent.com/u/160568904?v=4" height="150" width="150" style="max-width: 100%;">
+            <br>
+            @Captain-Kim
+          </a>
+        </td>
+        <td align="center">
+          <a href="https://github.com/KimDongSin">
+            <img src="https://avatars.githubusercontent.com/u/81426391?v=4" height="150" width="150" style="max-width: 100%;">
+            <br>
+            @KimDongSin
+          </a>
+        </td>
+        <td align="center">
+          <a href="https://github.com/Ga-zzang">
+            <img src="https://avatars.githubusercontent.com/u/165372628?v=4" height="150" width="150" style="max-width: 100%;">
+            <br>
+            @Ga-zzang
+          </a>
+        </td>
+        <td align="center">
+          <a href="https://github.com/ssbmel">
+            <img src="https://avatars.githubusercontent.com/u/159214124?v=4" height="150" width="150" style="max-width: 100%;">
+            <br>
+            @ssbmel
+          </a>
+        </td>
+        <td align="center">
+          <a href="https://github.com/LeeJunhyeok369">
+            <img src="https://avatars.githubusercontent.com/u/82815583?v=4" height="150" width="150" style="max-width: 100%;">
+            <br>
+            @LeeJunhyeok369
+          </a>
+        </td>
+        <td align="center">
+          <a href="https://github.com/ghastlymouse">
+            <img src="https://avatars.githubusercontent.com/u/163982251?v=4" height="150" width="150" style="max-width: 100%;">
+            <br>
+            @ghastlymouse
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
 
 ## 역할 및 업무 분담
 - 이가현
