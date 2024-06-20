@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { promises } from './Map';
+const { kakao } = window;
 
 const List = styled.li`
   width: 343px;
@@ -81,9 +83,18 @@ const List = styled.li`
   }
 `;
 
-function MapListCard({ places }) {
+function MapListCard({ places, map }) {
   const navigate = useNavigate();
-  console.log(places);
+
+  const handleMove = async () => {
+    const a = await promises(places.address);
+    if (map) {
+      var moveLatLon = new kakao.maps.LatLng(a.getLat(), a.getLng());
+      map.setLevel(5);
+      map.panTo(moveLatLon);
+    }
+  };
+
   return (
     <>
       {places && (
@@ -95,7 +106,7 @@ function MapListCard({ places }) {
             <p className="desc">{places.description}</p>
 
             <div className="card__btns__box">
-              <button className="default__btn default__btn--mapmove" type="button">
+              <button onClick={handleMove} className="default__btn default__btn--mapmove" type="button">
                 지역이동
               </button>
 
