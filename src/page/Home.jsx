@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import checkSignIn from '../components/authentication/checkSignIn';
 import CatagoryBar from '../components/main/CatagoryBar';
@@ -53,9 +53,9 @@ const Wrap = styled.div`
 `;
 
 function Home() {
-  // 사용자 인증상태 전역 공유 아래처럼 사용하세요
   const isSignedIn = useAuthStore((state) => state.isSignedIn);
   const filteredData = useFileterStore((state) => state.filteredData);
+  const [map, setMap] = useState(null);
 
   useEffect(() => {
     console.log(123);
@@ -68,9 +68,8 @@ function Home() {
     console.log('Filtered Data:', filteredData);
   }, [filteredData]);
 
-  // 스토어 커스텀 훅 fetch 테스트용 함수
   const { data: places, error, isLoading } = usePlaces();
-  
+
   console.log('데이터 테이블을 잘 불러왔습니다요 =>', places);
 
   if (isLoading) {
@@ -81,16 +80,18 @@ function Home() {
     return <div>Error: {error.message}</div>;
   }
 
+  const handleMapLoad = (loadedMap) => {
+    setMap(loadedMap);
+  };
+
   return (
     <>
       <CatagoryBar />
       <Wrap>
         <ul className="map__ul__wrap">
-          {places && places.map((data, idx) => (
-            <MapListCard key={idx} places={data} />
-          ))}
+          {places && places.map((data, idx) => <MapListCard key={idx} places={data} map={map} />)}
         </ul>
-        <Map places={places} />
+        <Map places={places} onMapLoad={handleMapLoad} />
       </Wrap>
     </>
   );

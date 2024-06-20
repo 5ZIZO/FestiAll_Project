@@ -15,7 +15,6 @@ const StWriteWrapper = styled.div`
 
 const StForm = styled.form`
   width: 700px;
-  
 `;
 
 const ImageUploadButton = styled.label`
@@ -33,21 +32,6 @@ const ImageUploadButton = styled.label`
     display: none;
   }
 `;
-
-// ToDo : 이 부분이 원래 인풋임. 이상하게 반응 제대로 안 함. 바로 위 컴포넌트와 비교
-
-// const ImageUpload = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   width: 100%;
-//   padding: 15px;
-//   margin: auto;
-//   margin-bottom: 10px;
-//   font-size: 15px;
-//   border-radius: 20px;
-//   border: 1px solid gray;
-// `;
-
 
 const StTopForm = styled.div`
   width: 100%;
@@ -67,7 +51,6 @@ const StFestival = styled.input`
 `;
 
 const StDateForm = styled.div`
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -155,7 +138,6 @@ const StFestiDetailAddress = styled.input`
   border-radius: 5px;
   border: 1px solid gray;
 `;
-
 
 const StFestiPricing = styled.input`
   width: 100%;
@@ -272,6 +254,7 @@ function AdminPostPage() {
         setAddress(selectedPost.address);
         setDescription(selectedPost.description);
         setRegion(selectedPost.region);
+        setPreviewImage(selectedPost.image);
       }
     }
   }, [places, postId]);
@@ -289,7 +272,6 @@ function AdminPostPage() {
     setDescription('');
     setRegion('');
     setImage('');
-    
 
     if (fileRef.current) {
       fileRef.current.value = '';
@@ -315,23 +297,8 @@ function AdminPostPage() {
   const createImagePreview = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      const img = new Image();
-      img.src = reader.result;
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        
-        const maxWidth = 200;
-        const scaleSize = maxWidth / img.width;
-        canvas.width = maxWidth;
-        canvas.height = img.height * scaleSize;
-        
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        
-        const dataUrl = canvas.toDataURL('image/jpeg', 0.5);
-        setPreviewImage(dataUrl);
-      };
+    reader.onload = () => {
+      setPreviewImage(reader.result);
     };
   };
 
@@ -442,14 +409,21 @@ function AdminPostPage() {
     <StWriteWrapper>
       <StForm onSubmit={handleSubmit}>
         <StInputForm>
-
           <h3>행사 {isEdit ? '수정' : '등록'}</h3>
           <ImageUploadButton>
             이미지 선택하기
             <input type="file" onChange={newImage} ref={fileRef} />
           </ImageUploadButton>
 
-          {previewImage && <img src={previewImage} alt="미리보기 이미지" style={{ marginTop: '10px', maxWidth: '100%' }} />}
+          {previewImage && (
+            <div style={{ margin: '10px 0', width: '100%', height: 'auto', background: '#f5f5f5', overflow: 'hidden' }}>
+              <img
+                src={previewImage}
+                alt="미리보기 이미지"
+                style={{ display: 'block', width: '100%', margin: '0 auto', objectFit: 'cover' }}
+              />
+            </div>
+          )}
 
           <StTopForm>
             <StFestival
@@ -495,7 +469,6 @@ function AdminPostPage() {
               제주
             </StFestiAddress>
           </StAddressForm>
-
 
           <StTopForm>
             <StFestiDetailAddress
@@ -543,7 +516,9 @@ function AdminPostPage() {
 
         <StButtonDiv>
           <StButton type="submit">등록</StButton>
-          <StButton type="button" onClick={handleCancel}>취소</StButton>
+          <StButton type="button" onClick={handleCancel}>
+            취소
+          </StButton>
         </StButtonDiv>
       </StForm>
     </StWriteWrapper>

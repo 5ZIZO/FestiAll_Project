@@ -84,6 +84,7 @@ const Button = styled.button`
 const AdminPage = () => {
   const { data, error, isLoading } = usePlaces();
   const [places, setPlaces] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -94,6 +95,14 @@ const AdminPage = () => {
 
   if (isLoading) return <Container>로딩 중...</Container>;
   if (error) return <Container>데이터 불러오다 에러가 났습니다.</Container>;
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredPlaces = places.filter((place) =>
+    place.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const handleItemClick = (postId) => {
     navigate(`/adminpost/${postId}`);
@@ -129,11 +138,16 @@ const AdminPage = () => {
     <Container>
       <Header>
         <Logo>관리자 페이지</Logo>
-        <SearchBar type="text" placeholder="Search..." />
+        <SearchBar
+          type="text"
+          placeholder="찾을 행사 제목을 입력하세요."
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
         <Button onClick={handlePostPage}>게시글 작성</Button>
       </Header>
       <EventList>
-        {places.map((place) => (
+        {filteredPlaces.map((place) => (
           <EventItem key={place.post_id}>
             <EventDetails onClick={() => handleItemClick(place.post_id)}>
               {place.name}
