@@ -78,8 +78,8 @@ export const ButtonDiv = styled.div`
 `;
 
 export const H3 = styled.h3`
-    font-size: 1.17em;
-    margin: 1em 0;
+    font-size: 40px;
+    margin: 20px 0;
     font-weight: bold;
 `;
 
@@ -122,6 +122,7 @@ export const ContentLi = styled.li`
     grid-gap: 25px;
     margin-bottom: 10px;
     width: 100%;
+    font-size: 18px;
     &::before{
     content: '';
     width: 5px;
@@ -141,7 +142,7 @@ export const Span = styled.span`
 `;
 
 export const H4 = styled.h4`
-    font-size: 1em;
-    margin: 0;
+    font-size: 28px;
+    margin-bottom: 20px;
     font-weight: bold;
 `;
