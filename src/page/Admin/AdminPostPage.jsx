@@ -393,7 +393,7 @@ function AdminPostPage() {
 
       alert(isEdit ? '수정이 완료되었습니다!' : '등록이 완료되었습니다!');
       resetForm();
-      navigate('/');
+      navigate('/adminpage');
     } catch (error) {
       console.error(isEdit ? '게시글 수정 실패' : '게시글 등록 실패', error.message);
       alert(`게시글 ${isEdit ? '수정' : '등록'}에 실패하였습니다: ${error.message}`);
@@ -404,12 +404,8 @@ function AdminPostPage() {
     const isConfirmed = window.confirm('등록을 취소하시겠습니까?');
     if (isConfirmed) {
       alert('취소되었습니다.');
-      navigate('/');
+      navigate('/adminpage');
     }
-  };
-
-  const handlePostAdd = () => {
-    navigate(`/adminpost`);
   };
 
   if (isLoading) return <div>로딩중</div>;
@@ -421,8 +417,7 @@ function AdminPostPage() {
         <StInputForm>
 
           <h3>행사 {isEdit ? '수정' : '등록'}</h3>
-          <ImageUpload onClick={fileSelect}>
-
+          <ImageUploadButton type="button" onClick={fileSelect}>
             <input type="file" onChange={newImage} ref={fileRef} />
           </ImageUploadButton>
 
@@ -435,13 +430,13 @@ function AdminPostPage() {
             />
           </StTopForm>
 
-            <StDateName>행사 시작일</StDateName>
+          <StDateName>행사 시작일</StDateName>
           <StDateForm>
             <StFestivalDate type="date" value={stDate} onChange={(e) => setStDate(e.target.value)} />
             <StFestivalDate type="time" value={stTime} onChange={(e) => setStTime(e.target.value)} />
           </StDateForm>
 
-            <StDateName>행사 종료일</StDateName>
+          <StDateName>행사 종료일</StDateName>
           <StDateForm>
             <StFestivalDate type="date" value={edDate} onChange={(e) => setEdDate(e.target.value)} />
             <StFestivalDate type="time" value={edTime} onChange={(e) => setEdTime(e.target.value)} />
@@ -473,7 +468,7 @@ function AdminPostPage() {
 
 
           <StTopForm>
-            <StFestiDetailAddress 
+            <StFestiDetailAddress
               type="text"
               placeholder="상세주소"
               value={address}
@@ -482,7 +477,7 @@ function AdminPostPage() {
           </StTopForm>
 
           <StTopForm>
-            <StFestiPricing 
+            <StFestiPricing
               type="text"
               placeholder="이용금액"
               value={pricing}
@@ -517,8 +512,8 @@ function AdminPostPage() {
         </StInputForm>
 
         <StButtonDiv>
-          <StButton onClick={handlePostAdd}>등록</StButton>
-          <StButton onClick={handleCancel}>취소</StButton>
+          <StButton type="submit">등록</StButton>
+          <StButton type="button" onClick={handleCancel}>취소</StButton>
         </StButtonDiv>
       </StForm>
     </StWriteWrapper>
