@@ -22,42 +22,42 @@ FestiAll은 전국의 행사 정보를 유저들에게 알려주는 사이트 �
     </thead>
     <tbody>
       <tr>
-        <td align="center">
+        <td style="padding: 0px" align="center">
           <a href="https://github.com/Captain-Kim">
             <img src="https://avatars.githubusercontent.com/u/160568904?v=4" height="150" width="150" style="max-width: 100%;">
             <br>
             @Captain-Kim
           </a>
         </td>
-        <td align="center">
+        <td style="padding: 0px" align="center">
           <a href="https://github.com/KimDongSin">
             <img src="https://avatars.githubusercontent.com/u/81426391?v=4" height="150" width="150" style="max-width: 100%;">
             <br>
             @KimDongSin
           </a>
         </td>
-        <td align="center">
+        <td style="padding: 0px" align="center">
           <a href="https://github.com/Ga-zzang">
             <img src="https://avatars.githubusercontent.com/u/165372628?v=4" height="150" width="150" style="max-width: 100%;">
             <br>
             @Ga-zzang
           </a>
         </td>
-        <td align="center">
+        <td style="padding: 0px" align="center">
           <a href="https://github.com/ssbmel">
             <img src="https://avatars.githubusercontent.com/u/159214124?v=4" height="150" width="150" style="max-width: 100%;">
             <br>
             @ssbmel
           </a>
         </td>
-        <td align="center">
+        <td style="padding: 0px" align="center">
           <a href="https://github.com/LeeJunhyeok369">
             <img src="https://avatars.githubusercontent.com/u/82815583?v=4" height="150" width="150" style="max-width: 100%;">
             <br>
             @LeeJunhyeok369
           </a>
         </td>
-        <td align="center">
+        <td style="padding: 0px" align="center">
           <a href="https://github.com/ghastlymouse">
             <img src="https://avatars.githubusercontent.com/u/163982251?v=4" height="150" width="150" style="max-width: 100%;">
             <br>
