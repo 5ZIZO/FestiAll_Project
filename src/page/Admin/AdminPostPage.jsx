@@ -14,7 +14,6 @@ const StWriteWrapper = styled.div`
 
 const StForm = styled.form`
   width: 700px;
-  
 `;
 
 const ImageUploadButton = styled.label`
@@ -47,7 +46,6 @@ const ImageUploadButton = styled.label`
 //   border: 1px solid gray;
 // `;
 
-
 const StTopForm = styled.div`
   width: 100%;
   display: flex;
@@ -66,7 +64,6 @@ const StFestival = styled.input`
 `;
 
 const StDateForm = styled.div`
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -154,7 +151,6 @@ const StFestiDetailAddress = styled.input`
   border-radius: 5px;
   border: 1px solid gray;
 `;
-
 
 const StFestiPricing = styled.input`
   width: 100%;
@@ -288,7 +284,6 @@ function AdminPostPage() {
     setDescription('');
     setRegion('');
     setImage('');
-    
 
     if (fileRef.current) {
       fileRef.current.value = '';
@@ -426,14 +421,21 @@ function AdminPostPage() {
     <StWriteWrapper>
       <StForm onSubmit={handleSubmit}>
         <StInputForm>
-
           <h3>행사 {isEdit ? '수정' : '등록'}</h3>
           <ImageUploadButton>
             이미지 선택하기
             <input type="file" onChange={newImage} ref={fileRef} />
           </ImageUploadButton>
 
-          {previewImage && <div style={{ margin: '10px 0', width: '100%', height:"auto", background: '#f5f5f5', overflow: "hidden"}}><img src={previewImage} alt="미리보기 이미지" style={{ display:"block", width:"100%", margin: '0 auto', objectFit: "cover" }} /></div>}
+          {previewImage && (
+            <div style={{ margin: '10px 0', width: '100%', height: 'auto', background: '#f5f5f5', overflow: 'hidden' }}>
+              <img
+                src={previewImage}
+                alt="미리보기 이미지"
+                style={{ display: 'block', width: '100%', margin: '0 auto', objectFit: 'cover' }}
+              />
+            </div>
+          )}
 
           <StTopForm>
             <StFestival
@@ -479,7 +481,6 @@ function AdminPostPage() {
               제주
             </StFestiAddress>
           </StAddressForm>
-
 
           <StTopForm>
             <StFestiDetailAddress
@@ -527,7 +528,9 @@ function AdminPostPage() {
 
         <StButtonDiv>
           <StButton type="submit">등록</StButton>
-          <StButton type="button" onClick={handleCancel}>취소</StButton>
+          <StButton type="button" onClick={handleCancel}>
+            취소
+          </StButton>
         </StButtonDiv>
       </StForm>
     </StWriteWrapper>
