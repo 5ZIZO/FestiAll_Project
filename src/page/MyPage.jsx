@@ -11,7 +11,7 @@ function MyPage() {
       data: { user }
     } = await supabase.auth.getUser();
     console.log(user);
-    const { data: teamData } = await supabase.from('hearts').select('*, places(*)').eq('user_id', user.id);
+    const { data: teamData } = await supabase.from('hearts').select('*, places(*), User').eq('user_id', user.id);
     console.log(teamData);
     return teamData.map((data) => data.places);
   };
@@ -28,7 +28,7 @@ function MyPage() {
   return (
     <StContainer>
       <StLeftBox>
-        <StTitleLeft>내가 찜한 지역</StTitleLeft>
+        <StTitleLeft>내가 찜한 축제</StTitleLeft>
         <MapComponent mapData={mapData} />
       </StLeftBox>
       <StRightBox>
@@ -58,9 +58,9 @@ export default MyPage;
 
 const StContainer = styled.div`
   width: 80%;
-  height: 800px;
+  height: 1000px;
   margin: 50px auto;
-  padding: 5%;
+  /* padding: 5%; */
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 5%;
@@ -81,21 +81,28 @@ const StGraphTitle = styled.div`
   display: flex;
   justify-content: space-around;
   margin: 40px auto;
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid #000;
   padding-bottom: 10px;
   justify-content: space-around;
 
   p {
     text-align: center;
-
     word-wrap: break-word;
+    font-size: 1.2rem;
   }
 `;
 const StGraphSrollBox = styled.div`
   width: 100%;
-  height: 700px;
-  /* border: 1px solid black; */
-  overflow-y: scroll;
+  height: 900px;
+  /* overflow-y: scroll; */
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #588157;
+  }
 `;
 const StGraphBox = styled.div`
   width: 100%;
@@ -104,15 +111,18 @@ const StGraphBox = styled.div`
   align-items: center;
   white-space: nowrap;
   margin: 10px auto;
+  cursor: pointer;
   p {
     white-space: pre-wrap;
     text-align: center;
     line-height: 26px;
     max-width: 170px;
+    font-size: 1.1rem;
   }
 `;
 const StGraphImg = styled.img`
   width: 150px;
-  height: 150px;
+  min-width: 150px;
+  height: 300px;
   border: 1px solid black;
 `;

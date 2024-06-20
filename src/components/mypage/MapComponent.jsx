@@ -8,7 +8,7 @@ const { kakao } = window;
 
 const StMap = styled.div`
   width: 100%;
-  height: 800px;
+  height: 1000px;
   margin: 20px auto;
   border: 1px solid #d8d8d8;
 `;
