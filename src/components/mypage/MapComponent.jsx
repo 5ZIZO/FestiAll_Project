@@ -1,6 +1,9 @@
+/* eslint-disable no-unused-vars */
 import { useEffect } from "react";
 import styled from "styled-components";
 import MapData from "../../map.json"
+import supabase from "../api/supabaseClient";
+import { useQuery } from "@tanstack/react-query";
 
 const { kakao } = window;
 
@@ -13,6 +16,18 @@ const StMap = styled.div`
 
 export default function MapComponent() {
 
+  const selectMapData = async () => {
+    const { data: mapData} = await supabase
+    .from('places')
+    .select('*')
+    console.log(mapData);
+    return mapData;
+  }
+
+  const { data: mapData} = useQuery({
+    queryKey: ['mapData'],
+    queryFn: selectMapData,
+  })
 
   useEffect(() => {
     if (!kakao || !kakao.maps) {
