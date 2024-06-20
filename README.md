@@ -32,7 +32,7 @@ FestiAll은 전국의 행사 정보를 유저들에게 알려주는 사이트 �
 
 <td align="center"><a href="https://github.com/LeeJunhyeok369"><img src="https://avatars.githubusercontent.com/u/82815583?v=4" height="150" width="150" style="max-width: 100%;"> <br> @LeeJunhyeok369</a></td>
 
-<td align="center"><a href="https://github.com/ghastlymouse"><img src="https://avatars.githubusercontent.com/u/163982251?v=4" height="150" width="150" style="max-width: 100%;"> <br> @ghastlymouse · he/him</a></td>
+<td align="center"><a href="https://github.com/ghastlymouse"><img src="https://avatars.githubusercontent.com/u/163982251?v=4" height="150" width="150" style="max-width: 100%;"> <br> @ghastlymouse</a></td>
 
 
 </tr>
