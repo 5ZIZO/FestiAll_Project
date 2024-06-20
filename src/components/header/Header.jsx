@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { IoMdSearch } from 'react-icons/io';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useLogout from '../../hooks/useLogout';
@@ -6,6 +6,7 @@ import useAuthStore from '../../store/store';
 import useFileterStore from '../../store/useFileterStore'; // Zustand store import
 import Button from '../Button/Button';
 import checkSignIn from '../authentication/checkSignIn';
+import { getCurrentUser } from './../api/api';
 import * as S from './Header.styled';
 import logo from './logo.png';
 
@@ -14,12 +15,23 @@ const Header = () => {
   const navigate = useNavigate();
   const handleLogout = useLogout();
   const isSignedIn = useAuthStore((state) => state.isSignedIn);
-
+  const [userId, setUserId] = useState(null);
   const setSearchTerm = useFileterStore((state) => state.setSearchTerm); // Zustand action 가져오기
 
   useEffect(() => {
+    async function getUserData() {
+      try {
+        const userData = await getCurrentUser();
+        console.log('userData:', userData.email);
+        setUserId(userData.email);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    }
+
+    getUserData();
     checkSignIn();
-  }, []);
+  }, [checkSignIn]);
 
   const handleLogoutAndCheckSignIn = async () => {
     await handleLogout();
@@ -49,13 +61,18 @@ const Header = () => {
           <></>
         ) : isSignedIn === false ? (
           <>
-            <S.Nav to="/signup">회원가입</S.Nav>
             <S.Nav to="/login">로그인</S.Nav>
+            <S.Nav to="/signup">회원가입</S.Nav>
           </>
         ) : (
-          <Button bgColor={'red'} onClick={handleLogoutAndCheckSignIn}>
-            로그아웃
-          </Button>
+          <>
+            <S.Nav to={userId === 'admin@admin.admin' ? '/adminpage' : '/mypage'}>
+              {userId === 'admin@admin.admin' ? '관리자 페이지' : '마이 페이지'}
+            </S.Nav>
+            <Button bgColor={'red'} onClick={handleLogoutAndCheckSignIn}>
+              로그아웃
+            </Button>
+          </>
         )}
       </S.RightSide>
     </S.HeaderContainer>
