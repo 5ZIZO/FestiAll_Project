@@ -9,6 +9,7 @@ const StMap = styled.div`
   height: 100%;
   margin: 20px auto;
   border: 1px solid #d8d8d8;
+  height: 575px;
 `;
 
 export default function MapComponent({ mapData }) {

@@ -15,7 +15,6 @@ export const promises = (address) => {
     geocoder.addressSearch(address, function (result, status) {
       if (status === kakao.maps.services.Status.OK) {
         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-        console.log(coords);
         return resolve(coords);
       } else {
         console.log(`Failed to get coordinates for address: ${address}`);
@@ -63,7 +62,6 @@ export default function Map({ places, onMapLoad }) {
           if (status === kakao.maps.services.Status.OK) {
             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
             resolve(coords);
-            console.log(coords);
           } else {
             reject(new Error(`Failed to get coordinates for address: ${address}`));
           }

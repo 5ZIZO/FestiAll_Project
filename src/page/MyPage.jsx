@@ -87,6 +87,8 @@ const StTitleLeft = styled.h2`
 const StRightBox = styled.div`
   display: flex;
   flex-direction: column;
+  height: 615px;
+  overflow-y: auto;
 `;
 const StGraphTitle = styled.div`
   width: 100%;
@@ -106,7 +108,6 @@ const StGraphTitle = styled.div`
 const StGraphSrollBox = styled.div`
   width: 100%;
   height: 100%;
-  /* border: 1px solid black; */
   overflow-y: auto;
 `;
 const StGraphBox = styled.div`
