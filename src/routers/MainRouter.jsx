@@ -23,6 +23,11 @@ const router = createBrowserRouter([
       { path: "/adminpage", element: <AdminPage />},
       { path: "/adminpost", element: <AdminPostPage />},
       { path: "/adminpost/:postId", element: <AdminPostPage/> },
+      // { element: <AdminRouters /> ,children: [ 
+      //   { path: "/adminpage", element: <AdminPage />},
+      //   { path: "/adminpost", element: <AdminPostPage />},
+      //   { path: "/adminpost/:postId", element: <AdminPostPage/> },
+      // ]},
     ]
   }
 ]);
