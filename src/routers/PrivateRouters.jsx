@@ -1,16 +1,26 @@
-import React from 'react'
-import useAuthStore from '../store/store'
+import React, { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import checkSignIn from '../components/authentication/checkSignIn';
+import useAuthStore from '../store/store';
 
 const PrivateRouters = () => {
-    const isSignedIn = useAuthStore(state => state.isSignedIn);
-    console.log("isSignedIn => ", isSignedIn);
+  const isSignedIn = useAuthStore((state) => state.isSignedIn);
+  const [loading, setLoading] = useState(true);
 
-    return (
-        <>
-            {isSignedIn ? <Outlet /> : <Navigate to="/login" />}
-        </>
-    )
-}
+  useEffect(() => {
+    const checkSignInStatus = async () => {
+      await checkSignIn();
+      setLoading(false);
+    };
 
-export default PrivateRouters
+    checkSignInStatus();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  return isSignedIn ? <Outlet /> : <Navigate to="/login" />;
+};
+
+export default PrivateRouters;
