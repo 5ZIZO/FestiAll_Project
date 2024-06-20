@@ -313,7 +313,7 @@ function AdminPostPage() {
   const handleImgUpload = async (file) => {
     console.log('file:', file);
 
-    if (!file) return; // 이미지파일 없으면 함수 끝
+    if (!file) return;
 
     const uniqueImgName = `places/${Date.now()}_${file.name}`;
 
