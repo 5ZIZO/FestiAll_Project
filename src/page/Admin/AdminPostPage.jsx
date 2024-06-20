@@ -28,7 +28,6 @@ const ImageUpload = styled.div`
   border-radius: 20px;
   border: 1px solid gray;
   cursor: pointer;
-
   input {
     display: none;
   }
@@ -111,7 +110,7 @@ const StAddressForm = styled.div`
   margin: 10px;
 `;
 
-const StFestAddress = styled.button`
+const StFestiAddress = styled.button`
   border: 1px solid gray;
   border-radius: 10px;
   padding: 20px;
@@ -125,7 +124,28 @@ const StFestAddress = styled.button`
   }
 `;
 
-const StFestCategory = styled.button`
+const StFestiDetailAddress = styled.input`
+  width: 70%;
+  padding: 15px;
+  margin: auto;
+  margin-bottom: 10px;
+  font-size: 15px;
+  border-radius: 20px;
+  border: 1px solid gray;
+`;
+
+
+const StFestiPricing = styled.input`
+  width: 70%;
+  padding: 15px;
+  margin: auto;
+  margin-bottom: 10px;
+  font-size: 15px;
+  border-radius: 20px;
+  border: 1px solid gray;
+`;
+
+const StFestiCategory = styled.button`
   border: 1px solid gray;
   border-radius: 10px;
   padding: 20px;
@@ -395,32 +415,32 @@ function AdminPostPage() {
           </StDateForm>
 
           <StAddressForm>
-            <StFestAddress type="button" selected={region === '서울'} onClick={() => setRegion('서울')}>
+            <StFestiAddress type="button" selected={region === '서울'} onClick={() => setRegion('서울')}>
               서울
-            </StFestAddress>
-            <StFestAddress type="button" selected={region === '강원도'} onClick={() => setRegion('강원도')}>
+            </StFestiAddress>
+            <StFestiAddress type="button" selected={region === '강원도'} onClick={() => setRegion('강원도')}>
               강원도
-            </StFestAddress>
-            <StFestAddress type="button" selected={region === '경기도'} onClick={() => setRegion('경기도')}>
+            </StFestiAddress>
+            <StFestiAddress type="button" selected={region === '경기도'} onClick={() => setRegion('경기도')}>
               경기도
-            </StFestAddress>
-            <StFestAddress type="button" selected={region === '경상도'} onClick={() => setRegion('경상도')}>
+            </StFestiAddress>
+            <StFestiAddress type="button" selected={region === '경상도'} onClick={() => setRegion('경상도')}>
               경상도
-            </StFestAddress>
-            <StFestAddress type="button" selected={region === '충청도'} onClick={() => setRegion('충청도')}>
+            </StFestiAddress>
+            <StFestiAddress type="button" selected={region === '충청도'} onClick={() => setRegion('충청도')}>
               충청도
-            </StFestAddress>
-            <StFestAddress type="button" selected={region === '전라도'} onClick={() => setRegion('전라도')}>
+            </StFestiAddress>
+            <StFestiAddress type="button" selected={region === '전라도'} onClick={() => setRegion('전라도')}>
               전라도
-            </StFestAddress>
-            <StFestAddress type="button" selected={region === '제주'} onClick={() => setRegion('제주')}>
+            </StFestiAddress>
+            <StFestiAddress type="button" selected={region === '제주'} onClick={() => setRegion('제주')}>
               제주
-            </StFestAddress>
+            </StFestiAddress>
           </StAddressForm>
 
+
           <StTopForm>
-            <StDateName>행사 시작일</StDateName>
-            <StFestival //이름 수정해야함
+            <StFestiDetailAddress 
               type="text"
               placeholder="상세주소"
               value={address}
@@ -429,7 +449,7 @@ function AdminPostPage() {
           </StTopForm>
 
           <StTopForm>
-            <StFestival //이름 수정해야함
+            <StFestiPricing 
               type="text"
               placeholder="이용금액"
               value={pricing}
@@ -438,21 +458,21 @@ function AdminPostPage() {
           </StTopForm>
 
           <StCategoryForm>
-            <StFestCategory type="button" selected={category === '음악'} onClick={() => setCategory('음악')}>
+            <StFestiCategory type="button" selected={category === '음악'} onClick={() => setCategory('음악')}>
               음악
-            </StFestCategory>
-            <StFestCategory type="button" selected={category === '음식'} onClick={() => setCategory('음식')}>
+            </StFestiCategory>
+            <StFestiCategory type="button" selected={category === '음식'} onClick={() => setCategory('음식')}>
               음식
-            </StFestCategory>
-            <StFestCategory type="button" selected={category === '전통'} onClick={() => setCategory('전통')}>
+            </StFestiCategory>
+            <StFestiCategory type="button" selected={category === '전통'} onClick={() => setCategory('전통')}>
               전통
-            </StFestCategory>
-            <StFestCategory type="button" selected={category === '예술'} onClick={() => setCategory('예술')}>
+            </StFestiCategory>
+            <StFestiCategory type="button" selected={category === '예술'} onClick={() => setCategory('예술')}>
               예술
-            </StFestCategory>
-            <StFestCategory type="button" selected={category === '기타'} onClick={() => setCategory('기타')}>
+            </StFestiCategory>
+            <StFestiCategory type="button" selected={category === '기타'} onClick={() => setCategory('기타')}>
               기타
-            </StFestCategory>
+            </StFestiCategory>
           </StCategoryForm>
 
           <StDescription
