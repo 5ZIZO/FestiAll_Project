@@ -314,23 +314,8 @@ function AdminPostPage() {
   const createImagePreview = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      const img = new Image();
-      img.src = reader.result;
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        
-        const maxWidth = 200;
-        const scaleSize = maxWidth / img.width;
-        canvas.width = maxWidth;
-        canvas.height = img.height * scaleSize;
-        
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        
-        const dataUrl = canvas.toDataURL('image/jpeg', 0.5);
-        setPreviewImage(dataUrl);
-      };
+    reader.onload = () => {
+      setPreviewImage(reader.result);
     };
   };
 
@@ -448,7 +433,7 @@ function AdminPostPage() {
             <input type="file" onChange={newImage} ref={fileRef} />
           </ImageUploadButton>
 
-          {previewImage && <img src={previewImage} alt="미리보기 이미지" style={{ marginTop: '10px', maxWidth: '100%' }} />}
+          {previewImage && <div style={{ margin: '10px 0', width: '100%', height:"auto", background: '#f5f5f5', overflow: "hidden"}}><img src={previewImage} alt="미리보기 이미지" style={{ display:"block", width:"100%", margin: '0 auto', objectFit: "cover" }} /></div>}
 
           <StTopForm>
             <StFestival
