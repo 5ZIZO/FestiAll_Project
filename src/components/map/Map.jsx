@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const { kakao } = window;
@@ -9,6 +9,13 @@ const StMap = styled.div`
 `;
 
 export default function Map({ places }) {
+  const [location, setLocation] = useState({
+     // 지도의 초기 위치
+     center: { lat: 36.2683, lng: 127.6358 },
+  });
+
+  console.log(location.center.lat);
+
   const loadMap = async () => {
     if (!kakao || !kakao.maps) {
       console.error('Kakao Maps API를 로드할 수 없습니다.');
@@ -24,7 +31,7 @@ export default function Map({ places }) {
 
     var map = new kakao.maps.Map(mapContainer, {
       // 지도를 표시할 div
-      center: new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표
+      center: new kakao.maps.LatLng(location.center.lat, location.center.lng), // 지도의 중심좌표
       level: 12 // 지도의 확대 레벨
     });
 
@@ -38,6 +45,7 @@ export default function Map({ places }) {
           if (status === kakao.maps.services.Status.OK) {
             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
             resolve(coords);
+            console.log(coords);
           } else {
             reject(new Error(`Failed to get coordinates for address: ${address}`));
           }
