@@ -10,7 +10,8 @@ const StWriteWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #f5f5f5;
-  height: calc(100vh - 80px);
+  height: 100%;
+  padding: 40px 0;
 `;
 
 const StForm = styled.form`
