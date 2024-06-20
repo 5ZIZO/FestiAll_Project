@@ -22,8 +22,9 @@ export const LeftSide = styled.ul`
 export const RightSide = styled.ul`
   width: 50%;
   display: flex;
-  flex-direction: row-reverse;
   align-items: center;
+  justify-content: flex-end;
+
   gap: 30px;
 `;
 
