@@ -98,7 +98,7 @@ export const JjimButton = styled.button`
 export const DetailDiv = styled.div`
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     align-items: self-start;
     justify-content: space-between;
     gap: 30px;
@@ -114,6 +114,7 @@ export const DescriptionDiv = styled.div`
 `;
 
 export const LabelUl = styled.ul`
+    line-height: 42px;
 `;
 
 export const ContentLi = styled.li`
@@ -125,11 +126,6 @@ export const ContentLi = styled.li`
     font-size: 18px;
     &::before{
     content: '';
-    width: 5px;
-    height: 5px;
-    background-color: black;
-    border-radius: 100%;
-    margin: 5px 10px;
     }
 `;
 
