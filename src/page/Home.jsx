@@ -51,14 +51,17 @@ const Wrap = styled.div`
     }
   }
 `;
+
 function Home() {
   // 사용자 인증상태 전역 공유 아래처럼 사용하세요
   const isSignedIn = useAuthStore((state) => state.isSignedIn);
   const filteredData = useFileterStore((state) => state.filteredData);
+
   useEffect(() => {
     console.log(123);
     checkSignIn();
   }, []);
+
   console.log('로그인 상태:', isSignedIn);
 
   useEffect(() => {
@@ -67,16 +70,27 @@ function Home() {
 
   // 스토어 커스텀 훅 fetch 테스트용 함수
   const { data: places, error, isLoading } = usePlaces();
+  
   console.log('데이터 테이블을 잘 불러왔습니다요 =>', places);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
   return (
     <>
       <CatagoryBar />
       <Wrap>
         <ul className="map__ul__wrap">
-          <MapListCard places={places} />
+          {places && places.map((data, idx) => (
+            <MapListCard key={idx} places={data} />
+          ))}
         </ul>
-
-        <Map />
+        <Map places={places} />
       </Wrap>
     </>
   );

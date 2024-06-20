@@ -17,7 +17,7 @@ const StForm = styled.form`
   
 `;
 
-const ImageUpload = styled.div`
+const ImageUploadButton = styled.button`
   display: flex;
   justify-content: center;
   width: 100%;
@@ -34,6 +34,7 @@ const ImageUpload = styled.div`
 `;
 
 // ToDo : 이 부분이 원래 인풋임. 이상하게 반응 제대로 안 함. 바로 위 컴포넌트와 비교
+
 // const ImageUpload = styled.div`
 //   display: flex;
 //   justify-content: center;
@@ -45,6 +46,7 @@ const ImageUpload = styled.div`
 //   border-radius: 20px;
 //   border: 1px solid gray;
 // `;
+
 
 const StTopForm = styled.div`
   width: 100%;
@@ -399,11 +401,15 @@ function AdminPostPage() {
   };
 
   const handleCancel = () => {
-    const isConfirmed = window.confirm('정말 취소하시겠습니까?');
+    const isConfirmed = window.confirm('등록을 취소하시겠습니까?');
     if (isConfirmed) {
       alert('취소되었습니다.');
       navigate('/');
     }
+  };
+
+  const handlePostAdd = () => {
+    navigate(`/adminpost`);
   };
 
   if (isLoading) return <div>로딩중</div>;
@@ -413,10 +419,12 @@ function AdminPostPage() {
     <StWriteWrapper>
       <StForm onSubmit={handleSubmit}>
         <StInputForm>
+
           <h3>행사 {isEdit ? '수정' : '등록'}</h3>
           <ImageUpload onClick={fileSelect}>
+
             <input type="file" onChange={newImage} ref={fileRef} />
-          </ImageUpload>
+          </ImageUploadButton>
 
           <StTopForm>
             <StFestival
@@ -509,7 +517,7 @@ function AdminPostPage() {
         </StInputForm>
 
         <StButtonDiv>
-          <StButton>등록</StButton>
+          <StButton onClick={handlePostAdd}>등록</StButton>
           <StButton onClick={handleCancel}>취소</StButton>
         </StButtonDiv>
       </StForm>

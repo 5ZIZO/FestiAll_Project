@@ -1,6 +1,63 @@
-import styled from "styled-components";
-import MapComponent from "../components/mypage/MapComponent";
-import MapData from "../map.json";
+import styled from 'styled-components';
+import MapComponent from '../components/mypage/MapComponent';
+import supabase from '../components/api/supabaseClient';
+import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+
+function MyPage() {
+  const navigate = useNavigate();
+  const selectMapData = async () => {
+    const {
+      data: { user }
+    } = await supabase.auth.getUser();
+    console.log(user);
+    const { data: teamData } = await supabase.from('hearts').select('*, places(*)').eq('user_id', user.id);
+    console.log(teamData);
+    return teamData.map((data) => data.places);
+  };
+
+  const { data: mapData, isPending } = useQuery({
+    queryKey: ['teamData'],
+    queryFn: selectMapData
+  });
+
+  if (isPending) {
+    return null;
+  }
+
+  
+  return (
+    <StContainer>
+      <StLeftBox>
+        <StTitleLeft>내가 찜한 지역</StTitleLeft>
+        <MapComponent mapData={mapData} />
+      </StLeftBox>
+      <StRightBox>
+        <StGraphTitle>
+          <p style={{ width: '40%' }}>포스터</p>
+          <p style={{ width: '35%' }}>축제이름</p>
+          <p style={{ width: '25%' }}>축제일정</p>
+        </StGraphTitle>
+        <StGraphSrollBox>
+          {mapData.map((data, index) => (
+            <StGraphBox 
+            key={index}
+            onClick={()=>navigate(`/detail/:${data.post_id}`)}>
+              <StGraphImg style={{ width: '30%' }} src={data.image} />
+              <p style={{ width: '30%' }}>{data.name}</p>
+              <div>
+                <p>{data.st_date}</p>
+                <p>~ {data.ed_date}</p>
+              </div>
+            </StGraphBox>
+          ))}
+        </StGraphSrollBox>
+      </StRightBox>
+    </StContainer>
+  );
+}
+
+export default MyPage;
 
 const StContainer = styled.div`
   width: 80%;
@@ -18,14 +75,10 @@ const StLeftBox = styled.div`
 const StTitleLeft = styled.h2`
   font-size: 1.5rem;
 `;
-const StTitleRight = styled.h2`
-  font-size: 1.5rem;
-`;
 const StRightBox = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
 const StGraphTitle = styled.div`
   width: 100%;
   display: flex;
@@ -37,7 +90,7 @@ const StGraphTitle = styled.div`
 
   p {
     text-align: center;
-    
+
     word-wrap: break-word;
   }
 `;
@@ -62,45 +115,7 @@ const StGraphBox = styled.div`
   }
 `;
 const StGraphImg = styled.img`
-  background-image: url("http://via.placeholder.com/150x150 ");
   width: 150px;
   height: 150px;
   border: 1px solid black;
 `;
-
-
-function MyPage() {
-
-  return (
-    <StContainer>
-      <StLeftBox>
-        <StTitleLeft>내가 찜한 축제</StTitleLeft>
-        <MapComponent />
-      </StLeftBox>
-      <StRightBox>
-        <StTitleRight>서울특별시(선택지역)</StTitleRight>
-        <StGraphTitle>
-          <p style={{ width: "40%"}}>포스터</p>
-          <p style={{ width: "35%" }}>축제이름</p>
-          <p style={{ width: "25%" }}>축제일정</p>
-        </StGraphTitle>
-
-        <StGraphSrollBox>
-          {MapData.records.slice(5).map((data, index)=>(
-          <StGraphBox key={index}> 
-            <StGraphImg style={{ width: "30%" }} />
-            <p style={{ width: "30%" }}>{data.축제명}</p>
-            <div>
-            <p>{data.축제시작일자}</p>
-            <p>~ {data.축제종료일자}</p>
-            </div>
-          </StGraphBox>
-            ))}
-        </StGraphSrollBox>
-      </StRightBox>
-    </StContainer>
-  );
-}
-
-export default MyPage
-;
