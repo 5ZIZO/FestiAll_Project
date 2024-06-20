@@ -14,8 +14,6 @@ export default function Map({ places }) {
      center: { lat: 36.2683, lng: 127.6358 },
   });
 
-  console.log(location.center.lat);
-
   const loadMap = async () => {
     if (!kakao || !kakao.maps) {
       console.error('Kakao Maps API를 로드할 수 없습니다.');
