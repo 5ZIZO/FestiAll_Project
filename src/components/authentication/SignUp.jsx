@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import supabase from '../api/supabaseClient';
 import styled from 'styled-components';
+import supabase from '../api/supabaseClient';
 
 export const Container = styled.div`
   display: grid;
@@ -46,7 +46,7 @@ export const Forms = styled.div`
 `;
 
 export const Form = styled.form`
-  position: absolute; 
+  position: absolute;
   top: 0;
   width: 100%;
   background-color: #f2f2f2;
@@ -148,7 +148,7 @@ export const SignUp = () => {
 
     if (!validateEmail(email)) {
       errorMessage = '이메일 형식을 확인해주세요';
-    } else if (password.length <= 6) {
+    } else if (password.length < 6) {
       errorMessage = '비밀번호는 6자리 이상으로 설정해주세요';
     } else if (password !== confirmPassword) {
       errorMessage = '비밀번호 재입력이 일치하지 않습니다';
@@ -164,7 +164,7 @@ export const SignUp = () => {
     try {
       const { data, error } = await supabase.auth.signUp({
         email: email,
-        password: password,
+        password: password
       });
 
       if (error) {
@@ -216,31 +216,24 @@ export const SignUp = () => {
     <Container>
       <Content>
         <ImgWrapper>
-          <img src="https://kmfvncclriiektxphias.supabase.co/storage/v1/object/public/images/public/Festiall_Model.png?t=2024-06-18T03%3A56%3A18.517Z" alt="user login" />
+          <img
+            src="https://kmfvncclriiektxphias.supabase.co/storage/v1/object/public/images/public/Festiall_Model.png?t=2024-06-18T03%3A56%3A18.517Z"
+            alt="user login"
+          />
         </ImgWrapper>
         <Forms>
           <Form className="block" id="login-up" onSubmit={handleSignUp}>
             <Title>회원가입 페이지</Title>
             <InputBox>
-              <Icon className='bx bx-at'></Icon>
-              <Input
-                type="email"
-                placeholder="이메일"
-                value={email}
-                onChange={handleEmailChange}
-              />
+              <Icon className="bx bx-at"></Icon>
+              <Input type="email" placeholder="이메일" value={email} onChange={handleEmailChange} />
             </InputBox>
             <InputBox>
-              <Icon className='bx bx-lock'></Icon>
-              <Input
-                type="password"
-                placeholder="비밀번호"
-                value={password}
-                onChange={handlePasswordChange}
-              />
+              <Icon className="bx bx-lock"></Icon>
+              <Input type="password" placeholder="비밀번호" value={password} onChange={handlePasswordChange} />
             </InputBox>
             <InputBox>
-              <Icon className='bx bx-lock'></Icon>
+              <Icon className="bx bx-lock"></Icon>
               <Input
                 type="password"
                 placeholder="비밀번호 재입력"
@@ -249,15 +242,9 @@ export const SignUp = () => {
               />
             </InputBox>
             {password !== confirmPassword && confirmPassword && (
-              <ErrorMessage>
-                비밀번호가 일치하지 않습니다
-              </ErrorMessage>
+              <ErrorMessage>비밀번호가 일치하지 않습니다</ErrorMessage>
             )}
-            {error && (
-              <ErrorMessage>
-                {error}
-              </ErrorMessage>
-            )}
+            {error && <ErrorMessage>{error}</ErrorMessage>}
             <Button type="submit" disabled={isButtonDisabled}>
               회원가입
             </Button>

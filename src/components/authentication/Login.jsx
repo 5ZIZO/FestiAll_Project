@@ -1,7 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../api/supabaseClient';
-import { Container, Content, ImgWrapper, Forms, Form, Title, InputBox, Icon, Input, Button, ErrorMessage } from './SignUp';
+import {
+  Button,
+  Container,
+  Content,
+  ErrorMessage,
+  Form,
+  Forms,
+  Icon,
+  ImgWrapper,
+  Input,
+  InputBox,
+  Title
+} from './SignUp';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -20,7 +32,7 @@ const Login = () => {
 
     if (!validateEmail(email)) {
       errorMessage = '이메일 형식을 확인해주세요.';
-    } else if (password.length < 7) {
+    } else if (password.length < 6) {
       errorMessage = '비밀번호는 6자리 이상이어야 합니다.';
     }
 
@@ -34,11 +46,11 @@ const Login = () => {
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email: email,
-        password: password,
+        password: password
       });
 
       if (error) {
-        const signUpError = `회원가입 중 에러가 발생했습니다.: ${error.message}`;
+        const signUpError = `로그인 중 에러가 발생했습니다.: ${error.message}`;
         setError(signUpError);
         console.error(signUpError);
       } else {
@@ -47,7 +59,7 @@ const Login = () => {
         navigate('/');
       }
     } catch (error) {
-      const loginError = `회원가입 중 에러가 발생했습니다.: ${error.message}`;
+      const loginError = `로그인 중 에러가 발생했습니다.: ${error.message}`;
       setError(loginError);
       console.error(loginError);
     }
@@ -80,34 +92,23 @@ const Login = () => {
     <Container>
       <Content>
         <ImgWrapper>
-          <img src="https://kmfvncclriiektxphias.supabase.co/storage/v1/object/public/images/public/Festiall_Model.png?t=2024-06-18T03%3A56%3A18.517Z" alt="user login" />
+          <img
+            src="https://kmfvncclriiektxphias.supabase.co/storage/v1/object/public/images/public/Festiall_Model.png?t=2024-06-18T03%3A56%3A18.517Z"
+            alt="user login"
+          />
         </ImgWrapper>
         <Forms>
           <Form className="block" id="login-up" onSubmit={handleLogin}>
             <Title>로그인 페이지</Title>
             <InputBox>
-              <Icon className='bx bx-at'></Icon>
-              <Input
-                type="email"
-                placeholder="이메일"
-                value={email}
-                onChange={handleEmailChange}
-              />
+              <Icon className="bx bx-at"></Icon>
+              <Input type="email" placeholder="이메일" value={email} onChange={handleEmailChange} />
             </InputBox>
             <InputBox>
-              <Icon className='bx bx-lock'></Icon>
-              <Input
-                type="password"
-                placeholder="비밀번호"
-                value={password}
-                onChange={handlePasswordChange}
-              />
+              <Icon className="bx bx-lock"></Icon>
+              <Input type="password" placeholder="비밀번호" value={password} onChange={handlePasswordChange} />
             </InputBox>
-            {error && (
-              <ErrorMessage>
-                {error}
-              </ErrorMessage>
-            )}
+            {error && <ErrorMessage>{error}</ErrorMessage>}
             <Button type="submit" disabled={isButtonDisabled}>
               로그인
             </Button>
