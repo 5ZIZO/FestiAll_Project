@@ -8,8 +8,9 @@ import usePlaces from '../../hooks/usePlaces';
 const StWriteWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding: 30px;
+  align-items: center;
   background-color: #f5f5f5;
+  height: calc(100vh - 80px);
 `;
 
 const StForm = styled.form`
