@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import supabase from '../api/supabaseClient';
+import signInWithKakao from './signInWithKakao';
 
 export const Container = styled.div`
   display: grid;
@@ -113,7 +114,8 @@ export const Button = styled.button`
   transition: 0.3s;
   cursor: pointer;
   border: none;
-  margin-left: auto;
+  margin: 20px auto;
+  width: 100%;
 
   &:hover {
     background-color: #65bf97;
@@ -128,6 +130,18 @@ export const Button = styled.button`
 export const ErrorMessage = styled.div`
   color: red;
   margin: 10px;
+`;
+
+export const KakaoButton = styled.img`
+  display: block;
+  margin: 10px auto;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 export const SignUp = () => {
@@ -248,6 +262,7 @@ export const SignUp = () => {
             <Button type="submit" disabled={isButtonDisabled}>
               회원가입
             </Button>
+            <KakaoButton src="src/assets/kakao_login_medium_wide.png" onClick={signInWithKakao} />
           </Form>
         </Forms>
       </Content>

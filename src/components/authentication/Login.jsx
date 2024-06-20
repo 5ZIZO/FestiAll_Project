@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../api/supabaseClient';
+import signInWithKakao from './signInWithKakao';
 import {
   Button,
   Container,
@@ -12,7 +13,8 @@ import {
   ImgWrapper,
   Input,
   InputBox,
-  Title
+  Title,
+  KakaoButton
 } from './SignUp';
 
 const Login = () => {
@@ -110,8 +112,9 @@ const Login = () => {
             </InputBox>
             {error && <ErrorMessage>{error}</ErrorMessage>}
             <Button type="submit" disabled={isButtonDisabled}>
-              로그인
+              이메일로 로그인
             </Button>
+            <KakaoButton src="src/assets/kakao_login_medium_wide.png" onClick={signInWithKakao} />
           </Form>
         </Forms>
       </Content>

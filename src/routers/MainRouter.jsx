@@ -9,6 +9,8 @@ import AdminPage from "../page/Admin/AdminPage";
 import Introduction from '../components/authentication/Introduction';
 import MyPage from '../page/MyPage';
 import { AdminRouters } from "./AdminRouters";
+import PrivateRouters from "./PrivateRouters";
+import PublicRouters from "./PublicRouters";
 
 const router = createBrowserRouter([
   {
@@ -16,17 +18,28 @@ const router = createBrowserRouter([
     children: [
       // 여기에 각자 페이지 연결해주시면 됩니다!
       { path: "/", element: <Home /> },
-      { path: "/login", element: <Login /> },
-      { path: "/signup", element: <SignUp /> },
+
       { path: "/detail/:festId", element: <DetailPage /> },
-      { path: '/introduction', element: <Introduction /> },
-      { path: '/mypage', element: <MyPage /> },
-      { element: <AdminRouters /> ,children: [ 
-        { path: "/adminpage", element: <AdminPage />},
-        { path: "/adminpost", element: <AdminPostPage />},
-        { path: "/adminpost/:postId", element: <AdminPostPage/> },
-      ]},
-    ] 
+      {
+        element: <PublicRouters />, children: [
+          { path: "/login", element: <Login /> },
+          { path: "/signup", element: <SignUp /> },
+          { path: '/introduction', element: <Introduction /> },
+        ]
+      },
+      {
+        element: <PrivateRouters />, children: [
+          { path: '/mypage', element: <MyPage /> },
+        ]
+      },
+      {
+        element: <AdminRouters />, children: [
+          { path: "/adminpage", element: <AdminPage /> },
+          { path: "/adminpost", element: <AdminPostPage /> },
+          { path: "/adminpost/:postId", element: <AdminPostPage /> },
+        ]
+      },
+    ]
   }
 ]);
 
