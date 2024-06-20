@@ -30,7 +30,6 @@ export const ImgWrapper = styled.div`
 
   img {
     width: 250px;
-    // margin-top: 1rem;
   }
 `;
 

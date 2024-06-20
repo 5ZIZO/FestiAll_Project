@@ -89,9 +89,11 @@ function Home() {
       <CatagoryBar />
       <Wrap>
         <ul className="map__ul__wrap">
-          {places && places.map((data, idx) => <MapListCard key={idx} places={data} map={map} />)}
+          {filteredData && filteredData.map((data, idx) => (
+            <MapListCard key={idx} places={data} map={map} />
+          ))}
         </ul>
-        <Map places={places} onMapLoad={handleMapLoad} />
+        <Map places={filteredData} onMapLoad={handleMapLoad} />
       </Wrap>
     </>
   );

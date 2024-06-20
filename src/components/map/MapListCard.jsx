@@ -5,7 +5,7 @@ const { kakao } = window;
 
 const List = styled.li`
   width: 343px;
-  height: 100%;
+  height: 519px;
   border: 1px solid #b2b9c0;
   border-radius: 16px;
   padding: 22px;
