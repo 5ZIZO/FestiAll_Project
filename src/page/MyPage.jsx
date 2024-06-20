@@ -11,7 +11,7 @@ function MyPage() {
       data: { user }
     } = await supabase.auth.getUser();
     console.log(user);
-    const { data: teamData } = await supabase.from('hearts').select('*, places(*), User').eq('user_id', user.id);
+    const { data: teamData } = await supabase.from('hearts').select('*, places(*)').eq('user_id', user.id);
     console.log(teamData);
     return teamData.map((data) => data.places);
   };
@@ -60,7 +60,6 @@ const StContainer = styled.div`
   width: 80%;
   height: 1000px;
   margin: 50px auto;
-  /* padding: 5%; */
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 5%;
@@ -71,6 +70,7 @@ const StLeftBox = styled.div`
 `;
 const StTitleLeft = styled.h2`
   font-size: 1.5rem;
+  font-weight: bold;
 `;
 const StRightBox = styled.div`
   display: flex;
@@ -94,7 +94,6 @@ const StGraphTitle = styled.div`
 const StGraphSrollBox = styled.div`
   width: 100%;
   height: 900px;
-  /* overflow-y: scroll; */
   overflow-y: auto;
   &::-webkit-scrollbar {
     width: 10px;
