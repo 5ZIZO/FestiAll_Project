@@ -131,6 +131,18 @@ export const ErrorMessage = styled.div`
   margin: 10px;
 `;
 
+export const KakaoButton = styled.img`
+  display: block;
+  margin: 10px auto;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+
 export const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -213,6 +225,12 @@ export const SignUp = () => {
     }
   }, [email, password, confirmPassword, error]);
 
+  async function signInWithKakao() {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'kakao',
+    })
+  }
+
   return (
     <Container>
       <Content>
@@ -249,6 +267,7 @@ export const SignUp = () => {
             <Button type="submit" disabled={isButtonDisabled}>
               회원가입
             </Button>
+            <KakaoButton src="src/assets/kakao_login_medium_wide.png" onClick={signInWithKakao} />
           </Form>
         </Forms>
       </Content>
