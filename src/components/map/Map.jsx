@@ -6,6 +6,7 @@ const { kakao } = window;
 const StMap = styled.div`
   width: calc(100% - 400px);
   height: 100%;
+  z-index: 0;
 `;
 
 var geocoder = new kakao.maps.services.Geocoder();
