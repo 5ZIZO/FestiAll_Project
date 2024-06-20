@@ -17,7 +17,7 @@ const StForm = styled.form`
   
 `;
 
-const ImageUploadButton = styled.button`
+const ImageUploadButton = styled.label`
   display: flex;
   justify-content: center;
   width: 100%;
@@ -227,6 +227,7 @@ function AdminPostPage() {
   const [address, setAddress] = useState('');
   const [description, setDescription] = useState('');
   const [region, setRegion] = useState('서울');
+  const [previewImage, setPreviewImage] = useState();
 
   const { postId } = useParams();
   const isEdit = Boolean(postId); // 수정용 불리언 값
@@ -287,6 +288,7 @@ function AdminPostPage() {
     setDescription('');
     setRegion('');
     setImage('');
+    
 
     if (fileRef.current) {
       fileRef.current.value = '';
@@ -305,7 +307,31 @@ function AdminPostPage() {
     if (file) {
       setImage(file);
       handleImgUpload(file);
+      createImagePreview(file);
     }
+  };
+
+  const createImagePreview = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      const img = new Image();
+      img.src = reader.result;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        const maxWidth = 200;
+        const scaleSize = maxWidth / img.width;
+        canvas.width = maxWidth;
+        canvas.height = img.height * scaleSize;
+        
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.5);
+        setPreviewImage(dataUrl);
+      };
+    };
   };
 
   const fileRef = useRef(null);
@@ -417,9 +443,12 @@ function AdminPostPage() {
         <StInputForm>
 
           <h3>행사 {isEdit ? '수정' : '등록'}</h3>
-          <ImageUploadButton type="button" onClick={fileSelect}>
+          <ImageUploadButton>
+            이미지 선택하기
             <input type="file" onChange={newImage} ref={fileRef} />
           </ImageUploadButton>
+
+          {previewImage && <img src={previewImage} alt="미리보기 이미지" style={{ marginTop: '10px', maxWidth: '100%' }} />}
 
           <StTopForm>
             <StFestival
