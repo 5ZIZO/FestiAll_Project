@@ -62,8 +62,7 @@ export default MyPage;
 const StContainer = styled.div`
   width: 80%;
   height: 800px;
-  margin: 50px auto;
-  padding: 5%;
+  margin: 40px auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 5%;

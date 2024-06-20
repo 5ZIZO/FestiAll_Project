@@ -8,7 +8,7 @@ const CatagoryBarWarp = styled.div`
   width: 100%;
   height: 50px;
   border-bottom: 1px solid rgb(205, 205, 205);
-  padding: 0 2rem;
+  padding: 2rem;
   display: flex;
   align-items: center;
 `;

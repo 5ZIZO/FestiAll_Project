@@ -17,7 +17,7 @@ export const TitleDiv = styled.div`
 `;
 
 export const FestState = styled.div`
-    margin-top: 10px;
+    margin-top: 40px;
     width: 50%;
     height: 40px;
     background-color: ${props => props.$bgColor};
