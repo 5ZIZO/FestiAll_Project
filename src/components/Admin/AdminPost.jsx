@@ -1,10 +1,30 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import styled from 'styled-components';
-import supabase from '../../components/api/supabaseClient';
-import checkSignIn from '../../components/authentication/checkSignIn';
+import supabase from '../api/supabaseClient';
+import checkSignIn from '../authentication/checkSignIn';
 import usePlaces from '../../hooks/usePlaces';
+import {
+  StWriteWrapper,
+  StForm,
+  ImageUploadButton,
+  StTopForm,
+  StFestival,
+  StDateForm,
+  StDateName,
+  StFestivalDate,
+  StDescription,
+  StInputForm,
+  StAddressForm,
+  StFestiAddress,
+  StFestiDetailAddress,
+  StFestiPricing,
+  StFestiCategory,
+  StCategoryForm,
+  StButtonDiv,
+  StButton,
+} from './Admin.styled';
 
+<<<<<<< HEAD:src/page/Admin/AdminPostPage.jsx
 const StWriteWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -199,6 +219,9 @@ const StButton = styled.button`
 `;
 
 function AdminPostPage() {
+=======
+function AdminPost() {
+>>>>>>> d2327d5bb8ae503d9c81961a061d6140acef1d73:src/components/Admin/AdminPost.jsx
   const [userId, setUserId] = useState('');
   const [image, setImage] = useState('');
   const [festName, setFestName] = useState('');
@@ -526,4 +549,4 @@ function AdminPostPage() {
   );
 }
 
-export default AdminPostPage;
+export default AdminPost;
