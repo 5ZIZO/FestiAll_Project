@@ -122,11 +122,16 @@ const AdminPage = () => {
     }
   };
 
+  const handlePostPage = () => {
+    navigate(`/adminpost`);
+  };
+
   return (
     <Container>
       <Header>
         <Logo>관리자 페이지</Logo>
         <SearchBar type="text" placeholder="Search..." />
+        <Button onClick={handlePostPage}>게시글 작성</Button>
       </Header>
       <EventList>
         {places.map((place) => (
