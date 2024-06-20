@@ -39,7 +39,7 @@ function MyPage() {
         </StGraphTitle>
         <StGraphSrollBox>
           {mapData.map((data, index) => (
-            <StGraphBox key={index} onClick={() => navigate(`/detail/:${data.post}`)}>
+            <StGraphBox key={index} onClick={() => navigate(`/detail/${data.post}`)}>
               <StGraphImg style={{ width: '30%' }} src={data.image} />
               <p style={{ width: '30%' }}>{data.name}</p>
               <div>
@@ -95,12 +95,31 @@ const StGraphSrollBox = styled.div`
   height: 900px;
   overflow-y: auto;
   &::-webkit-scrollbar {
-    width: 10px;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 5px;
-    background: #588157;
-  }
+      width: 10px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: gray;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: skyblue;
+    }
+    &::-webkit-scrollbar-button {
+      display: none;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: blue;
+      transition: all 0.2s;
+    }
+
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+    }
+
+    & > li:not(:last-child) {
+      margin-bottom: 20px;
+    }
 `;
 const StGraphBox = styled.div`
   width: 100%;
