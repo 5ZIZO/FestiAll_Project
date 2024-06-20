@@ -19,9 +19,6 @@ const StLeftBox = styled.div`
 const StTitleLeft = styled.h2`
   font-size: 1.5rem;
 `;
-const StTitleRight = styled.h2`
-  font-size: 1.5rem;
-`;
 const StRightBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -69,12 +66,17 @@ const StGraphImg = styled.img`
 
 function MyPage() {
   const selectMapData = async () => {
-    const { data: placeData } = await supabase.from('places').select('*');
-    return placeData;
+    const {
+      data: { user }
+    } = await supabase.auth.getUser();
+    console.log(user);
+    const { data: teamData } = await supabase.from('hearts').select('*, places(*)').eq('user_id', user.id);
+    console.log(teamData);
+    return teamData.map((data) => data.places);
   };
 
   const { data: mapData, isPending } = useQuery({
-    queryKey: ['mapData'],
+    queryKey: ['teamData'],
     queryFn: selectMapData
   });
 
@@ -82,21 +84,18 @@ function MyPage() {
     return null;
   }
 
-  console.log(mapData);
   return (
     <StContainer>
       <StLeftBox>
         <StTitleLeft>내가 찜한 지역</StTitleLeft>
-        <MapComponent />
+        <MapComponent mapData={mapData} />
       </StLeftBox>
       <StRightBox>
-        <StTitleRight>서울특별시(선택지역)</StTitleRight>
         <StGraphTitle>
           <p style={{ width: '40%' }}>포스터</p>
           <p style={{ width: '35%' }}>축제이름</p>
           <p style={{ width: '25%' }}>축제일정</p>
         </StGraphTitle>
-
         <StGraphSrollBox>
           {mapData.map((data, index) => (
             <StGraphBox key={index}>
