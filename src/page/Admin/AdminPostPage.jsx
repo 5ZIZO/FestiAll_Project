@@ -31,6 +31,7 @@ const ImageUploadButton = styled.label`
   cursor: pointer;
   input {
     display: none;
+    
   }
 `;
 
