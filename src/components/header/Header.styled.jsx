@@ -25,7 +25,7 @@ export const RightSide = styled.ul`
   align-items: center;
   justify-content: flex-end;
 
-  gap: 30px;
+  gap: 20px;
 `;
 
 export const Logo = styled.img`

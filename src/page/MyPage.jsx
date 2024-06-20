@@ -26,6 +26,7 @@ function MyPage() {
   }
 
   return (
+    <StWrap>
     <StContainer>
       <StLeftBox>
         <StTitleLeft>내가 찜한 축제</StTitleLeft>
@@ -51,18 +52,30 @@ function MyPage() {
         </StGraphSrollBox>
       </StRightBox>
     </StContainer>
+    </StWrap>
   );
 }
 
 export default MyPage;
-
+const StWrap = styled.div`
+  width: 100%;
+  height: calc(100vh - 80px);
+  background-color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const StContainer = styled.div`
   width: 80%;
-  height: 1000px;
-  margin: 50px auto;
+  height: 700px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 5%;
+  gap: 2%;
+  background-color: white;
+  border-radius: 15px;
+  padding: 2%;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;;
 `;
 const StLeftBox = styled.div`
   display: flex;
@@ -92,15 +105,9 @@ const StGraphTitle = styled.div`
 `;
 const StGraphSrollBox = styled.div`
   width: 100%;
-  height: 900px;
+  height: 100%;
+  /* border: 1px solid black; */
   overflow-y: auto;
-  &::-webkit-scrollbar {
-    width: 10px;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 5px;
-    background: #588157;
-  }
 `;
 const StGraphBox = styled.div`
   width: 100%;
@@ -120,7 +127,5 @@ const StGraphBox = styled.div`
 `;
 const StGraphImg = styled.img`
   width: 150px;
-  min-width: 150px;
-  height: 300px;
-  border: 1px solid black;
+  height: 150px;
 `;

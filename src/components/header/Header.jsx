@@ -77,9 +77,10 @@ const Header = () => {
             <S.Nav to={userId === 'admin@admin.admin' ? '/adminpage' : '/mypage'}>
               {userId === 'admin@admin.admin' ? '관리자 페이지' : '마이 페이지'}
             </S.Nav>
-            <Button bgColor={'red'} onClick={handleLogoutAndCheckSignIn}>
+
+            <S.Nav onClick={handleLogoutAndCheckSignIn}>
               로그아웃
-            </Button>
+            </S.Nav>
           </>
         )}
       </S.RightSide>

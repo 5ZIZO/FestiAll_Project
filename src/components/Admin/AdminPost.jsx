@@ -81,6 +81,7 @@ function AdminPost() {
         setAddress(selectedPost.address);
         setDescription(selectedPost.description);
         setRegion(selectedPost.region);
+        setPreviewImage(selectedPost.image);
       }
     }
   }, [places, postId]);

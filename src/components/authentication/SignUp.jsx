@@ -8,10 +8,9 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 100%;
   height: 100vh;
-  margin: 1.5rem;
 
   @media screen and (min-width: 1024px) {
-    height: 100vh;
+    height: calc(100vh - 80px);
     overflow: hidden;
     .login__content {
       grid-template-columns: repeat(2, max-content);
@@ -39,9 +38,9 @@ export const Forms = styled.div`
   position: absolute;
   top: 24rem;
   width: 100%;
-  height: 368px;
+  height: 400px;
   @media screen and (min-width: 576px) {
-    width: 348px;
+    width: 400px;
     justify-self: center;
   }
 `;
@@ -51,7 +50,7 @@ export const Form = styled.form`
   top: 0;
   width: 100%;
   background-color: #f2f2f2;
-  padding: 2rem 1rem;
+  padding: 2rem;
   border-radius: 1rem;
   text-align: center;
   box-shadow: 0 8px 20px rgba(35, 0, 77, 0.2);
