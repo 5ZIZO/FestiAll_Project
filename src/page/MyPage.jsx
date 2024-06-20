@@ -34,14 +34,14 @@ function MyPage() {
       </StLeftBox>
       <StRightBox>
         <StGraphTitle>
-          <p style={{ width: '40%' }}>포스터</p>
+          <p style={{ width: '30%' }}>포스터</p>
           <p style={{ width: '35%' }}>축제이름</p>
           <p style={{ width: '25%' }}>축제일정</p>
         </StGraphTitle>
         <StGraphSrollBox>
           {mapData.map((data, index) => (
             <StGraphBox key={index} onClick={() => navigate(`/detail/${data.post_id}`)}>
-              <StGraphImg style={{ width: '30%' }} src={data.image} />
+              <StGraphImg src={data.image} />
               <p style={{ width: '30%' }}>{data.name}</p>
               <div>
                 <p>{data.st_date}</p>
@@ -129,4 +129,5 @@ const StGraphBox = styled.div`
 const StGraphImg = styled.img`
   width: 150px;
   height: 150px;
+  text-align: center;
 `;
