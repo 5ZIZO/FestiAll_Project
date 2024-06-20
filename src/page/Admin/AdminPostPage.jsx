@@ -32,20 +32,6 @@ const ImageUploadButton = styled.label`
   }
 `;
 
-// ToDo : 이 부분이 원래 인풋임. 이상하게 반응 제대로 안 함. 바로 위 컴포넌트와 비교
-
-// const ImageUpload = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   width: 100%;
-//   padding: 15px;
-//   margin: auto;
-//   margin-bottom: 10px;
-//   font-size: 15px;
-//   border-radius: 20px;
-//   border: 1px solid gray;
-// `;
-
 const StTopForm = styled.div`
   width: 100%;
   display: flex;
@@ -267,6 +253,7 @@ function AdminPostPage() {
         setAddress(selectedPost.address);
         setDescription(selectedPost.description);
         setRegion(selectedPost.region);
+        setPreviewImage(selectedPost.image);
       }
     }
   }, [places, postId]);
