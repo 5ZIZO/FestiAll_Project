@@ -87,9 +87,9 @@ function MapListCard({ places, map }) {
   const navigate = useNavigate();
 
   const handleMove = async () => {
-    const a = await promises(places.address);
+    const coordinate = await promises(places.address);
     if (map) {
-      var moveLatLon = new kakao.maps.LatLng(a.getLat(), a.getLng());
+      var moveLatLon = new kakao.maps.LatLng(coordinate.getLat(), coordinate.getLng());
       map.setLevel(5);
       map.panTo(moveLatLon);
     }
