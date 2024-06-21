@@ -336,7 +336,7 @@ function AdminPost() {
         </StInputForm>
 
         <StButtonDiv>
-          <StButton type="submit">등록</StButton>
+          <StButton type="submit">{isEdit ? '수정' : '등록'}</StButton>
           <StButton type="button" onClick={handleCancel}>
             취소
           </StButton>
