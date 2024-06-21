@@ -142,10 +142,8 @@ FestiAll은 전국의 행사 정보를 유저들에게 알려주는 사이트 �
 ## Trouble Shooting
 3개 정도 ?
 1. 상세 페이지에서 행사의 진행 상태를 띄어주기 위해 접속한 날짜와 행사 시작일, 종료일을 비교하니 무한 렌더링 발생
-![image](https://github.com/5ZIZO/FestiAll_Project/assets/165372628/99776963-0f91-4014-baa7-42420c0b05be)
 
 2.Supabase 셋업을 하면서 팀원들이 어느 부분까지 데이터가 필요한지 예측하지 못함. 이용하기 편하도록 커스텀 훅을 기본적으로 제작해두었으나 대부분의 니즈를 파악하지 못해 팀원들이 직접 필요한 부분을 커스텀 훅으로 제작하는 것을 목격함.
-![image](https://github.com/5ZIZO/FestiAll_Project/assets/165372628/92dd7b5e-3185-43ac-82c5-3203d1431f76)
 
-3.onAuthStateChange를 통한 인증/인가 로직 구현의 아쉬움![image](https://github.com/5ZIZO/FestiAll_Project/assets/165372628/d9e4ea67-acb2-431b-aa8f-14432a3e7fe4)
+3.onAuthStateChange를 통한 인증/인가 로직 구현의 아쉬움
 
