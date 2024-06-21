@@ -4,8 +4,8 @@ import SignUp from "../components/authentication/SignUp";
 import Login from "../components/authentication/Login";
 import DetailPage from "../page/DetailPage";
 import DefaultLayout from "../layouts/DefaultLayout";
-import AdminPostPage from "../page/Admin/AdminPostPage";
-import AdminPage from "../page/Admin/AdminPage";
+import AdminPost from "../components/Admin/AdminPost";
+import Admin from "../components/Admin/Admin";
 import Introduction from '../components/authentication/Introduction';
 import MyPage from '../page/MyPage';
 import { AdminRouters } from "./AdminRouters";
@@ -34,9 +34,9 @@ const router = createBrowserRouter([
       },
       {
         element: <AdminRouters />, children: [
-          { path: "/adminpage", element: <AdminPage /> },
-          { path: "/adminpost", element: <AdminPostPage /> },
-          { path: "/adminpost/:postId", element: <AdminPostPage /> },
+          { path: "/adminpage", element: <Admin /> },
+          { path: "/adminpost", element: <AdminPost /> },
+          { path: "/adminpost/:postId", element: <AdminPost /> },
         ]
       },
     ]
