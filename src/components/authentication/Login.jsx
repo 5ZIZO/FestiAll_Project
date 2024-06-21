@@ -66,14 +66,8 @@ const Login = () => {
         password: password
       });
 
-      if (error) {
-        const signUpError = `로그인 중 에러가 발생했습니다.: ${error.message}`;
-        setError(signUpError);
-        console.error(signUpError);
-      } else {
-        alert(`${data.user.email} 님의 방문을 환영합니다!`);
-        navigate('/');
-      }
+      alert(`${data.user.email} 님의 방문을 환영합니다!`);
+      navigate('/');
     } catch (error) {
       const loginError = `로그인 중 에러가 발생했습니다.: ${error.message}`;
       setError(loginError);
