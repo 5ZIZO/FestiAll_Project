@@ -76,22 +76,17 @@ export const SignUp = () => {
     event.preventDefault();
 
     try {
-      const { data, error } = await supabase.auth.signUp({
+      const { data } = await supabase.auth.signUp({
         email: email,
         password: password
       });
-
-      if (error) {
-        const signUpError = `회원가입 중 에러가 발생했습니다.: ${error.message}`;
-        setError(signUpError);
-      } else {
-        alert(`${data.user.email} 님 회원가입을 축하드립니다!`);
-        navigate('/');
-      }
+    
+      alert(`${data.user.email} 님 회원가입을 축하드립니다!`);
+      navigate('/');
     } catch (error) {
       const signUpError = `회원가입 중 에러가 발생했습니다.: ${error.message}`;
       setError(signUpError);
-      alert(`회원가입 중 에러가 발생했습니다.: ${error.message}`)
+      console.error(signUpError);
     }
   };
 
