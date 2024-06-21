@@ -96,8 +96,10 @@ export default function Map({ places, onMapLoad }) {
   };
 
   useEffect(() => {
-    loadMap();
-  }, []);
+    if (places && places.length > 0) {
+      loadMap();
+    }
+  }, [places]);
 
   return <StMap id="map"></StMap>;
 }
