@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import usePlaces from '../../hooks/usePlaces';
-import supabase from "../../components/api/supabaseClient";
+import styled from 'styled-components';
 import LoadingSpinners from '../../components/Loading/LoadingSpinners';
+import supabase from '../../components/api/supabaseClient';
+import useDebounce from '../../hooks/useDebounce';
+import usePlaces from '../../hooks/usePlaces';
 
 const Container = styled.div`
   display: flex;
@@ -86,6 +87,7 @@ const AdminPage = () => {
   const { data, error, isLoading } = usePlaces();
   const [places, setPlaces] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 1000); // apply useDebounce
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -103,9 +105,7 @@ const AdminPage = () => {
     setSearchTerm(e.target.value);
   };
 
-  const filteredPlaces = places.filter((place) =>
-    place.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredPlaces = places.filter((place) => place.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()));
 
   const handleItemClick = (postId) => {
     navigate(`/adminpost/${postId}`);
@@ -115,10 +115,7 @@ const AdminPage = () => {
     const isConfirmed = window.confirm('정말 삭제하시겠습니까?');
     if (isConfirmed) {
       try {
-        const { error } = await supabase
-          .from('places')
-          .delete()
-          .eq('post_id', postId);
+        const { error } = await supabase.from('places').delete().eq('post_id', postId);
 
         if (error) {
           throw error;
@@ -152,9 +149,7 @@ const AdminPage = () => {
       <EventList>
         {filteredPlaces.map((place) => (
           <EventItem key={place.post_id}>
-            <EventDetails onClick={() => handleItemClick(place.post_id)}>
-              {place.name}
-            </EventDetails>
+            <EventDetails onClick={() => handleItemClick(place.post_id)}>{place.name}</EventDetails>
             <ButtonGroup>
               <Button onClick={() => handleItemClick(place.post_id)}>수정</Button>
               <Button onClick={() => handleDelete(place.post_id)}>삭제</Button>
