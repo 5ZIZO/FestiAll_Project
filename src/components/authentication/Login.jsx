@@ -15,7 +15,7 @@ import {
   InputBox,
   Title,
   KakaoButton
-} from './SignUp';
+} from './auth.styled';
 
 const Login = () => {
   const [email, setEmail] = useState('');
