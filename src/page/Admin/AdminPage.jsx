@@ -13,6 +13,7 @@ const Container = styled.div`
   padding: 20px;
   background-color: #f5f5f5;
   height: 100%;
+  min-height: calc(100vh - 80px);
 `;
 
 const Header = styled.div`
