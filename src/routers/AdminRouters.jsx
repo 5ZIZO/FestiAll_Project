@@ -5,23 +5,27 @@ import checkSignIn from '../components/authentication/checkSignIn';
 
 export const AdminRouters = () => {
     const [currentUserInfo, setCurrentUserInfo] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function getUserData() {
-        try {
-            const userData = await getCurrentUser();
-            console.log('userData:', userData.email);
-            setCurrentUserInfo(userData.email);
-        } catch (error) {
-        console.error('Error fetching user data:', error);
+            try {
+                const isSignedIn = await checkSignIn();
+                if (isSignedIn) {
+                    const userData = await getCurrentUser();
+                    setCurrentUserInfo(userData.email);
+                }
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            } finally {
+                setLoading(false);
+            }
         }
-    }
 
-    getUserData();
-    checkSignIn();
-    }, [checkSignIn]);
+        getUserData();
+    }, []);
 
-    if (!currentUserInfo) {
+    if (loading) {
         return null;
     }
 

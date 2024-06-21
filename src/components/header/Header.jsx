@@ -23,9 +23,7 @@ const Header = () => {
     async function getUserData() {
       try {
         const userData = await getCurrentUser();
-        console.log('userData:', userData.email);
         setUserId(userData.email);
-        console.log(userData);
       } catch (error) {
         console.error('Error fetching user data:', error);
       } finally {
@@ -37,7 +35,6 @@ const Header = () => {
       setIsLoadingUser(true);
       getUserData();
     }
-    console.log("isSignedIn:",isSignedIn)
     checkSignIn();
   }, [isSignedIn]);
 

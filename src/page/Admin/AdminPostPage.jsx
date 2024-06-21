@@ -224,7 +224,6 @@ function AdminPostPage() {
     const fetchUserData = async () => {
       const isSignedIn = await checkSignIn();
       if (isSignedIn) {
-        console.log('사용자가 로그인되었습니다.');
         const {
           data: { user }
         } = await supabase.auth.getUser();
@@ -282,7 +281,6 @@ function AdminPostPage() {
 
   useEffect(() => {
     if (image && typeof image !== 'string' && image instanceof File) {
-      console.log('이미지 선택됨 =>', image);
       handleImgUpload(image);
     }
   }, [image]);
@@ -306,14 +304,7 @@ function AdminPostPage() {
 
   const fileRef = useRef(null);
 
-  const fileSelect = () => {
-    if (fileRef.current) {
-      fileRef.current.click();
-    }
-  };
-
   const handleImgUpload = async (file) => {
-    console.log('file:', file);
 
     if (!file) return;
 
@@ -326,9 +317,8 @@ function AdminPostPage() {
       const { publicUrl } = supabase.storage.from('images').getPublicUrl(uniqueImgName).data;
       if (!publicUrl) throw new Error('이미지 유알엘을 못 가져 왔음');
 
-      console.log('퍼블릭유알엘임 =>', publicUrl);
       setImage(publicUrl);
-      console.log(publicUrl);
+
     } catch (error) {
       console.error('이미지 업로드 실패', error.message);
       alert(`이미지 업로드에 실패하였습니다: ${error.message}`);

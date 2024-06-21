@@ -42,9 +42,6 @@ const Details = () => {
   const { data: allJjim } = useGetAllJjim();
   const { data: myJjim } = useGetJjim(festId, currentUser?.id);
 
-  console.log('allJjim => ', allJjim);
-  console.log('myJjim => ', myJjim);
-
   useEffect(() => {
     if (place) {
       const today = Date.now();
@@ -67,10 +64,8 @@ const Details = () => {
     const checkUser = async () => {
       const gotUser = await getCurrentUser();
       setCurrentUser(gotUser);
-      console.log(currentUser);
     };
     checkUser();
-    console.log(currentUser?.id);
     if (myJjim?.length > 0) setIsJiimed(true);
     else setIsJiimed(false);
   }, [place]);
@@ -83,8 +78,6 @@ const Details = () => {
   if (isPending) {
     return <LoadingSpinners />;
   }
-
-  console.log(place);
 
   const FestMap = () => {
     return (

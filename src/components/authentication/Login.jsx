@@ -57,7 +57,6 @@ const Login = () => {
         console.error(signUpError);
       } else {
         alert(`${data.user.email} 님의 방문을 환영합니다!`);
-        console.log('로그인 완료:', data);
         navigate('/');
       }
     } catch (error) {

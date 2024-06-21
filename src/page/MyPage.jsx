@@ -11,9 +11,7 @@ function MyPage() {
     const {
       data: { user }
     } = await supabase.auth.getUser();
-    console.log(user);
     const { data: teamData } = await supabase.from('hearts').select('*, places(*)').eq('user_id', user.id);
-    console.log(teamData);
     return teamData.map((data) => data.places);
   };
 

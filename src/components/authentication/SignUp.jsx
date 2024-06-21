@@ -185,7 +185,6 @@ export const SignUp = () => {
         console.error(signUpError);
       } else {
         alert(`${data.user.email} 님 회원가입을 축하드립니다!`);
-        console.log('회원가입 완료:', data);
         navigate('/');
       }
     } catch (error) {

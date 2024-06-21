@@ -24,7 +24,6 @@ export default function MapComponent({ mapData }) {
       console.error('지도를 표시할 div 요소를 찾을 수 없습니다.');
       return;
     }
-    console.log(mapData);
 
     var map = new kakao.maps.Map(mapContainer, {
       center: new kakao.maps.LatLng(36.2683, 127.6358),
@@ -48,7 +47,6 @@ export default function MapComponent({ mapData }) {
     });
     let lattings = await Promise.allSettled(promises);
     lattings = lattings.filter((f) => f.status === 'fulfilled').map((m) => m.value);
-    console.log(lattings);
 
     var clusterer = new kakao.maps.MarkerClusterer({
       map: map,
