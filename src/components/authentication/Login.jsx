@@ -25,25 +25,40 @@ const Login = () => {
   const navigate = useNavigate();
 
   const validateEmail = (email) => {
-    return /\S+@\S+\.\S+/.test(email);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    if (!validateEmail(e.target.value)) {
+      setError('이메일 형식을 확인해주세요');
+    } else {
+      setError('');
+    }
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setError('');
+    if (e.target.value.length < 6) {
+      setError('비밀번호는 6자리 이상으로 입력해주세요');
+    } else {
+      setError('');
+    }
+  };
+
+  useEffect(() => {
+    if (email && password && !error && validateEmail(email)) {
+      setIsButtonDisabled(false);
+    } else {
+      setIsButtonDisabled(true);
+    }
+  }, [email, password, error]);
+
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    let errorMessage = '';
-
-    if (!validateEmail(email)) {
-      errorMessage = '이메일 형식을 확인해주세요.';
-    } else if (password.length < 6) {
-      errorMessage = '비밀번호는 6자리 이상이어야 합니다.';
-    }
-
-    if (errorMessage) {
-      setError(errorMessage);
-      return;
-    }
-
-    setError('');
 
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
@@ -65,29 +80,6 @@ const Login = () => {
       console.error(loginError);
     }
   };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    if (!validateEmail(e.target.value)) {
-      setError('이메일 형식을 확인해주세요');
-    } else {
-      setError('');
-    }
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-    setError('');
-  };
-
-  useEffect(() => {
-    // 버튼 활성화/비활성화 상태 업데이트
-    if (email && password && !error && validateEmail(email)) {
-      setIsButtonDisabled(false);
-    } else {
-      setIsButtonDisabled(true);
-    }
-  }, [email, password, error]);
 
   return (
     <Container>
