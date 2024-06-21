@@ -105,7 +105,6 @@ export default function CatagoryBar() {
     }
 
     setFilteredData(updatedData);
-    console.log(updatedData);
   }, [placesData.data, selectedArea, selectedType, selectedNow, searchTerm, setFilteredData]);
 
   return (

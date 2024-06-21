@@ -4,7 +4,6 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 const PublicRouters = () => {
     const isSignedIn = useAuthStore(state => state.isSignedIn);
-    console.log("isSignedIn => ", isSignedIn);
     return (
         <>
             {isSignedIn ? <Navigate to="/" /> : <Outlet />}

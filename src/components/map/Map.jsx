@@ -18,7 +18,6 @@ export const promises = (address) => {
         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
         return resolve(coords);
       } else {
-        console.log(`Failed to get coordinates for address: ${address}`);
         reject(`Failed to get coordinates for address: ${address}`);
       }
     });
@@ -72,7 +71,6 @@ export default function Map({ places, onMapLoad }) {
 
     let lattings = await Promise.allSettled(promises);
     lattings = lattings.filter((f) => f.status === 'fulfilled').map((m) => m.value);
-    console.log(lattings);
 
     var clusterer = new kakao.maps.MarkerClusterer({
       map: map,

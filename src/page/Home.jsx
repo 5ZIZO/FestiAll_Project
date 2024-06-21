@@ -59,19 +59,10 @@ function Home() {
   const [map, setMap] = useState(null);
 
   useEffect(() => {
-    console.log(123);
     checkSignIn();
   }, []);
 
-  console.log('로그인 상태:', isSignedIn);
-
-  useEffect(() => {
-    console.log('Filtered Data:', filteredData);
-  }, [filteredData]);
-
   const { data: places, error, isLoading } = usePlaces();
-
-  console.log('데이터 테이블을 잘 불러왔습니다요 =>', places);
 
   if (isLoading) {
     return <LoadingSpinners />;
