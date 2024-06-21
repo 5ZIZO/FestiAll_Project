@@ -15,7 +15,7 @@ import {
   InputBox,
   Title,
   KakaoButton
-} from './SignUp';
+} from './auth.styled';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -25,45 +25,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   const validateEmail = (email) => {
-    return /\S+@\S+\.\S+/.test(email);
-  };
-
-  const handleLogin = async (event) => {
-    event.preventDefault();
-    let errorMessage = '';
-
-    if (!validateEmail(email)) {
-      errorMessage = '이메일 형식을 확인해주세요.';
-    } else if (password.length < 6) {
-      errorMessage = '비밀번호는 6자리 이상이어야 합니다.';
-    }
-
-    if (errorMessage) {
-      setError(errorMessage);
-      return;
-    }
-
-    setError('');
-
-    try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password
-      });
-
-      if (error) {
-        const signUpError = `로그인 중 에러가 발생했습니다.: ${error.message}`;
-        setError(signUpError);
-        console.error(signUpError);
-      } else {
-        alert(`${data.user.email} 님의 방문을 환영합니다!`);
-        navigate('/');
-      }
-    } catch (error) {
-      const loginError = `로그인 중 에러가 발생했습니다.: ${error.message}`;
-      setError(loginError);
-      console.error(loginError);
-    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
 
   const handleEmailChange = (e) => {
@@ -78,16 +41,39 @@ const Login = () => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
     setError('');
+    if (e.target.value.length < 6) {
+      setError('비밀번호는 6자리 이상으로 입력해주세요');
+    } else {
+      setError('');
+    }
   };
 
   useEffect(() => {
-    // 버튼 활성화/비활성화 상태 업데이트
     if (email && password && !error && validateEmail(email)) {
       setIsButtonDisabled(false);
     } else {
       setIsButtonDisabled(true);
     }
   }, [email, password, error]);
+
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+      alert(`${data.user.email} 님의 방문을 환영합니다!`);
+      navigate('/');
+    } catch (error) {
+      const loginError = `로그인 중 에러가 발생했습니다.: ${error.message}`;
+      setError(loginError);
+      console.error(loginError);
+    }
+  };
 
   return (
     <Container>
