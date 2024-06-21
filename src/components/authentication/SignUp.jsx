@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import supabase from '../api/supabaseClient';
 import signInWithKakao from './signInWithKakao';
+import SignUpConfirmModal from './SignUpConfirmModal';
 
 export const Container = styled.div`
   display: grid;
@@ -142,16 +143,61 @@ export const KakaoButton = styled.img`
   }
 `;
 
+const AgreementText = styled.p`
+  cursor: pointer;
+  text-align: right;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+
 export const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const validateEmail = (email) => {
-    return /\S+@\S+\.\S+/.test(email);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    if (!validateEmail(e.target.value)) {
+      setError('이메일 형식을 확인해주세요.');
+    } else {
+      setError('');
+    }
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setError('');
+    if (e.target.value.length < 6) {
+      setError('비밀번호는 6자리 이상으로 설정해주세요');
+    } else {
+      setError('');
+    }
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+    setError('');
+    if (e.target.value.length < 6) {
+      setError('비밀번호는 6자리 이상으로 설정해주세요');
+    } else if (password !== e.target.value) {
+      setError('비밀번호가 일치하지 않습니다');
+    } else {
+      setError('');
+    }
   };
 
   const handleSignUp = async (event) => {
@@ -189,39 +235,27 @@ export const SignUp = () => {
       }
     } catch (error) {
       const signUpError = `회원가입 중 에러가 발생했습니다.: ${error.message}`;
-      // Todo: 에러메시지 스위치문
       setError(signUpError);
       console.error(signUpError);
     }
   };
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    if (!validateEmail(e.target.value)) {
-      setError('이메일 형식을 확인해주세요');
-    } else {
-      setError('');
-    }
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-    setError('');
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
-    setError('');
-  };
-
   useEffect(() => {
-    // 버튼 활성화/비활성화 상태 업데이트
     if (email && password && confirmPassword && !error && password === confirmPassword && validateEmail(email)) {
       setIsButtonDisabled(false);
     } else {
       setIsButtonDisabled(true);
     }
   }, [email, password, confirmPassword, error]);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = (e) => {
+    e.preventDefault();
+    setIsModalOpen(false);
+  };
 
   return (
     <Container>
@@ -256,13 +290,17 @@ export const SignUp = () => {
               <ErrorMessage>비밀번호가 일치하지 않습니다</ErrorMessage>
             )}
             {error && <ErrorMessage>{error}</ErrorMessage>}
+
+            <AgreementText onClick={openModal}>회원가입 약관 확인하기</AgreementText>
             <Button type="submit" disabled={isButtonDisabled}>
               회원가입
             </Button>
             <KakaoButton src="src/assets/kakao_login_medium_wide.png" onClick={signInWithKakao} />
+
           </Form>
         </Forms>
       </Content>
+      <SignUpConfirmModal isOpen={isModalOpen} onClose={closeModal} />
     </Container>
   );
 };
