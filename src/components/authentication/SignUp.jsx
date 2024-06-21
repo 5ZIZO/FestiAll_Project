@@ -200,24 +200,16 @@ export const SignUp = () => {
     }
   };
 
+  useEffect(() => {
+    if (email && password && confirmPassword && !error && password === confirmPassword && validateEmail(email)) {
+      setIsButtonDisabled(false);
+    } else {
+      setIsButtonDisabled(true);
+    }
+  }, [email, password, confirmPassword, error]);
+
   const handleSignUp = async (event) => {
     event.preventDefault();
-    let errorMessage = '';
-
-    if (!validateEmail(email)) {
-      errorMessage = '이메일 형식을 확인해주세요';
-    } else if (password.length < 6) {
-      errorMessage = '비밀번호는 6자리 이상으로 설정해주세요';
-    } else if (password !== confirmPassword) {
-      errorMessage = '비밀번호 재입력이 일치하지 않습니다';
-    }
-
-    if (errorMessage) {
-      setError(errorMessage);
-      return;
-    }
-
-    setError('');
 
     try {
       const { data, error } = await supabase.auth.signUp({
@@ -228,7 +220,6 @@ export const SignUp = () => {
       if (error) {
         const signUpError = `회원가입 중 에러가 발생했습니다.: ${error.message}`;
         setError(signUpError);
-        console.error(signUpError);
       } else {
         alert(`${data.user.email} 님 회원가입을 축하드립니다!`);
         navigate('/');
@@ -236,17 +227,9 @@ export const SignUp = () => {
     } catch (error) {
       const signUpError = `회원가입 중 에러가 발생했습니다.: ${error.message}`;
       setError(signUpError);
-      console.error(signUpError);
+      alert(`회원가입 중 에러가 발생했습니다.: ${error.message}`)
     }
   };
-
-  useEffect(() => {
-    if (email && password && confirmPassword && !error && password === confirmPassword && validateEmail(email)) {
-      setIsButtonDisabled(false);
-    } else {
-      setIsButtonDisabled(true);
-    }
-  }, [email, password, confirmPassword, error]);
 
   const openModal = () => {
     setIsModalOpen(true);
