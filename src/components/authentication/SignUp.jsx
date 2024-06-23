@@ -83,6 +83,18 @@ export const SignUp = () => {
         email: email,
         password: password
       });
+
+      if (error) {
+        throw error;
+      }
+
+      const userId = data.user.id;
+
+      const { data: insertData, error: insertError } = await supabase.from('Users').insert([{ user_id: userId }]);
+
+    if (insertError) {
+      throw insertError;
+    }
     
       alert(`${data.user.email} 님 회원가입을 축하드립니다!`);
       navigate('/');
