@@ -44,7 +44,6 @@ export const SignUp = () => {
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-    setError('');
     if (e.target.value.length < 6) {
       setError('비밀번호는 6자리 이상으로 설정해주세요');
     } else {
@@ -59,8 +58,6 @@ export const SignUp = () => {
       setError('비밀번호는 6자리 이상으로 설정해주세요');
     } else if (password !== e.target.value) {
       setError('비밀번호가 일치하지 않습니다');
-    } else {
-      setError('');
     }
   };
 
@@ -89,8 +86,9 @@ export const SignUp = () => {
       }
 
       const userId = data.user.id;
+      const userEmail = data.user.email;
 
-      const { data: insertData, error: insertError } = await supabase.from('Users').insert([{ user_id: userId }]);
+      const { data: insertData, error: insertError } = await supabase.from('Users').insert([{ user_id: userId, email: userEil }]);
 
     if (insertError) {
       throw insertError;
