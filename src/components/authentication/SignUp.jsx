@@ -88,7 +88,7 @@ export const SignUp = () => {
       const userId = data.user.id;
       const userEmail = data.user.email;
 
-      const { data: insertData, error: insertError } = await supabase.from('Users').insert([{ user_id: userId, email: userEil }]);
+      const { data: insertData, error: insertError } = await supabase.from('Users').insert([{ user_id: userId, email: userEmail }]);
 
     if (insertError) {
       throw insertError;
