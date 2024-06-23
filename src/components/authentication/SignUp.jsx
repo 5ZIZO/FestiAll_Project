@@ -19,11 +19,21 @@ import {
   AgreementText
 } from './auth.styled';
 
+const ErrorMessages = ({ messages }) => {
+  return (
+    <>
+      {messages.map((message, index) => (
+        <ErrorMessage key={index}>{message}</ErrorMessage>
+      ))}
+    </>
+  );
+};
+
 export const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
+  const [errorMessages, setErrorMessages] = useState([]);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -35,30 +45,35 @@ export const SignUp = () => {
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+    const newErrorMessages = [...errorMessages];
     if (!validateEmail(e.target.value)) {
-      setError('이메일 형식을 확인해주세요.');
+      newErrorMessages[0] = '이메일 형식을 확인해주세요.';
     } else {
-      setError('');
+      newErrorMessages[0] = '';
     }
+    setErrorMessages(newErrorMessages);
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    const newErrorMessages = [...errorMessages];
     if (e.target.value.length < 6) {
-      setError('비밀번호는 6자리 이상으로 설정해주세요');
+      newErrorMessages[1] = '비밀번호는 6자리 이상으로 설정해주세요';
     } else {
-      setError('');
+      newErrorMessages[1] = '';
     }
+    setErrorMessages(newErrorMessages);
   };
 
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
-    setError('');
-    if (e.target.value.length < 6) {
-      setError('비밀번호는 6자리 이상으로 설정해주세요');
-    } else if (password !== e.target.value) {
-      setError('비밀번호가 일치하지 않습니다');
+    const newErrorMessages = [...errorMessages];
+    if (password !== e.target.value) {
+      newErrorMessages[2] = '비밀번호가 일치하지 않습니다';
+    } else {
+      newErrorMessages[2] = '';
     }
+    setErrorMessages(newErrorMessages);
   };
 
   useEffect(() => {
@@ -66,17 +81,17 @@ export const SignUp = () => {
       const isPasswordsMatching = password === confirmPassword;
       const isEmailValid = validateEmail(email);
       const isFieldsFilled = email && password && confirmPassword;
-      return isFieldsFilled && isPasswordsMatching && isEmailValid && !error;
+      return isFieldsFilled && isPasswordsMatching && isEmailValid && !errorMessages.some(message => message !== '');
     };
-  
+
     setIsButtonDisabled(!isFormValid());
-  }, [email, password, confirmPassword, error]);
+  }, [email, password, confirmPassword, errorMessages]);
 
   const handleSignUp = async (event) => {
     event.preventDefault();
 
     try {
-      const { data } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email: email,
         password: password
       });
@@ -90,15 +105,15 @@ export const SignUp = () => {
 
       const { data: insertData, error: insertError } = await supabase.from('Users').insert([{ user_id: userId, email: userEmail }]);
 
-    if (insertError) {
-      throw insertError;
-    }
-    
+      if (insertError) {
+        throw insertError;
+      }
+
       alert(`${data.user.email} 님 회원가입을 축하드립니다!`);
       navigate('/');
     } catch (error) {
       const signUpError = `회원가입 중 에러가 발생했습니다.: ${error.message}`;
-      setError(signUpError);
+      setErrorMessages([signUpError]);
       console.error(signUpError);
     }
   };
@@ -141,10 +156,8 @@ export const SignUp = () => {
                 onChange={handleConfirmPasswordChange}
               />
             </InputBox>
-            {password !== confirmPassword && confirmPassword && (
-              <ErrorMessage>비밀번호가 일치하지 않습니다</ErrorMessage>
-            )}
-            {error && <ErrorMessage>{error}</ErrorMessage>}
+            
+            <ErrorMessages messages={errorMessages.filter(message => message !== '')} />
 
             <AgreementText onClick={openModal}>회원가입 약관 확인하기</AgreementText>
             <Button type="submit" disabled={isButtonDisabled}>
