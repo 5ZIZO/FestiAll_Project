@@ -65,11 +65,14 @@ export const SignUp = () => {
   };
 
   useEffect(() => {
-    if (email && password && confirmPassword && !error && password === confirmPassword && validateEmail(email)) {
-      setIsButtonDisabled(false);
-    } else {
-      setIsButtonDisabled(true);
-    }
+    const isFormValid = () => {
+      const isPasswordsMatching = password === confirmPassword;
+      const isEmailValid = validateEmail(email);
+      const isFieldsFilled = email && password && confirmPassword;
+      return isFieldsFilled && isPasswordsMatching && isEmailValid && !error;
+    };
+  
+    setIsButtonDisabled(!isFormValid());
   }, [email, password, confirmPassword, error]);
 
   const handleSignUp = async (event) => {
